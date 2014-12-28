@@ -1,31 +1,24 @@
 import QtQuick 2.3
 import QtQuick.Controls 1.2
-import CircleSlider 1.0
+import QtQuick.Window 2.1
+
+import "components/controls" as Controls
 
 ApplicationWindow {
     visible: true
-    width: 640
-    height: 480
+    width: 480
+    height: 854
     title: qsTr("Hello World")
+    //visibility: Window.FullScreen
 
-    CircleSlider {
-        id: slider
-        x: parent.x + parent.width - width / 2 + 1
-        y: 0
-        width: 400
-        height: 400
-        grooveWidth: 10
-        grooveColor: "orange"
+    Controls.Slider {
+       // x: 0
+        anchors.fill: parent
 
-    }
-
-
-    MouseArea {
-        anchors.fill: slider
-        onPositionChanged: {
-            //if(mouse.pressed) {
-                slider.mouseMove(Qt.point(mouse.x, mouse.y))
-            //}
-        }
+        color: "orange"
+        lineWidth:  5
+        toggleSize: 20
+        minimum: 10
+        maximum: 100
     }
 }

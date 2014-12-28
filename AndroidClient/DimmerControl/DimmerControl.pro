@@ -2,8 +2,7 @@ TEMPLATE = app
 
 QT += qml quick widgets
 
-SOURCES += main.cpp \
-    components/controls/circleslider.cpp
+SOURCES += main.cpp
 
 RESOURCES += qml.qrc
 
@@ -12,6 +11,3 @@ QML_IMPORT_PATH =
 
 # Default rules for deployment.
 include(deployment.pri)
-
-HEADERS += \
-    components/controls/circleslider.h
