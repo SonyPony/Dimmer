@@ -11,7 +11,7 @@ Canvas {
     property real minimum
     property int radius: height / 2 - toggleSize
 
-    onPaint: {
+    onPaint: {      //draw groove//
         var ctx = canvas.getContext('2d');
         var centerX = width + x;
         var centerY = height / 2.0 + y;
@@ -24,20 +24,19 @@ Canvas {
         ctx.stroke()
     }
 
-    Rectangle {
+    Rectangle {     //rotating area//
         id: toggleArea
-
-        property bool activated: false
 
         width: parent.radius + parent.lineWidth * 2
         height: parent.toggleSize
+
         color: "transparent"
         transformOrigin: Item.Right
 
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
 
-        Rectangle {
+        Rectangle {     //toggle button//
             width: canvas.toggleSize
             height: width
 
@@ -52,7 +51,6 @@ Canvas {
     function calcValue(x, y) {
         toggleArea.rotation = Math.atan(( canvas.height / 2.0 + canvas.y - y) / (canvas.width  + canvas.x - x)) / Math.PI * 180
         value = (toggleArea.rotation / 180.0 + 0.5) * (maximum - minimum) + minimum;
-        console.log(value)
     }
 
     MouseArea {
