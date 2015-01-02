@@ -4,6 +4,7 @@ Canvas {
     id: canvas
 
     property color color
+    property color toggleColor
     property color activeColor
     property int lineWidth
     property int toggleSize
@@ -13,6 +14,8 @@ Canvas {
     property int radius: height / 2 - toggleSize
 
     onValueChanged: canvas.requestPaint()
+    onWidthChanged: canvas.requestPaint()
+    onHeightChanged: canvas.requestPaint()
 
     onPaint: {      //draw groove//
         var ctx = canvas.getContext('2d');
@@ -56,7 +59,7 @@ Canvas {
             width: canvas.toggleSize
             height: width
 
-            color: "red"
+            color: canvas.toggleColor
             antialiasing: true
 
             anchors.left: parent.left
