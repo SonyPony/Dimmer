@@ -1,1 +1,4 @@
 AndroidClient/build/
+AndroidClient/build-DimmerControl-Android/android-build/
+AndroidClient/build-DimmerControl-Android/libDimmerControl.so
+AndroidClient/build-DimmerControl-Android/
