@@ -2,6 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>components/controls/Slider.qml</file>
+        <file>components/tabs/DimmerTab.qml</file>
         <file>components/controls/Graph.qml</file>
         <file>responsivity/responsivityLogic.js</file>
     </qresource>
