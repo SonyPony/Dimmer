@@ -44,13 +44,13 @@ ApplicationWindow {
         anchors.bottom: positioner.bottom
 
         Tab {   //tab with slider
-            title: "Tab 1"
+            title: "Dim"
 
             Tabs.DimmerTab {}
         }
 
         Tab {   //tab width graph
-            title: "Tab 2"
+            title: "Schedule"
 
             Tabs.ScheduleTab {}
         }
@@ -62,6 +62,7 @@ ApplicationWindow {
         Tab {   //channel
             title: "Tab 4"
         }
+        //---------------------------------------TAB VIEW
 
         //---------------TAB STYLE---------------
         style: TabViewStyle {
@@ -91,7 +92,6 @@ ApplicationWindow {
         }
         //---------------------------------------STYLE
     }
-    //---------------------------------------TAB VIEW
 
     //--------------TAB POINTER--------------
     Item {     //define selected tab
@@ -105,8 +105,8 @@ ApplicationWindow {
         }
 
         Triangle {
-            width: 40
-            height: 15
+            width: RL.calcSize("width", 40)
+            height: RL.calcSize("height", 15)
             color: "#404040"
 
             anchors.horizontalCenter: parent.horizontalCenter
