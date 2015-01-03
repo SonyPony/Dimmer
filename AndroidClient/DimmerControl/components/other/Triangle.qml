@@ -5,9 +5,14 @@ Canvas {
 
     property color color
 
+    onWidthChanged: requestPaint()
+    onHeightChanged: requestPaint()
+
     onPaint: {
         var ctx = canvas.getContext('2d');
 
+        ctx.clearRect(x, y, width, height)
+        ctx.beginPath()
         ctx.fillStyle = canvas.color;
 
         ctx.moveTo(0, 0)
@@ -16,5 +21,6 @@ Canvas {
         ctx.lineTo(0, 0)
 
         ctx.fill()
+        ctx.closePath()
     }
 }
