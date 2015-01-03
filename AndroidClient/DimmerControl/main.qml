@@ -14,11 +14,32 @@ ApplicationWindow {
     height: 854
     title: qsTr("Hello World")
 
+    Item {
+        id: positioner
+        anchors.fill: parent
+    }
+
+    //-------------ICON & STATUS-------------
+    Rectangle {
+        id: status
+
+        width: root.width
+        height: root.height - frame.height
+
+        color: "#404040"
+    }
+
+    //---------------------------------------
+
     TabView {
         id: frame
         anchors.fill: parent
 
         Tab {
+        width: parent.width
+        height: RL.calcSize("height", 700)
+        anchors.bottom: positioner.bottom
+
             title: "Tab 1"
 
             Tabs.DimmerTab {}
