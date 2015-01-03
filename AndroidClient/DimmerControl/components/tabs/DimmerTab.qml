@@ -3,7 +3,6 @@ import "../controls" as Controls
 
 Rectangle {
     Controls.Slider {
-       //  x: 100
          width: parent.width
          height: parent.height
 
@@ -14,7 +13,5 @@ Rectangle {
          toggleSize: 20
          minimum: 0
          maximum: 100
-
-       //  anchors.bottom: frame.bottom
      }
 }
