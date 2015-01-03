@@ -84,10 +84,20 @@ Canvas {
         }
     }
 
+    //test code
+    Component.onCompleted: {
+       // internal.points = {}
+        canvas.addPoint(5, 20, 100)
+        canvas.addPoint(12, 0, 0)
+        canvas.addPoint(16, 0, 30)
+        canvas.addPoint(20, 0, 60)
+        canvas.addPoint(0, 10, 30)
+    }
+
     onPaint: {
         var ctx = canvas.getContext('2d');
         var formula;
-        var previous = 0
+        var previous = false
         var margins = RL.calcSize("width", 20)
         var size = RL.calcSize("height", 5)
 
@@ -121,22 +131,29 @@ Canvas {
     }
 
     function addPoint(hour, minute, DCL) {
-        var component = Qt.createComponent("../other/SchedulePoint.qml")
-        var object = component.createObject(canvas)
+        var component = Qt.createComponent("../other/SchedulePoint.qml");
+        var object = component.createObject(canvas);
 
-        object.hour = hour
-        object.minute = minute
-        object.dutyCycle = DCL
+        object.hour = hour;
+        object.minute = minute;
+        object.dutyCycle = DCL;
 
-        internal.points[hour * 100 + minute] = object
+        internal.points[hour * 100 + minute] = object;
     }
 
-    //test code
-    Component.onCompleted: {
-        canvas.addPoint(5, 20, 100)
-        canvas.addPoint(12, 0, 0)
-        canvas.addPoint(16, 0, 30)
-        canvas.addPoint(20, 0, 60)
+    function removePoint(hour, minute) {
+        var container;
 
+        internal.points.splice(hour * 100 + minute, 1);
+
+        container = internal.points;
+        internal.points = new Array;
+
+        for(var key in container) {
+            var object = container[key];
+            internal.points[object.hour * 100 + object.minute] = object;
+        }
+
+        canvas.requestPaint();
     }
 }

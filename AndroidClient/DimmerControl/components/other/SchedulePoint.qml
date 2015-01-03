@@ -45,9 +45,8 @@ Item {
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            internal.points.splice(parent.hour * 100 + parent.minute, 1)
+            canvas.removePoint(hour, minute)
             parent.destroy()
-            canvas.requestPaint()
         }
     }
 }
