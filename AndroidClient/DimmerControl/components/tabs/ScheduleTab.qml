@@ -5,7 +5,7 @@ Rectangle {
     Controls.Graph {
         width: parent.width
         height: parent.height
-        valuesCountY: 10
+        valuesCountY: 11
         valuesCountX: 12
         minimumX: 0
         stepX: 2
