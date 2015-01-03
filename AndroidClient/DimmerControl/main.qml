@@ -5,14 +5,18 @@ import QtQuick.Controls.Styles 1.2
 
 import "components/controls" as Controls
 import "components/tabs" as Tabs
+import "components/other"
+import "responsivity/responsivityLogic.js" as RL
 
 ApplicationWindow {
     id: root
 
+    property real tabCount: 4.0
+
     visible: true
     width: 480
     height: 854
-    title: qsTr("Hello World")
+    title: qsTr("Ultra Dimmer")
 
     Item {
         id: positioner
@@ -31,26 +35,33 @@ ApplicationWindow {
 
     //---------------------------------------
 
+    //---------------TAB VIEW----------------
     TabView {
         id: frame
-        anchors.fill: parent
 
-        Tab {
         width: parent.width
         height: RL.calcSize("height", 700)
         anchors.bottom: positioner.bottom
 
+        Tab {   //tab with slider
             title: "Tab 1"
 
             Tabs.DimmerTab {}
         }
 
-        Tab {
+        Tab {   //tab width graph
             title: "Tab 2"
 
-            Tabs.ProgramTab {}
+            Tabs.ScheduleTab {}
         }
-        Tab { title: "Tab 3" }
+
+        Tab {   //luminosity
+            title: "Tab 3"
+        }
+
+        Tab {   //channel
+            title: "Tab 4"
+        }
 
         //---------------TAB STYLE---------------
         style: TabViewStyle {
@@ -61,8 +72,8 @@ ApplicationWindow {
 
                 color: "#76C012"
 
-                implicitWidth: root.width / 3.0 + 1
-                implicitHeight: 60
+                implicitWidth: root.width / root.tabCount + 1
+                implicitHeight: RL.calcSize("height", 70)
 
                 Text {
                     id: text
@@ -73,15 +84,15 @@ ApplicationWindow {
 
                 onSelectedChanged: {
                     if(styleData.selected)
-                        slideBar.x = styleData.index * (root.width / 3.0 + 1)
+                        slideBar.x = styleData.index * (root.width / root.tabCount + 1)
 
                 }
             }
         }
-        //---------------------------------------
+        //---------------------------------------STYLE
+    }
+    //---------------------------------------TAB VIEW
 
-        Rectangle {     //rect beneath the tab -> define selected tab
-            id: slideBar
     //--------------TAB POINTER--------------
     Item {     //define selected tab
         id: slideBar
@@ -103,3 +114,4 @@ ApplicationWindow {
     }
     //---------------------------------------TAB POINTER
 }
+
