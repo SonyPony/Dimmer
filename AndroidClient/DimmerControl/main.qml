@@ -61,14 +61,24 @@ ApplicationWindow {
 
         Rectangle {     //rect beneath the tab -> define selected tab
             id: slideBar
+    //--------------TAB POINTER--------------
+    Item {     //define selected tab
+        id: slideBar
 
-            width: root.width / 3.0 + 1
-            height: 7
-            color: "blue"
+        width: frame.width / root.tabCount + 1
+        anchors.top: frame.top  //stick to tab view
 
-            Behavior on x {
-                NumberAnimation { easing.type: Easing.InOutQuad; duration: 400; }
-            }
+        Behavior on x {
+            NumberAnimation { easing.type: Easing.InOutQuad; duration: 400; }
+        }
+
+        Triangle {
+            width: 40
+            height: 15
+            color: "#404040"
+
+            anchors.horizontalCenter: parent.horizontalCenter
         }
     }
+    //---------------------------------------TAB POINTER
 }
