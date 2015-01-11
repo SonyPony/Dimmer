@@ -3,15 +3,20 @@ import "../controls" as Controls
 
 Rectangle {
     Controls.Slider {
-         width: parent.width
-         height: parent.height
+        id: slider
 
-         color: "lightGray"
-         activeColor: "orange"
-         toggleColor: "gray"
-         lineWidth:  5
-         toggleSize: 20
-         minimum: 0
-         maximum: 100
-     }
+        width: parent.width
+        height: parent.height
+
+        color: "lightGray"
+        activeColor: "#76C012"
+        toggleColor: "gray"
+        lineWidth:  RL.calcSize("width", 20)
+        toggleSize: RL.calcSize("width", 35)
+        minimum: 0
+        maximum: 100
+
+        onValueChanged: socket.sendTextMessage(slider.value)
+    }
+
 }

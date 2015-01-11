@@ -2,6 +2,7 @@ import QtQuick 2.3
 import QtQuick.Controls 1.2
 import QtQuick.Window 2.1
 import QtQuick.Controls.Styles 1.2
+import Qt.WebSockets 1.0
 
 import "components/controls" as Controls
 import "components/tabs" as Tabs
@@ -21,6 +22,39 @@ ApplicationWindow {
     Item {
         id: positioner
         anchors.fill: parent
+    }
+
+    WebSocket {
+        id: socket
+
+        active: true
+        url: "ws://192.168.2.10:8888"
+
+        onStatusChanged: {
+            var actualStatus = socket.status
+
+            switch(actualStatus) {
+                case WebSocket.Connecting:
+                    console.log("Connecting");
+                    break;
+
+                case WebSocket.Open:
+                    console.log("Open");
+                    break;
+
+                case WebSocket.Closing:
+                    console.log("Closing");
+                    break;
+
+                case WebSocket.Closed:
+                    console.log("Closed");
+                    break;
+
+                case WebSocket.Error:
+                    console.log("Error (" + socket.errorString + ")")
+                    break;
+            }
+        }
     }
 
     //-------------ICON & STATUS-------------
