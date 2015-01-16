@@ -14,10 +14,11 @@ ApplicationWindow {
     id: root
 
     property real tabCount: 4.0
+    property var tabIcons: ["resources/images/Sun.png", "resources/images/Sun.png", "resources/images/Sun.png", "resources/images/wheel.png"]
 
     visible: true
     width: 480
-    height: 854
+    height: 782
     title: qsTr("Ultra Dimmer")
 
     Item {
@@ -29,7 +30,7 @@ ApplicationWindow {
         id: socket
 
         active: true
-        url: "ws://192.168.2.10:8888"
+        url: "ws://169.254.29.212:8888"
 
         onStatusChanged: {
             var actualStatus = socket.status
@@ -40,6 +41,7 @@ ApplicationWindow {
                     break;
 
                 case WebSocket.Open:
+                    connectionStatus.color = "#76C012"
                     console.log("Open");
                     break;
 
@@ -48,10 +50,12 @@ ApplicationWindow {
                     break;
 
                 case WebSocket.Closed:
+                    connectionStatus.color = "orange"
                     console.log("Closed");
                     break;
 
                 case WebSocket.Error:
+                    connectionStatus.color = "orange"
                     console.log("Error (" + socket.errorString + ")")
                     break;
             }
@@ -99,6 +103,7 @@ ApplicationWindow {
         }
 
         Tab {   //tab width graph
+            id: sheduleTab
             title: "Schedule"
 
             Tabs.ScheduleTab {}
@@ -106,6 +111,7 @@ ApplicationWindow {
 
         Tab {   //luminosity
             title: "Tab 3"
+
         }
 
         Tab {   //channel
@@ -123,14 +129,24 @@ ApplicationWindow {
                 color: "#76C012"
 
                 implicitWidth: root.width / root.tabCount + 1
-                implicitHeight: RL.calcSize("height", 70)
+                implicitHeight: RL.calcSize("height", 100)
 
-                Text {
+
+                Image {
+                    source: root.tabIcons[styleData.index]
+
+                    width: Math.min(parent.implicitWidth, parent.implicitHeight)
+                    height: width
+
+                    anchors.centerIn: parent
+                }
+
+                /*Text {
                     id: text
                     anchors.centerIn: parent
                     text: styleData.title
                     color: styleData.selected ? "white" : "black"
-                }
+                }*/
 
                 onSelectedChanged: {
                     if(styleData.selected)
@@ -140,6 +156,20 @@ ApplicationWindow {
             }
         }
         //---------------------------------------STYLE
+    }
+
+    Rectangle {
+        id: connectionStatus
+
+        width: RL.calcSize("width", 60)
+        height: RL.calcSize("height", 6)
+        radius: height
+
+        color: "orange"
+
+        anchors.bottom: slideBar.top
+        anchors.bottomMargin: RL.calcSize("height", 15)
+        anchors.horizontalCenter: positioner.horizontalCenter
     }
 
     //--------------TAB POINTER--------------
