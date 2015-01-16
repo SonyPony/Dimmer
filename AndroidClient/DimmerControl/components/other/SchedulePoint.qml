@@ -1,4 +1,5 @@
 import QtQuick 2.0
+
 import "../../responsivity/responsivityLogic.js" as RL
 
 Item {
@@ -8,8 +9,8 @@ Item {
 
     //                          evenHour                     +      remainingMinutes                    *              1pieceWidth                 - objectWidth - halfOfLine
     x: internal.xAxisX[((hour % 2) ?hour - 1 :hour) / 2 + 1] + ((minute + ((hour % 2) ?60 :0)) / 120.0) * canvas.width / (canvas.valuesCountX + 1) - width / 2 - RL.calcSize("height", 1)
-    //        DCL in decade -> DCL % 10 == 0       +   height between two points on Y axis     *       DCL % 10 / 10     - objectWidth
-    y: internal.yAxisY[Math.floor(dutyCycle / 10)] + (internal.yAxisY[0] - internal.yAxisY[1]) * ((dutyCycle % 10) / 10) - width / 2
+    //        DCL in decade -> DCL % 10 == 0       - half of width -    height between 2 points            *       rest / 10
+    y: internal.yAxisY[Math.floor(dutyCycle / 10)] - width / 2 - (internal.yAxisY[0] - internal.yAxisY[1]) * ((dutyCycle % 10) / 10.0)
 
     width: RL.calcSize("height", 15)
     height: width
@@ -20,7 +21,7 @@ Item {
     }
 
     Rectangle {     //edge because of white point would not be seen
-        width: parent.width + 2 * RL.calcSize("height", 2) + ((Math.round(parent.width) % 2) ?0 : 1 )
+        width: parent.width + 2 * RL.calcSize("height", 2) + ((Math.round(parent.width) % 2) ?1 : 0)
         height: width
 
         radius: width
@@ -44,9 +45,6 @@ Item {
 
     MouseArea {
         anchors.fill: parent
-        onClicked: {
-            canvas.removePoint(hour, minute)
-            parent.destroy()
-        }
+        onClicked: canvas.removePoint(hour, minute)
     }
 }
