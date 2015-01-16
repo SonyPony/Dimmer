@@ -2,6 +2,7 @@ import QtQuick 2.3
 import QtQuick.Controls 1.2
 import QtQuick.Window 2.1
 import QtQuick.Controls.Styles 1.2
+import QtQuick.Dialogs 1.2
 import Qt.WebSockets 1.0
 
 import "components/controls" as Controls
@@ -56,6 +57,20 @@ ApplicationWindow {
             }
         }
     }
+
+    //-------------ERROR DIALOG--------------
+    MessageDialog {
+        id: errorDialog
+
+        title: "Error"
+
+        function error(message) {
+            errorDialog.text = message
+            errorDialog.visible = true
+        }
+    }
+
+    //---------------------------------------
 
     //-------------ICON & STATUS-------------
     Rectangle {

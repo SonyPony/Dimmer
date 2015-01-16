@@ -8,6 +8,7 @@
         <file>responsivity/responsivityLogic.js</file>
         <file>components/other/Triangle.qml</file>
         <file>components/other/SchedulePoint.qml</file>
+        <file>components/controls/CloseButton.qml</file>
         <file>components/controls/CircleProgressBar.qml</file>
         <file>components/controls/Switch.qml</file>
     </qresource>
