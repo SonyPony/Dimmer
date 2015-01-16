@@ -7,18 +7,22 @@ Canvas {
     property color activeColor
     property color textColor
     property int lineWidth
-    property int value
-    property int maximum
-    property int minimum
+    property real value
+    property real maximum
+    property real minimum
 
     onWidthChanged: requestPaint()
     onHeightChanged: requestPaint()
     onValueChanged: requestPaint()
 
+    Behavior on value {
+        NumberAnimation { easing.type: Easing.InOutQuad; duration: 700 }
+    }
+
     Text {
         id: valueText
 
-        text: parent.value
+        text: parent.value.toFixed(1)
 
         color: textColor
 
@@ -45,7 +49,7 @@ Canvas {
 
         var centerX = width / 2;
         var centerY = height / 2;
-        var percentageValue = (value- minimum) / (maximum - minimum);
+        var percentageValue = (value - minimum) / (maximum - minimum);
         var startAngle = Math.PI * 1.5;
 
         ctx.clearRect(0, 0, width, height);
