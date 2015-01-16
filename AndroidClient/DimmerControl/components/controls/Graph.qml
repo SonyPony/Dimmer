@@ -84,16 +84,6 @@ Canvas {
         }
     }
 
-    //test code
-    Component.onCompleted: {
-       // internal.points = {}
-        canvas.addPoint(5, 20, 100)
-        canvas.addPoint(12, 0, 0)
-        canvas.addPoint(16, 0, 30)
-        canvas.addPoint(20, 0, 60)
-        canvas.addPoint(0, 10, 30)
-    }
-
     onPaint: {
         var ctx = canvas.getContext('2d');
         var formula;
@@ -112,12 +102,10 @@ Canvas {
 
                 var relativeWidth = internal.points[key].x - previous.x - previous.width / 4;   //width between 2 points
                 var relativeHeight = previous.y - internal.points[key].y;   //height between 2 points
-                relativeHeight = (relativeHeight > 0) ?relativeHeight - previous.width / 2 :relativeHeight + previous.width / 2;
+                relativeHeight = relativeHeight - ((relativeHeight > 0) - (relativeHeight < 0)) * (previous.width / 2)
 
                 //calc num of particles according to distance between 2 points
                 var numberOfParticles = Math.floor(Math.sqrt(Math.pow(relativeWidth, 2) + Math.pow(relativeHeight, 2)) / margins);
-
-                formula = function(pX) {return (relativeHeight / relativeWidth) * pX}   //create linear function
 
                 for(var i = 1; i <= numberOfParticles; i++) {
                     var fraction = i / numberOfParticles;
@@ -138,12 +126,17 @@ Canvas {
         object.minute = minute;
         object.dutyCycle = DCL;
 
+        if(internal.points[hour * 100 + minute]) //overwrite point
+            removePoint(hour, minute)
+
         internal.points[hour * 100 + minute] = object;
+        canvas.requestPaint();
     }
 
     function removePoint(hour, minute) {
         var container;
 
+        internal.points[hour * 100 + minute].destroy()
         internal.points.splice(hour * 100 + minute, 1);
 
         container = internal.points;
