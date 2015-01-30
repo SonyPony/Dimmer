@@ -15,6 +15,7 @@ ApplicationWindow {
 
     property real tabCount: 4.0
     property var tabIcons: ["resources/images/Sun.png", "resources/images/Sun.png", "resources/images/Sun.png", "resources/images/wheel.png"]
+    property var tabIcons: ["resources/images/dim.png", "resources/images/program.png", "resources/images/channel.png", "resources/images/settings.png"]
 
     visible: true
     width: 480

@@ -13,5 +13,9 @@
         <file>components/controls/CloseButton.qml</file>
         <file>components/controls/CircleProgressBar.qml</file>
         <file>components/controls/Switch.qml</file>
+        <file>resources/images/dim.png</file>
+        <file>resources/images/channel.png</file>
+        <file>resources/images/program.png</file>
+        <file>resources/images/settings.png</file>
     </qresource>
 </RCC>
