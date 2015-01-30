@@ -21,10 +21,11 @@ ApplicationWindow {
     property color lineColor: "lightGray"
     property color cancelColor: "#FE2126"
 
+    property real luminosity: 0
     property real tabCount: 4.0
-    property var tabIcons: ["resources/images/Sun.png", "resources/images/Sun.png", "resources/images/Sun.png", "resources/images/wheel.png"]
     property var tabIcons: ["resources/images/dim.png", "resources/images/program.png", "resources/images/channel.png", "resources/images/settings.png"]
     property var tabLabels: ["Dim", "Schedule", "Channel", "Settings"]
+    property int actualChannel
     property var socket
 
     visible: true
@@ -151,9 +152,8 @@ ApplicationWindow {
 
                 color: root.primaryColor
 
-                implicitWidth: root.width / root.tabCount + 1
+                implicitWidth: Math.round(root.width / root.tabCount) + 1
                 implicitHeight: RL.calcSize("height", 100)
-
 
                 Image {
                     id: image
@@ -195,8 +195,8 @@ ApplicationWindow {
                 onSelectedChanged: {
                     if(styleData.selected)
                         slideBar.x = styleData.index * (root.width / root.tabCount + 1)
-
                 }
+
             }
         }
         //---------------------------------------STYLE

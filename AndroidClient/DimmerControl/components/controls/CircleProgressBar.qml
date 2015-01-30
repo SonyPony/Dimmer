@@ -16,7 +16,7 @@ Canvas {
     onValueChanged: requestPaint()
 
     Behavior on value {
-        NumberAnimation { easing.type: Easing.InOutQuad; duration: 700 }
+        NumberAnimation { easing.type: Easing.InOutQuad; duration: 600 }
     }
 
     Text {
