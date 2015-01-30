@@ -19,6 +19,7 @@
         <file>resources/images/channel.png</file>
         <file>resources/images/program.png</file>
         <file>resources/images/settings.png</file>
+        <file>components/controls/TextInput.qml</file>
         <file>components/controls/Button.qml</file>
     </qresource>
 </RCC>
