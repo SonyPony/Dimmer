@@ -113,19 +113,24 @@ ApplicationWindow {
         Tab {   //tab with slider
             title: "Dim"
 
-            Tabs.DimmerTab {}
+            Tabs.DimmerTab {
+                id: dimmerTab
+            }
         }
 
         Tab {   //tab width graph
-            id: sheduleTab
+            id: scheduleTab
             title: "Schedule"
 
             Tabs.ScheduleTab {}
         }
 
-        Tab {   //luminosity
-            title: "Tab 3"
+        Tab {   //channel
+            title: "Channel"
 
+            Tabs.ChannelTab {
+                id: channelTab
+            }
         }
 
         Tab {   //settings
