@@ -9,6 +9,7 @@ import FileStream 1.0
 import "components/controls" as Controls
 import "components/tabs" as Tabs
 import "components/other"
+import "components/screens" as Screens
 import "responsivity/responsivityLogic.js" as RL
 
 ApplicationWindow {
@@ -211,5 +212,12 @@ ApplicationWindow {
         }
     }
     //---------------------------------------TAB POINTER
+
+    Screens.LoadingScreen {
+        id: loadingScreen
+
+        width: root.width
+        height: root.height
+    }
 }
 

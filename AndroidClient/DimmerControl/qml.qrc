@@ -23,6 +23,7 @@
         <file>resources/images/settings.png</file>
         <file>resources/images/select.png</file>
         <file>resources/images/delete.png</file>
+        <file>components/screens/LoadingScreen.qml</file>
         <file>components/other/WSClient.qml</file>
         <file>components/controls/TextInput.qml</file>
         <file>components/tabs/SettingsTab.qml</file>
