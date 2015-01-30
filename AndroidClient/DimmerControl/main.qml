@@ -66,6 +66,20 @@ ApplicationWindow {
 
         color: root.secondaryColor
 
+        Text {
+            id: roomLabel
+
+            color: "white"
+            text: ""
+
+            font.pixelSize: RL.calcSize("height", 25)
+            font.family: "Trebuchet MS"
+
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: RL.calcSize("height", 30)
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
         Image {
             source: "resources/images/bulbOutline.png"
             rotation: 180
