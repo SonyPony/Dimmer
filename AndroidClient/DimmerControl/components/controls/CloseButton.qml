@@ -5,7 +5,7 @@ import "../../responsivity/responsivityLogic.js" as RL
 Rectangle {
     signal close
 
-    color: "#FE2126"
+    color: root.cancelColor
 
     Rectangle {
         height: parent.width * 0.08

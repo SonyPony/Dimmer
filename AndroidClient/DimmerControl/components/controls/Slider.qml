@@ -78,7 +78,7 @@ Canvas {
         id: valueText
 
         text: "0"
-        color: "gray"
+        color: root.secondaryColor
 
         font.family: "Trebuchet MS"
         font.pixelSize: 80
