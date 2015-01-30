@@ -113,8 +113,12 @@ ApplicationWindow {
 
         }
 
-        Tab {   //channel
-            title: "Tab 4"
+        Tab {   //settings
+            title: "Settings"
+
+            Tabs.SettingsTab {
+
+            }
         }
         //---------------------------------------TAB VIEW
 
