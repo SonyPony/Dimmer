@@ -105,7 +105,12 @@ Canvas {
     function sendValue() {
         if(counter >= 4) {
             counter = 0;
-            socket.sendTextMessage(value)
+            var data = {}
+            data.command = "dim"
+            data.pin = root.actualChannel
+            data.value = canvas.value
+
+            root.socket.sendTextMessage(JSON.stringify(data))
         }
 
         else
