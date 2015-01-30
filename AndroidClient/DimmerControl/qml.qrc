@@ -13,6 +13,7 @@
         <file>components/controls/CloseButton.qml</file>
         <file>components/controls/CircleProgressBar.qml</file>
         <file>components/controls/Switch.qml</file>
+        <file>components/other/ChannelListElement.qml</file>
         <file>components/dialogs/RoomDialog.qml</file>
         <file>components/dialogs/AddDialog.qml</file>
         <file>resources/images/dim.png</file>
