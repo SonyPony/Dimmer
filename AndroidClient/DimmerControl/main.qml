@@ -204,9 +204,9 @@ ApplicationWindow {
         }
 
         Triangle {
-            width: RL.calcSize("width", 40)
-            height: RL.calcSize("height", 15)
-            color: "#404040"
+            width: RL.calcSize("width", 27)
+            height: RL.calcSize("height", 14)
+            color: root.secondaryColor
 
             anchors.horizontalCenter: parent.horizontalCenter
         }
