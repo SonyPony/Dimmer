@@ -16,6 +16,7 @@ ApplicationWindow {
     property real tabCount: 4.0
     property var tabIcons: ["resources/images/Sun.png", "resources/images/Sun.png", "resources/images/Sun.png", "resources/images/wheel.png"]
     property var tabIcons: ["resources/images/dim.png", "resources/images/program.png", "resources/images/channel.png", "resources/images/settings.png"]
+    property var tabLabels: ["Dim", "Schedule", "Channel", "Settings"]
 
     visible: true
     width: 480
@@ -142,12 +143,24 @@ ApplicationWindow {
                     anchors.centerIn: parent
                 }
 
-                /*Text {
-                    id: text
-                    anchors.centerIn: parent
-                    text: styleData.title
-                    color: styleData.selected ? "white" : "black"
-                }*/
+                Text {
+                    id: label
+
+                    text: root.tabLabels[styleData.index]
+                    color: "white"
+                    opacity: (parent.selected) ?1 : 0.5
+
+                    Behavior on opacity {
+                        NumberAnimation { duration: 700 }
+                    }
+
+                    font.family: "trebuchet MS"
+                    font.pixelSize: RL.calcSize("height", 14)
+
+                    anchors.top: image.bottom
+                    anchors.topMargin: RL.calcSize("height", 4)
+                    anchors.horizontalCenter: image.horizontalCenter
+                }
 
                 onSelectedChanged: {
                     if(styleData.selected)
