@@ -10,7 +10,9 @@ Item {
     property color edgeColor
     property color textColor
     property string title
-    property int value: Math.round(flick.contentY / height) * step + minimum
+    property var value: (fromList) ?list[Math.round(flick.contentY / height)] :Math.round(flick.contentY / height) * step + minimum
+    property bool fromList: false
+    property var list: new Array
 
     Flickable {
         id: flick
@@ -22,7 +24,7 @@ Item {
         height: parent.height
 
         contentWidth: width
-        contentHeight: parent.count * height
+        contentHeight: ((spinbox.fromList) ?spinbox.list.length :parent.count) * height
 
         onMovementEnded: NumberAnimation {
             target: flick;
@@ -33,13 +35,13 @@ Item {
 
         Column {
             Repeater {
-                model: spinbox.count
+                model: (spinbox.fromList) ?spinbox.list :spinbox.count
                 delegate: Item {
                     width: spinbox.width
                     height: spinbox.height
 
                     Text {
-                        text: modelData * spinbox.step + spinbox.minimum
+                        text: (spinbox.fromList) ?modelData :(modelData * spinbox.step + spinbox.minimum)
                         color: spinbox.textColor
 
                         font.family: "Trebuchet MS"
@@ -73,7 +75,7 @@ Item {
         id: topLine
 
         width: parent.width
-        height: RL.calcSize("height", 3)
+        height: Math.floor(RL.calcSize("height", 3))
 
         color: parent.edgeColor
 
@@ -83,7 +85,7 @@ Item {
 
     Rectangle {
         width: parent.width
-        height: RL.calcSize("height", 3)
+        height: Math.floor(RL.calcSize("height", 3))
 
         color: parent.edgeColor
 
