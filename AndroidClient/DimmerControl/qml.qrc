@@ -21,6 +21,7 @@
         <file>resources/images/settings.png</file>
         <file>resources/images/select.png</file>
         <file>resources/images/delete.png</file>
+        <file>components/other/WSClient.qml</file>
         <file>components/controls/TextInput.qml</file>
         <file>resources/images/bulbInner.png</file>
         <file>resources/images/bulbOutline.png</file>

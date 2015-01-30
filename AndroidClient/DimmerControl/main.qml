@@ -24,6 +24,7 @@ ApplicationWindow {
     property var tabIcons: ["resources/images/Sun.png", "resources/images/Sun.png", "resources/images/Sun.png", "resources/images/wheel.png"]
     property var tabIcons: ["resources/images/dim.png", "resources/images/program.png", "resources/images/channel.png", "resources/images/settings.png"]
     property var tabLabels: ["Dim", "Schedule", "Channel", "Settings"]
+    property var socket
 
     visible: true
     width: 480
@@ -35,42 +36,9 @@ ApplicationWindow {
         anchors.fill: parent
     }
 
-    WebSocket {
-        id: socket
     FileStream {
         id: fileStream
 
-        active: true
-        url: "ws://169.254.29.212:8888"
-
-        onStatusChanged: {
-            var actualStatus = socket.status
-
-            switch(actualStatus) {
-                case WebSocket.Connecting:
-                    console.log("Connecting");
-                    break;
-
-                case WebSocket.Open:
-                    connectionStatus.color = "#76C012"
-                    console.log("Open");
-                    break;
-
-                case WebSocket.Closing:
-                    console.log("Closing");
-                    break;
-
-                case WebSocket.Closed:
-                    connectionStatus.color = "orange"
-                    console.log("Closed");
-                    break;
-
-                case WebSocket.Error:
-                    connectionStatus.color = "orange"
-                    console.log("Error (" + socket.errorString + ")")
-                    break;
-            }
-        }
         source: "config.txt"
     }
 
