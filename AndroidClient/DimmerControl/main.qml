@@ -4,6 +4,7 @@ import QtQuick.Window 2.1
 import QtQuick.Controls.Styles 1.2
 import QtQuick.Dialogs 1.2
 import Qt.WebSockets 1.0
+import FileStream 1.0
 
 import "components/controls" as Controls
 import "components/tabs" as Tabs
@@ -36,6 +37,8 @@ ApplicationWindow {
 
     WebSocket {
         id: socket
+    FileStream {
+        id: fileStream
 
         active: true
         url: "ws://169.254.29.212:8888"
@@ -68,6 +71,7 @@ ApplicationWindow {
                     break;
             }
         }
+        source: "config.txt"
     }
 
     //-------------ERROR DIALOG--------------
