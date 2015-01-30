@@ -151,12 +151,21 @@ ApplicationWindow {
 
 
                 Image {
-                    source: root.tabIcons[styleData.index]
+                    id: image
 
-                    width: Math.min(parent.implicitWidth, parent.implicitHeight)
+                    source: root.tabIcons[styleData.index]
+                    opacity: (parent.selected) ?1 : 0.5
+
+                    Behavior on opacity {
+                        NumberAnimation { duration: 700 }
+                    }
+
+                    width: Math.min(parent.implicitWidth, parent.implicitHeight) * 0.5
                     height: width
 
-                    anchors.centerIn: parent
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.top: parent.top
+                    anchors.topMargin: RL.calcSize("height", 20)
                 }
 
                 Text {
