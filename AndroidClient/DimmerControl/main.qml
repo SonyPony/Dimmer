@@ -13,6 +13,12 @@ import "responsivity/responsivityLogic.js" as RL
 ApplicationWindow {
     id: root
 
+    property color primaryColor: "#00C0FF"
+    property color secondaryColor: "#232020"
+    property color ternaryColor: "#333333"
+    property color lineColor: "lightGray"
+    property color cancelColor: "#FE2126"
+
     property real tabCount: 4.0
     property var tabIcons: ["resources/images/Sun.png", "resources/images/Sun.png", "resources/images/Sun.png", "resources/images/wheel.png"]
     property var tabIcons: ["resources/images/dim.png", "resources/images/program.png", "resources/images/channel.png", "resources/images/settings.png"]
@@ -85,7 +91,7 @@ ApplicationWindow {
         width: root.width
         height: root.height - frame.height
 
-        color: "#404040"
+        color: root.secondaryColor
     }
 
     //---------------------------------------
@@ -128,7 +134,7 @@ ApplicationWindow {
             tab: Rectangle {        //tab style
                 property bool selected: styleData.selected
 
-                color: "#76C012"
+                color: root.primaryColor
 
                 implicitWidth: root.width / root.tabCount + 1
                 implicitHeight: RL.calcSize("height", 100)
@@ -179,7 +185,11 @@ ApplicationWindow {
         height: RL.calcSize("height", 6)
         radius: height
 
-        color: "orange"
+        color: root.cancelColor
+
+        Behavior on color {
+            ColorAnimation { duration: 1000 }
+        }
 
         anchors.bottom: slideBar.top
         anchors.bottomMargin: RL.calcSize("height", 15)

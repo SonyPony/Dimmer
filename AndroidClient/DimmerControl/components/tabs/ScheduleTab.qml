@@ -18,8 +18,8 @@ Rectangle {
         minimumX: 0
         stepX: 2
 
-        textColor: "gray"
-        lineColor: "lightGray"
+        textColor: root.secondaryColor
+        lineColor: root.lineColor
     }
 
 

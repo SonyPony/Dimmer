@@ -40,6 +40,8 @@ Item {
         anchors.top: parent.top
         anchors.left: parent.left
     }
+            edgeColor: root.primaryColor
+            textColor: root.secondaryColor
 
     Controls.TouchSpinBox {     //minutes
         id: minuteSpinBox
@@ -78,6 +80,8 @@ Item {
             background: Rectangle {
                 color: "transparent"
                 radius: RL.calcSize("height", 5)
+            edgeColor: root.primaryColor
+            textColor: root.secondaryColor
 
                 border.width: RL.calcSize("height", 3)
                 border.color: "#76C012"

@@ -25,7 +25,7 @@ Item {
         height: width
 
         radius: width
-        color: "#76C012"
+        color: root.primaryColor
         antialiasing: true
 
         anchors.horizontalCenter: point.horizontalCenter

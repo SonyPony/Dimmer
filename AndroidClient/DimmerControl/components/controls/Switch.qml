@@ -15,7 +15,7 @@ Switch {
             implicitHeight: switchControl.height//implicitWidth / 3.5
 
             radius: 1
-            color: control.checked ? "#76C012" : "lightGray"
+            color: control.checked ? root.primaryColor : root.lineColor
         }
 
         handle: Rectangle {
@@ -25,7 +25,7 @@ Switch {
             color: "white"
             radius: 2
 
-            border.color: "gray"
+            border.color: root.secondaryColor
             border.width: 1
         }
     }

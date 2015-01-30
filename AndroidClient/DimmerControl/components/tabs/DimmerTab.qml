@@ -13,11 +13,11 @@ Rectangle {
         height: parent.height
 
         enabled: powerSwitch.checked
-        color: "lightGray"
-        activeColor: "#76C012"
-        toggleColor: "gray"
-        lineWidth:  RL.calcSize("width", 20)
-        toggleSize: RL.calcSize("width", 35)
+        color: root.lineColor
+        activeColor: root.primaryColor
+        toggleColor: root.secondaryColor
+        lineWidth:  RL.calcSize("height", 20)
+        toggleSize: RL.calcSize("height", 35)
         minimum: 0
         maximum: 100
 
@@ -45,12 +45,11 @@ Rectangle {
 
         maximum: 10.0
         minimum: 0
-        value: slider.value / 10.0
-        lineWidth: RL.calcSize("width", 20)
-        activeColor: "#76C012"
-        textColor: "gray"
-        grooveColor: "lightGray"
-    }
+        value: 10.0 - root.luminosity / 25.5
+        lineWidth: RL.calcSize("height", 20)
+        activeColor: root.primaryColor
+        textColor: root.secondaryColor
+        grooveColor: root.lineColor
 
     Rectangle {
         color: "orange"
@@ -63,7 +62,7 @@ Rectangle {
         y: 200
         width: RL.calcSize("width", 140)
         height: 300
-        color: "gray"
+        color: root.secondaryColor
         activeColor: "orange"
     }
 }

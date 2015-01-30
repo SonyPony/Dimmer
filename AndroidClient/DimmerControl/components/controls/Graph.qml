@@ -93,7 +93,7 @@ Canvas {
 
         ctx.clearRect(x, y, width, height)
         ctx.beginPath()
-        ctx.fillStyle = "#B5E61D"
+        ctx.fillStyle = root.secondaryColor
 
         for(var key in internal.points) {
             if(previous) {      //if it is not first point
