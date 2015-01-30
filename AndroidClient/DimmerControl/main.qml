@@ -92,6 +92,25 @@ ApplicationWindow {
         height: root.height - frame.height
 
         color: root.secondaryColor
+
+        Image {
+            source: "resources/images/bulbOutline.png"
+            rotation: 180
+
+            y: -RL.calcSize("height", 10)
+            width: RL.calcSize("height", 80)
+            height: width
+
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            Image {
+                id: dimmingBulb
+
+                source: "resources/images/bulbInner.png"
+                opacity: 0
+                anchors.fill: parent
+            }
+        }
     }
 
     //---------------------------------------

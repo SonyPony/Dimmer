@@ -21,7 +21,7 @@ Rectangle {
         minimum: 0
         maximum: 100
 
-       // onValueChanged: socket.sendTextMessage(slider.value)
+        onValueChanged: dimmingBulb.opacity = value / 100.0
     }
 
     Controls.Switch {
