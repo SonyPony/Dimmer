@@ -6,6 +6,8 @@ import "../controls" as Controls
 import "../../responsivity/responsivityLogic.js" as RL
 
 Rectangle {
+    property alias value: slider.value
+
     Controls.Slider {
         id: slider
 
@@ -38,10 +40,8 @@ Rectangle {
     }
 
     Controls.CircleProgressBar {
-        y: 40
-        x: 100
-        height: 150
-        width: 150
+        height: RL.calcSize("height", 150)
+        width: RL.calcSize("height", 150)
 
         maximum: 10.0
         minimum: 0
@@ -51,9 +51,10 @@ Rectangle {
         textColor: root.secondaryColor
         grooveColor: root.lineColor
 
-    Rectangle {
-        color: "orange"
-        anchors.fill: offButton
+        anchors.top: parent.top
+        anchors.topMargin: RL.calcSize("height", 40)
+        anchors.left: parent.left
+        anchors.leftMargin: RL.calcSize("width", 40)
     }
 
     Controls.OffButton {
