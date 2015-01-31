@@ -3,6 +3,8 @@ import QtQuick 2.0
 import "../../responsivity/responsivityLogic.js" as RL
 
 Item {
+    id: pointPositioner
+
     property int hour: 0
     property int minute: 0
     property real dutyCycle: 0
@@ -45,6 +47,6 @@ Item {
 
     MouseArea {
         anchors.fill: parent
-        onClicked: canvas.removePoint(hour, minute)
+        onClicked: deleteDialog.show(pointPositioner.x, pointPositioner.y, pointPositioner.hour * 100 + pointPositioner.minute)
     }
 }

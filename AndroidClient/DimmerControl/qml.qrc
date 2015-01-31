@@ -30,5 +30,6 @@
         <file>resources/images/bulbInner.png</file>
         <file>resources/images/bulbOutline.png</file>
         <file>components/controls/Button.qml</file>
+        <file>components/dialogs/DeleteDialog.qml</file>
     </qresource>
 </RCC>

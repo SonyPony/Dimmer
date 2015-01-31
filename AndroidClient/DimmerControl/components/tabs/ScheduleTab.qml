@@ -22,7 +22,6 @@ Rectangle {
         lineColor: root.lineColor
     }
 
-
     Dialogs.PointDialog {
         id: pointDialog
 
@@ -32,5 +31,4 @@ Rectangle {
 
         anchors.bottom: parent.bottom
     }
-
 }

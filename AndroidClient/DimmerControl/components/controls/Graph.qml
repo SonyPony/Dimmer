@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "../dialogs" as Dialogs
 import "../../responsivity/responsivityLogic.js" as RL
 
 Canvas {
@@ -19,6 +20,11 @@ Canvas {
         property var xAxisX: new Array
         property var yAxisY: new Array
         property var points: new Array
+    }
+
+    Dialogs.DeleteDialog {
+        id: deleteDialog
+        z: 1
     }
 
     Repeater {      //Y axis
@@ -82,6 +88,14 @@ Canvas {
                 }
             }
         }
+    }
+
+    MouseArea {
+        id: graphMouseArea
+
+        anchors.fill: parent
+        onClicked: if(deleteDialog.opacity)
+                       deleteDialog.clicked(mouse.x, mouse.y)
     }
 
     onPaint: {
