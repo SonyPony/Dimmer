@@ -145,6 +145,7 @@ Canvas {
 
         internal.points[hour * 100 + minute] = object;
         canvas.requestPaint();
+        deleteDialog.hide()
     }
 
     function removePoint(hour, minute) {

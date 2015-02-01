@@ -38,6 +38,10 @@ Rectangle {
     function clicked(x, y) {
         if(x >= dialog.x && x <= dialog.x + dialog.width && y >= dialog.y && y <= dialog.y + dialog.height)
             canvas.removePoint(Math.floor(currentPointIndex / 100), currentPointIndex % 100)
+        dialog.hide()
+    }
+
+    function hide() {
         graphMouseArea.z = 0
         dialog.opacity = 0
     }
