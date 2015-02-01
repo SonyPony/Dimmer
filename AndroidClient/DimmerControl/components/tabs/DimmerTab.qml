@@ -14,7 +14,7 @@ Rectangle {
         width: parent.width
         height: parent.height
 
-        enabled: powerSwitch.checked
+        enabled: powerButton.active
         color: root.lineColor
         activeColor: root.primaryColor
         toggleColor: root.secondaryColor
@@ -26,7 +26,7 @@ Rectangle {
         onValueChanged: dimmingBulb.opacity = value / 100.0
     }
 
-    Controls.Switch {
+    /*Controls.Switch {
         id: powerSwitch
 
         x: 170
@@ -37,7 +37,7 @@ Rectangle {
 
         onCheckedChanged: if(!checked)
                               slider.setValue(0)
-    }
+    }*/
 
     Controls.CircleProgressBar {
         height: RL.calcSize("height", 150)
@@ -58,12 +58,17 @@ Rectangle {
     }
 
     Controls.OffButton {
-        id: offButton
+        id: powerButton
 
-        y: 200
-        width: RL.calcSize("width", 140)
-        height: 300
-        color: root.secondaryColor
-        activeColor: "orange"
+        width: RL.calcSize("height", 153)
+        height: RL.calcSize("height", 159)
+
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.bottomMargin: RL.calcSize("height", 40)
+        anchors.leftMargin: RL.calcSize("width", 40)
+
+        onActiveChanged: if(!active)
+                              slider.setValue(0)
     }
 }

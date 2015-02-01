@@ -13,6 +13,8 @@
         <file>components/controls/CloseButton.qml</file>
         <file>components/controls/CircleProgressBar.qml</file>
         <file>components/controls/Switch.qml</file>
+        <file>components/controls/OffButton.qml</file>
+        <file>resources/images/powerOn.png</file>
         <file>components/tabs/ChannelTab.qml</file>
         <file>components/other/ChannelListElement.qml</file>
         <file>components/dialogs/RoomDialog.qml</file>
@@ -31,5 +33,6 @@
         <file>resources/images/bulbOutline.png</file>
         <file>components/controls/Button.qml</file>
         <file>components/dialogs/DeleteDialog.qml</file>
+        <file>resources/images/powerOff.png</file>
     </qresource>
 </RCC>
