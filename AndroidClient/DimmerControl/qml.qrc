@@ -34,5 +34,6 @@
         <file>components/controls/Button.qml</file>
         <file>components/dialogs/DeleteDialog.qml</file>
         <file>resources/images/powerOff.png</file>
+        <file>resources/images/help.png</file>
     </qresource>
 </RCC>

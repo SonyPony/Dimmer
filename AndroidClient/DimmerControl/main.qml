@@ -22,9 +22,9 @@ ApplicationWindow {
     property color cancelColor: "#FE2126"
 
     property real luminosity: 0
-    property real tabCount: 4.0
-    property var tabIcons: ["resources/images/dim.png", "resources/images/program.png", "resources/images/channel.png", "resources/images/settings.png"]
-    property var tabLabels: ["Dim", "Schedule", "Channel", "Settings"]
+    property real tabCount: 5.0
+    property var tabIcons: ["resources/images/dim.png", "resources/images/program.png", "resources/images/channel.png", "resources/images/settings.png", "resources/images/help.png"]
+    property var tabLabels: ["Dim", "Schedule", "Channel", "Settings", "Help"]
     property int actualChannel
     property var socket
 
@@ -141,6 +141,11 @@ ApplicationWindow {
 
             }
         }
+
+        Tab {
+
+        }
+
         //---------------------------------------TAB VIEW
 
         //---------------TAB STYLE---------------
