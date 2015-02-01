@@ -82,6 +82,12 @@ AddDialog {
             anchors.verticalCenter: sensorSpinbox.verticalCenter
             anchors.left: sensorSpinbox.right
             anchors.leftMargin: RL.calcSize("width", 20)
+
+            onEnabledChanged: {
+                if(enabled)
+                    forceActiveFocus()
+                focus = enabled
+            }
         }
     }
 }

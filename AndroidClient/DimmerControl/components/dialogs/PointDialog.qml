@@ -75,6 +75,12 @@ AddDialog {
             anchors.verticalCenter: minuteSpinbox.verticalCenter
             anchors.left: minuteSpinbox.right
             anchors.leftMargin: RL.calcSize("width", 20)
+
+            onEnabledChanged: {
+                if(enabled)
+                    forceActiveFocus()
+                focus = enabled
+            }
         }
 
         //ADDITIONAL TEXT
