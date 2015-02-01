@@ -14,7 +14,7 @@ Item {
     //        DCL in decade -> DCL % 10 == 0       - half of width -    height between 2 points            *       rest / 10
     y: internal.yAxisY[Math.floor(dutyCycle / 10)] - width / 2 - (internal.yAxisY[0] - internal.yAxisY[1]) * ((dutyCycle % 10) / 10.0)
 
-    width: RL.calcSize("height", 15)
+    width: RL.calcSize("height", 23)
     height: width
 
     onDutyCycleChanged: {   //dimming color

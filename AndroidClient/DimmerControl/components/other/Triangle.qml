@@ -5,6 +5,7 @@ Canvas {
 
     property color color
 
+    antialiasing: true
     onWidthChanged: requestPaint()
     onHeightChanged: requestPaint()
 
