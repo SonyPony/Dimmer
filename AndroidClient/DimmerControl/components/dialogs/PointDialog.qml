@@ -70,6 +70,7 @@ AddDialog {
 
             width: RL.calcSize("width", 120)
             height: RL.calcSize("height", 60)
+            validator: RegExpValidator { regExp: /[1]?\d\d/ }
             title: "Power"
 
             anchors.verticalCenter: minuteSpinbox.verticalCenter
