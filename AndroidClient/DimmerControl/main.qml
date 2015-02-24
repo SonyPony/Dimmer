@@ -143,7 +143,7 @@ ApplicationWindow {
         }
 
         Tab {
-
+            Tabs.HelpTab {}
         }
 
         //---------------------------------------TAB VIEW
