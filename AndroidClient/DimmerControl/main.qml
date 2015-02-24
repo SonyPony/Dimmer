@@ -27,6 +27,7 @@ ApplicationWindow {
     property var tabLabels: ["Dim", "Schedule", "Channel", "Settings", "Help"]
     property int actualChannel
     property var socket
+    property string language: Qt.locale().name.substring(0,2)
 
     visible: true
     width: 480
