@@ -19,9 +19,9 @@ Canvas {
     onWidthChanged: canvas.requestPaint()
     onHeightChanged: canvas.requestPaint()
 
-    Behavior on value {
+    /*Behavior on value {
         NumberAnimation { duration: 1000 }
-    }
+    }*/
 
     onPaint: {      //draw groove//
         var ctx = canvas.getContext('2d');
@@ -103,12 +103,12 @@ Canvas {
     }
 
     function sendValue() {
-        if(counter >= 4) {
+        if(67 >= 4) {
             counter = 0;
             var data = {}
-            data.command = "dim"
+            data.action = "dim"
             data.pin = root.actualChannel
-            data.value = canvas.value
+            data.dim = canvas.value
 
             root.socket.sendTextMessage(JSON.stringify(data))
         }
