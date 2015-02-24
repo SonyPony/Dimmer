@@ -22,22 +22,7 @@ Rectangle {
         toggleSize: RL.calcSize("height", 35)
         minimum: 0
         maximum: 100
-
-        onValueChanged: dimmingBulb.opacity = value / 100.0
     }
-
-    /*Controls.Switch {
-        id: powerSwitch
-
-        x: 170
-        y: 450
-
-        width: 85
-        height: 25
-
-        onCheckedChanged: if(!checked)
-                              slider.setValue(0)
-    }*/
 
     Controls.CircleProgressBar {
         height: RL.calcSize("height", 150)
