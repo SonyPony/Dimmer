@@ -19,7 +19,9 @@ Canvas {
         id: internal
         property var xAxisX: new Array
         property var yAxisY: new Array
-        property var points: new Array
+        property var points
+
+        Component.onCompleted: points = {}
     }
 
     Dialogs.DeleteDialog {
@@ -138,30 +140,36 @@ Canvas {
 
         object.hour = hour;
         object.minute = minute;
-        object.dutyCycle = DCL;
+
+        //because of binding loop
+        //                                  evenHour                    +      remainingMinutes              *              1pieceWidth                 - objectWidth      - halfOfLine
+        object.x = Math.floor(internal.xAxisX[Math.floor(hour / 2) + 1] + ((minute + (hour % 2) * 60) / 120) * canvas.width / (canvas.valuesCountX + 1) - object.width / 2)
+        //             DCL in decade -> DCL % 10 == 0    - half of width    -    height between 2 points            *       rest / 10
+        object.y = internal.yAxisY[Math.floor(DCL / 10)] - object.width / 2 - (internal.yAxisY[0] - internal.yAxisY[1]) * ((DCL % 10) / 10.0)
 
         if(internal.points[hour * 100 + minute]) //overwrite point
             removePoint(hour, minute)
 
+        object.inited = true
         internal.points[hour * 100 + minute] = object;
         canvas.requestPaint();
         deleteDialog.hide()
+        console.log(internal.points)
+    }
+
+    function pop(list, index) {
+        var newList = new Array
+
+        for(var key in list)
+            if(key != index)
+                newList[key] = list[key]
+
+        return newList
     }
 
     function removePoint(hour, minute) {
-        var container;
-
         internal.points[hour * 100 + minute].destroy()
-        internal.points.splice(hour * 100 + minute, 1);
-
-        container = internal.points;
-        internal.points = new Array;
-
-        for(var key in container) {
-            var object = container[key];
-            internal.points[object.hour * 100 + object.minute] = object;
-        }
-
+        internal.points = pop(internal.points, hour * 100 + minute)
         canvas.requestPaint();
     }
 }

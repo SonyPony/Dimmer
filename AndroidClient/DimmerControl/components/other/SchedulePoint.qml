@@ -5,21 +5,37 @@ import "../../responsivity/responsivityLogic.js" as RL
 Item {
     id: pointPositioner
 
-    property int hour: 0
+    property int hour: -1
     property int minute: 0
     property real dutyCycle: 0
 
-    //                          evenHour                     +      remainingMinutes                    *              1pieceWidth                 - objectWidth - halfOfLine
-    x: internal.xAxisX[((hour % 2) ?hour - 1 :hour) / 2 + 1] + ((minute + ((hour % 2) ?60 :0)) / 120.0) * canvas.width / (canvas.valuesCountX + 1) - width / 2 - RL.calcSize("height", 1)
-    //        DCL in decade -> DCL % 10 == 0       - half of width -    height between 2 points            *       rest / 10
-    y: internal.yAxisY[Math.floor(dutyCycle / 10)] - width / 2 - (internal.yAxisY[0] - internal.yAxisY[1]) * ((dutyCycle % 10) / 10.0)
+    property bool timeChanged: false
+    property int newHour
+    property int newMinute
+    property bool inited: false
+    property bool done: false
 
     width: RL.calcSize("height", 23)
     height: width
 
-    onDutyCycleChanged: {   //dimming color
-        var rgbColor = parseInt(Math.floor(255.0 * (dutyCycle / 100.0)))
-        point.color = "#" + rgbColor.toString(16) + rgbColor.toString(16) + rgbColor.toString(16)
+    onYChanged: {
+        var closestLine = -1
+        var restOfDCL
+        var piece = internal.yAxisY[0] - internal.yAxisY[1]
+
+        for(var key in internal.yAxisY)
+            if(Math.abs((pointPositioner.y + pointPositioner.height / 2) - internal.yAxisY[key]) < piece) {
+                closestLine = key
+                restOfDCL = Math.floor(Math.abs(internal.yAxisY[closestLine] - pointPositioner.y - pointPositioner.height / 2) / piece * 10)
+                break
+            }
+        pointPositioner.dutyCycle = closestLine * 10 + restOfDCL
+    }
+
+    //dimming color
+    onDutyCycleChanged: {
+        point.opacity = 1 - dutyCycle / 100.0
+        pointPositioner.parent.requestPaint()
     }
 
     Rectangle {     //edge because of white point would not be seen
@@ -27,8 +43,9 @@ Item {
         height: width
 
         radius: width
-        color: root.primaryColor
         antialiasing: true
+        border.color: root.primaryColor
+        border.width: RL.calcSize("height", 2) + ((Math.round(parent.width) % 2) ?1 : 0)
 
         anchors.horizontalCenter: point.horizontalCenter
         anchors.verticalCenter: point.verticalCenter
@@ -46,7 +63,20 @@ Item {
     }
 
     MouseArea {
-        anchors.fill: parent
+        id: mouseArea
+
+        parent: pointPositioner.parent
+        anchors.fill: pointPositioner
+
+        drag.axis: Drag.YAxis
+        drag.target: pointPositioner
+        drag.minimumY: internal.yAxisY[internal.yAxisY.length - 1] - pointPositioner.height / 2
+        drag.maximumY: internal.yAxisY[0] - pointPositioner.height / 2
+
+        //because of MouseArea overlooping
+        onPressed: mouseArea.anchors.fill = parent
+        onReleased: mouseArea.anchors.fill = pointPositioner
+
         onClicked: deleteDialog.show(pointPositioner.x, pointPositioner.y, pointPositioner.hour * 100 + pointPositioner.minute)
     }
 }
