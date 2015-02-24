@@ -36,9 +36,9 @@ if __name__ == "__main__":
     #handler = MessageHandler(a)
     application.listen(8888)
     WSHandler.message_handler = MessageHandler(WSHandler.clients)
-    tornado.ioloop.IOLoop.instance().start()
-    print("ff")
-    #luminosity_reader = tornado.ioloop.PeriodicCallback(WSHandler.message_handler.send_luminosity, 400)
-    #luminosity_reader.start()
-    #ioloop.start()
+    serverloop = tornado.ioloop.IOLoop.instance()
+  
+    luminosity_reader = tornado.ioloop.PeriodicCallback(WSHandler.message_handler.send_luminosity, 300)
+    luminosity_reader.start()
+    serverloop.start()
 

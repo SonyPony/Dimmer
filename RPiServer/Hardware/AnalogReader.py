@@ -2,6 +2,9 @@ __author__ = 'Sony'
 
 from settings import Settings
 from smbus import SMBus
+import time
+from tornado.ioloop import IOLoop
+import logging
 
 class AnalogReader():
     def __init__(self):
@@ -20,5 +23,6 @@ class AnalogReader():
 
             for channel in range(Settings.NUMBER_OF_CHANNELS):
                 self.__bus.write_byte(address, channel)
+                time.sleep(0.2)
                 readings[address].append(self.__bus.read_byte(address))
         return readings
