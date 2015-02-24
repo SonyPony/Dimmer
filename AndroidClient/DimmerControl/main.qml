@@ -33,6 +33,11 @@ ApplicationWindow {
     height: 782
     title: qsTr("Ultra Dimmer")
 
+    function setChannel(pin, room_label) {
+        root.actualChannel = pin
+        roomLabel.text = room_label
+    }
+
     Item {
         id: positioner
         anchors.fill: parent
@@ -73,7 +78,7 @@ ApplicationWindow {
             color: "white"
             text: ""
 
-            font.pixelSize: RL.calcSize("height", 25)
+            font.pixelSize: RL.calcSize("height", 35)
             font.family: "Trebuchet MS"
 
             anchors.bottom: parent.bottom
@@ -82,21 +87,38 @@ ApplicationWindow {
         }
 
         Image {
-            source: "resources/images/bulbOutline.png"
-            rotation: 180
+            id: leftArrow
 
-            y: -RL.calcSize("height", 10)
-            width: RL.calcSize("height", 80)
-            height: width
+            source: "resources/images/leftArrow.png"
+            width: height * (85.0 / 128.0)
+            height: RL.calcSize("height", 40)
 
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: RL.calcSize("width", 15)
+            anchors.verticalCenter: parent.verticalCenter
 
-            Image {
-                id: dimmingBulb
-
-                source: "resources/images/bulbInner.png"
-                opacity: 0
+            MouseArea {
                 anchors.fill: parent
+
+                onClicked: root.setChannel(channelTab.getPreviousRoom(root.actualChannel), "d")
+            }
+        }
+
+        Image {
+            id: rightArrow
+
+            source: "resources/images/rightArrow.png"
+            width: leftArrow.width
+            height: leftArrow.height
+
+            anchors.right: parent.right
+            anchors.rightMargin: leftArrow.anchors.leftMargin
+            anchors.top: leftArrow.top
+
+            MouseArea {
+                anchors.fill: parent
+
+                onClicked: root.setChannel(frame.channelTab.getNextRoom(root.actualChannel), "d")
             }
         }
     }
@@ -128,6 +150,10 @@ ApplicationWindow {
 
         Tab {   //channel
             title: "Channel"
+            //id: channelTab
+
+//            property alias channelTab: channelTab.children[0]
+
 
             Tabs.ChannelTab {
                 id: channelTab

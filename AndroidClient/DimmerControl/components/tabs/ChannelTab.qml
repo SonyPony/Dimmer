@@ -103,6 +103,24 @@ Item {
                 return key
     }
 
+    function getNextRoom(pin) {
+        var current = getRoom(pin)
+
+        if(current == channels.length - 1)
+            return 0
+        else
+            return current + 1
+    }
+
+    function getPreviousRoom(pin) {
+        var current = getRoom(pin)
+
+        if(current == 0)
+            return channels.length - 1
+        else
+            return current - 1
+    }
+
     function popRoom(pin) {
         var removingItemKey = -1
         var element

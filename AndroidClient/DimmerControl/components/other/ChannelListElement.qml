@@ -179,9 +179,8 @@ Rectangle {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    root.actualChannel = element.pin
+                    root.setChannel(element.pin, element.title)
                     frame.currentIndex = 0;
-                    roomLabel.text = channelListView.channels[channelListView.getRoom(element.pin)][0]
                     infoPart.hideMenu()
                 }
             }
