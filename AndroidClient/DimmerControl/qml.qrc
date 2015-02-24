@@ -1,40 +1,44 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>components/controls/Slider.qml</file>
-        <file>components/tabs/DimmerTab.qml</file>
-        <file>components/controls/Graph.qml</file>
-        <file>components/tabs/ScheduleTab.qml</file>
-        <file>responsivity/responsivityLogic.js</file>
-        <file>components/other/Triangle.qml</file>
-        <file>components/other/SchedulePoint.qml</file>
-        <file>components/controls/TouchSpinBox.qml</file>
-        <file>components/dialogs/PointDialog.qml</file>
-        <file>components/controls/CloseButton.qml</file>
+        <file>components/controls/Button.qml</file>
         <file>components/controls/CircleProgressBar.qml</file>
-        <file>components/controls/Switch.qml</file>
+        <file>components/controls/CloseButton.qml</file>
+        <file>components/controls/Graph.qml</file>
         <file>components/controls/OffButton.qml</file>
-        <file>resources/images/powerOn.png</file>
-        <file>components/tabs/ChannelTab.qml</file>
-        <file>components/other/ChannelListElement.qml</file>
-        <file>components/dialogs/RoomDialog.qml</file>
-        <file>components/dialogs/AddDialog.qml</file>
-        <file>resources/images/dim.png</file>
-        <file>resources/images/channel.png</file>
-        <file>resources/images/program.png</file>
-        <file>resources/images/settings.png</file>
-        <file>resources/images/select.png</file>
-        <file>resources/images/delete.png</file>
-        <file>components/screens/LoadingScreen.qml</file>
-        <file>components/other/WSClient.qml</file>
+        <file>components/controls/Slider.qml</file>
+        <file>components/controls/Switch.qml</file>
         <file>components/controls/TextInput.qml</file>
-        <file>components/tabs/HelpTab.qml</file>
-        <file>components/tabs/SettingsTab.qml</file>
+        <file>components/controls/TouchSpinBox.qml</file>
         <file>resources/images/bulbInner.png</file>
         <file>resources/images/bulbOutline.png</file>
-        <file>components/controls/Button.qml</file>
-        <file>components/dialogs/DeleteDialog.qml</file>
-        <file>resources/images/powerOff.png</file>
+        <file>resources/images/delete.png</file>
+        <file>resources/images/dim.png</file>
         <file>resources/images/help.png</file>
+        <file>resources/images/channel.png</file>
+        <file>resources/images/lamp.png</file>
+        <file>resources/images/leftArrow.png</file>
+        <file>resources/images/powerOff.png</file>
+        <file>resources/images/powerOn.png</file>
+        <file>resources/images/program.png</file>
+        <file>resources/images/rightArrow.png</file>
+        <file>resources/images/select.png</file>
+        <file>resources/images/settings.png</file>
+        <file>responsivity/responsivityLogic.js</file>
+        <file>components/dialogs/AddDialog.qml</file>
+        <file>components/dialogs/DeleteDialog.qml</file>
+        <file>components/dialogs/PointDialog.qml</file>
+        <file>components/dialogs/RoomDialog.qml</file>
+        <file>components/other/ChannelListElement.qml</file>
+        <file>components/other/SchedulePoint.qml</file>
+        <file>components/other/Triangle.qml</file>
+        <file>components/other/WSClient.qml</file>
+        <file>components/panels/InfoPanel.qml</file>
+        <file>components/screens/LoadingScreen.qml</file>
+        <file>components/tabs/DimmerTab.qml</file>
+        <file>components/tabs/HelpTab.qml</file>
+        <file>components/tabs/ChannelTab.qml</file>
+        <file>components/tabs/SettingsTab.qml</file>
+        <file>components/tabs/ScheduleTab.qml</file>
     </qresource>
 </RCC>
