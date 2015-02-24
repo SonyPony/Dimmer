@@ -72,6 +72,14 @@ ApplicationWindow {
 
         color: root.secondaryColor
 
+        Image {
+            y: 10
+            source: "resources/images/lamp.png"
+            height: 70
+            width: height
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
         Text {
             id: roomLabel
 
@@ -129,15 +137,21 @@ ApplicationWindow {
     TabView {
         id: frame
 
+        property alias dimmerTab: dimmerTab
+        property alias channelTab: channelTab
+
+        //property alias channelTab: channelTab.channelTab
+
         width: parent.width
         height: RL.calcSize("height", 700)
         anchors.bottom: positioner.bottom
 
         Tab {   //tab with slider
+            id: dimmerTab
+
             title: "Dim"
 
             Tabs.DimmerTab {
-                id: dimmerTab
             }
         }
 
