@@ -179,7 +179,7 @@ Rectangle {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    root.setChannel(element.pin, element.title)
+                    root.setChannel(element.pin, element.title, sensorAddres[0] + sensorAddres[1], sensorAddres[sensorAddres.length - 1])
                     frame.currentIndex = 0;
                     infoPart.hideMenu()
                 }

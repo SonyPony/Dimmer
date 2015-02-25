@@ -40,7 +40,13 @@ WebSocket {
         }
     }
 
-    onTextMessageReceived: root.luminosity = message
+    onTextMessageReceived: {
+        var data = JSON.parse(message)
+
+        if(data["action"] == "luminosity_read") {
+            root.luminosity = 255 - data["readings"][tempData.actualSensorAddress][tempData.actualSensorChannel]
+        }
+    }
     Component.onCompleted: {
         var ip = fileStream.read()
         if(ip != "") {

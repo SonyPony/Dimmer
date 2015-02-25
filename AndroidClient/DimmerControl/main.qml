@@ -29,14 +29,24 @@ ApplicationWindow {
     property var socket
     property string language: Qt.locale().name.substring(0,2)
 
+    QtObject {
+        id: tempData
+
+        property int actualSensorAddress: 0
+        property int actualSensorChannel: 0
+        property var channels
+    }
+
     visible: true
     width: 480
     height: 782
     title: qsTr("Ultra Dimmer")
 
-    function setChannel(pin, room_label) {
+    function setChannel(pin, room_label, address, channel) {
         root.actualChannel = pin
         roomLabel.text = room_label
+        tempData.actualSensorAddress = address
+        tempData.actualSensorChannel = channel
     }
 
     Item {
@@ -139,7 +149,7 @@ ApplicationWindow {
         id: frame
 
         property alias dimmerTab: dimmerTab
-        property alias channelTab: channelTab
+        //property alias channelTab: channelTab
 
         //property alias channelTab: channelTab.channelTab
 
