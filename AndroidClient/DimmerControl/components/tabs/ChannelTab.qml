@@ -2,6 +2,7 @@ import QtQuick 2.0
 
 import "../other"
 import "../../responsivity/responsivityLogic.js" as RL
+import "../../logic/channelLogic.js" as CL
 import "../dialogs" as Dialogs
 
 Item {
@@ -40,7 +41,7 @@ Item {
                     ChannelListElement {
                         id: singleElement
 
-                        property int index: getRoom(modelData[1])
+                        property int index: CL.getRoomIndexFromPin(modelData[1])
 
                         pin: modelData[1]
                         sensorAddres: modelData[2]
@@ -96,52 +97,5 @@ Item {
         buttonHeight: RL.calcSize("height", 60)
 
         anchors.bottom: parent.bottom
-    }
-
-    function getRoom(pin) {
-        for(var key in channels)
-            if(channels[key][1] == pin)
-                return key
-    }
-
-    function getNextRoom(pin) {
-        var current = getRoom(pin)
-
-        if(current == channels.length - 1)
-            return 0
-        else
-            return current + 1
-    }
-
-    function getPreviousRoom(pin) {
-        var current = getRoom(pin)
-
-        if(current == 0)
-            return channels.length - 1
-        else
-            return current - 1
-    }
-
-    function popRoom(pin) {
-        var removingItemKey = -1
-        var element
-
-        for(var i = 0; i < repeater.count; i++) {
-            element = repeater.itemAt(i).singleElement
-
-            if(element.pin == pin) {
-                element.remove()
-                removingItemKey = i
-            }
-            else if(i > removingItemKey && removingItemKey != -1)
-                element.move()
-        }
-    }
-
-    function addRoom(title, pin, sensorPin) {
-        repeater.newItemIndex = pin
-        channels.push([title, pin, sensorPin])
-        channelsChanged()
-        repeater.newItemIndex = -1
     }
 }
