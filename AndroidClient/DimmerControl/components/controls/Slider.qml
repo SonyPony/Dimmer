@@ -107,7 +107,7 @@ Canvas {
             counter = 0;
             var data = {}
             data.action = "dim"
-            data.pin = root.actualChannel
+            data.pin = tempData.actualChannel
             data.dim = canvas.value
 
             root.socket.sendTextMessage(JSON.stringify(data))

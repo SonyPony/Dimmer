@@ -34,7 +34,9 @@ ApplicationWindow {
 
         property int actualSensorAddress: 0
         property int actualSensorChannel: 0
-        property var channels
+
+        property int actualChannel  //store pin
+        property var channels: new Array
     }
 
     visible: true
