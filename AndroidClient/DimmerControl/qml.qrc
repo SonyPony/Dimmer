@@ -40,5 +40,6 @@
         <file>components/tabs/ChannelTab.qml</file>
         <file>components/tabs/SettingsTab.qml</file>
         <file>components/tabs/ScheduleTab.qml</file>
+        <file>logic/channelLogic.js</file>
     </qresource>
 </RCC>

@@ -10,7 +10,9 @@ import "components/controls" as Controls
 import "components/tabs" as Tabs
 import "components/other"
 import "components/screens" as Screens
+import "components/panels" as Panels
 import "responsivity/responsivityLogic.js" as RL
+import "logic/channelLogic.js" as CL
 
 ApplicationWindow {
     id: root
@@ -25,7 +27,6 @@ ApplicationWindow {
     property real tabCount: 5.0
     property var tabIcons: ["resources/images/dim.png", "resources/images/program.png", "resources/images/channel.png", "resources/images/settings.png", "resources/images/help.png"]
     property var tabLabels: ["Dim", "Schedule", "Channel", "Settings", "Help"]
-    property int actualChannel
     property var socket
     property string language: Qt.locale().name.substring(0,2)
 
@@ -43,13 +44,6 @@ ApplicationWindow {
     width: 480
     height: 782
     title: qsTr("Ultra Dimmer")
-
-    function setChannel(pin, room_label, address, channel) {
-        root.actualChannel = pin
-        roomLabel.text = room_label
-        tempData.actualSensorAddress = address
-        tempData.actualSensorChannel = channel
-    }
 
     Item {
         id: positioner
@@ -77,83 +71,19 @@ ApplicationWindow {
     //---------------------------------------
 
     //-------------ICON & STATUS-------------
-    Rectangle {
-        id: status
+    Panels.InfoPanel {
+        id: infoPanel
 
         width: root.width
         height: root.height - frame.height
 
         color: root.secondaryColor
-
-        Image {
-            y: 10
-            source: "resources/images/lamp.png"
-            height: 70
-            width: height
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-
-        Text {
-            id: roomLabel
-
-            color: "white"
-            text: ""
-
-            font.pixelSize: RL.calcSize("height", 35)
-            font.family: "Trebuchet MS"
-
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: RL.calcSize("height", 30)
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-
-        Image {
-            id: leftArrow
-
-            source: "resources/images/leftArrow.png"
-            width: height * (85.0 / 128.0)
-            height: RL.calcSize("height", 40)
-
-            anchors.left: parent.left
-            anchors.leftMargin: RL.calcSize("width", 15)
-            anchors.verticalCenter: parent.verticalCenter
-
-            MouseArea {
-                anchors.fill: parent
-
-                onClicked: root.setChannel(channelTab.getPreviousRoom(root.actualChannel), "d")
-            }
-        }
-
-        Image {
-            id: rightArrow
-
-            source: "resources/images/rightArrow.png"
-            width: leftArrow.width
-            height: leftArrow.height
-
-            anchors.right: parent.right
-            anchors.rightMargin: leftArrow.anchors.leftMargin
-            anchors.top: leftArrow.top
-
-            MouseArea {
-                anchors.fill: parent
-
-                onClicked: root.setChannel(frame.channelTab.getNextRoom(root.actualChannel), "d")
-            }
-        }
     }
-
     //---------------------------------------
 
     //---------------TAB VIEW----------------
     TabView {
         id: frame
-
-        property alias dimmerTab: dimmerTab
-        //property alias channelTab: channelTab
-
-        //property alias channelTab: channelTab.channelTab
 
         width: parent.width
         height: RL.calcSize("height", 700)
@@ -177,13 +107,9 @@ ApplicationWindow {
 
         Tab {   //channel
             title: "Channel"
-            //id: channelTab
-
-//            property alias channelTab: channelTab.children[0]
-
+            id: channelTab
 
             Tabs.ChannelTab {
-                id: channelTab
             }
         }
 

@@ -1,17 +1,27 @@
 import QtQuick 2.0
 import "../../responsivity/responsivityLogic.js" as RL
+import "../../logic/channelLogic.js" as CL
 
 //-------------ICON & STATUS-------------
 Rectangle {
-    id: status
+    id: panel
 
-    width: root.width
-    height: root.height - frame.height
+    property string label: ""
 
-    color: root.secondaryColor
+    onLabelChanged: roomLabel.changeText()
+
+    Image {
+        y: 10
+        source: "../../resources/images/lamp.png"
+        height: 70
+        width: height
+        anchors.horizontalCenter: parent.horizontalCenter
+    }
 
     Text {
         id: roomLabel
+
+        signal changeText()
 
         color: "white"
         text: ""
@@ -22,42 +32,47 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: RL.calcSize("height", 30)
         anchors.horizontalCenter: parent.horizontalCenter
+
+        onChangeText: SequentialAnimation {
+            NumberAnimation { target: roomLabel; property: "opacity"; from: 1; to: 0; duration: 200 }
+            ScriptAction { script: roomLabel.text = panel.label }
+            NumberAnimation { target: roomLabel; property: "opacity"; from: 0; to: 1; duration: 200 }
+        }
     }
 
     Image {
         id: leftArrow
 
-        source: "resources/images/leftArrow.png"
-        width: 30
-        height: 30
+        source: "../../resources/images/leftArrow.png"
+        width: height * (85.0 / 128.0)
+        height: RL.calcSize("height", 40)
+
+        anchors.left: parent.left
+        anchors.leftMargin: RL.calcSize("width", 15)
+        anchors.verticalCenter: parent.verticalCenter
+
+        MouseArea {
+            anchors.fill: parent
+
+            onClicked: CL.setPreviousRoom()
+        }
     }
 
     Image {
         id: rightArrow
 
-        source: "resources/images/rightArrow.png"
-        width: 30
-        height: 30
+        source: "../../resources/images/rightArrow.png"
+        width: leftArrow.width
+        height: leftArrow.height
 
         anchors.right: parent.right
-    }
+        anchors.rightMargin: leftArrow.anchors.leftMargin
+        anchors.top: leftArrow.top
 
-    Image {
-        source: "resources/images/bulbOutline.png"
-        rotation: 180
-
-        y: -RL.calcSize("height", 10)
-        width: RL.calcSize("height", 80)
-        height: width
-
-        anchors.horizontalCenter: parent.horizontalCenter
-
-        Image {
-            id: dimmingBulb
-
-            source: "resources/images/bulbInner.png"
-            opacity: 0
+        MouseArea {
             anchors.fill: parent
+
+            onClicked: CL.setNextRoom()
         }
     }
 }
