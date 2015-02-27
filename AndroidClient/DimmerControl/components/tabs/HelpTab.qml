@@ -3,6 +3,8 @@ import "../../responsivity/responsivityLogic.js" as RL
 
 Item {
     Flickable {
+        id: flick
+
         clip: true
         boundsBehavior: Flickable.StopAtBounds
 
@@ -49,5 +51,15 @@ Item {
             </body>
             "
         }
+    }
+
+    Rectangle { //scrollbar
+        y: flick.visibleArea.yPosition * flick.height
+        width: RL.calcSize("width", 4)
+        height: flick.visibleArea.heightRatio * flick.height
+
+        color: root.secondaryColor
+
+        anchors.right: parent.right
     }
 }
