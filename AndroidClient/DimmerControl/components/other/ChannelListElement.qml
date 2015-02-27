@@ -1,6 +1,7 @@
 import QtQuick 2.0
 
 import "../../responsivity/responsivityLogic.js" as RL
+import "../../logic/channelLogic.js" as CL
 
 Rectangle {
     id: element
@@ -139,7 +140,7 @@ Rectangle {
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: channelListView.popRoom(element.pin)
+                onClicked: CL.popRoom(element.pin)
             }
         }
 
@@ -179,7 +180,7 @@ Rectangle {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    root.setChannel(element.pin, element.title, sensorAddres[0] + sensorAddres[1], sensorAddres[sensorAddres.length - 1])
+                    CL.setChannel(element.pin, element.title, sensorAddres[0] + sensorAddres[1], sensorAddres[sensorAddres.length - 1])
                     frame.currentIndex = 0;
                     infoPart.hideMenu()
                 }
@@ -194,7 +195,7 @@ Rectangle {
         NumberAnimation { duration: 750 }  //delay
         ScriptAction {
             script: {
-                var key = channelListView.getRoom(element.pin)
+                var key = CL.getRoomIndexFromPin(element.pin)
 
                 roomDialog.pinList.push(channelListView.channels[key][1])
                 roomDialog.pinList.sort(function(a,b) { return a - b; })

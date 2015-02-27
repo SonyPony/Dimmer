@@ -3,6 +3,7 @@ import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
 import "../controls" as Controls
 import "../../responsivity/responsivityLogic.js" as RL
+import "../../logic/channelLogic.js" as CL
 
 AddDialog {
     id: dialog
@@ -17,7 +18,7 @@ AddDialog {
     buttonHeight: RL.calcSize("height", 60)
     acceptFunction: (function() {
         if(titleInput.text != "") {
-            channelListView.addRoom(titleInput.text, pinSpinbox.value, sensorSpinbox.value)
+            CL.addRoom(titleInput.text, pinSpinbox.value, sensorSpinbox.value)
 
             for(var key in pinList)
                 if(pinSpinbox.value == pinList[key])
