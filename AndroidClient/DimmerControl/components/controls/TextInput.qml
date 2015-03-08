@@ -8,6 +8,7 @@ TextField {
 
     property string title: ""
     horizontalAlignment: TextInput.AlignRight
+    inputMethodHints: Qt.ImhSensitiveData
 
     style: TextFieldStyle {
         background: Rectangle {
