@@ -19,9 +19,9 @@ Canvas {
     onWidthChanged: canvas.requestPaint()
     onHeightChanged: canvas.requestPaint()
 
-    /*Behavior on value {
+    Behavior on value {
         NumberAnimation { duration: 1000 }
-    }*/
+    }
 
     onPaint: {      //draw groove//
         var ctx = canvas.getContext('2d');
