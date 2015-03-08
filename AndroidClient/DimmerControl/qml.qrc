@@ -42,5 +42,6 @@
         <file>components/tabs/ScheduleTab.qml</file>
         <file>logic/channelLogic.js</file>
         <file>logic/messageController.js</file>
+        <file>logic/gestures.js</file>
     </qresource>
 </RCC>

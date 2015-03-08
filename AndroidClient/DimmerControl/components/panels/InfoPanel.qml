@@ -1,12 +1,14 @@
 import QtQuick 2.0
 import "../../responsivity/responsivityLogic.js" as RL
 import "../../logic/channelLogic.js" as CL
+import "../../logic/gestures.js" as Gestures
 
 //-------------ICON & STATUS-------------
 Rectangle {
     id: panel
 
     property string label: ""
+    property int swipeXStart
 
     onLabelChanged: roomLabel.changeText()
 
@@ -73,6 +75,22 @@ Rectangle {
             anchors.fill: parent
 
             onClicked: CL.setNextRoom()
+        }
+    }
+
+    MouseArea {     //swipe area
+        anchors.fill: parent
+        onPressed: panel.swipeXStart = mouse.x
+        onMouseXChanged: {
+            var result = Gestures.checkSwipe(panel.swipeXStart, mouse.x, RL.calcSize("width", 250))
+            if(result)
+                panel.swipeXStart = mouse.x
+
+            if(result == "swipeRight")
+                CL.setPreviousRoom()
+
+            else if(result == "swipeLeft")
+                CL.setNextRoom()
         }
     }
 }
