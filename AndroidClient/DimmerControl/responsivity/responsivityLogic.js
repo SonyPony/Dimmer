@@ -4,5 +4,5 @@ function calcSize(relation, componenentSize) {
     standart.width = 480;
     standart.height = 854;
 
-    return root[relation] / standart[relation] * componenentSize;
+    return Math.round(root[relation] / standart[relation] * componenentSize);
 }
