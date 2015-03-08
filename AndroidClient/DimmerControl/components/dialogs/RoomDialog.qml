@@ -88,6 +88,7 @@ AddDialog {
                 if(enabled)
                     forceActiveFocus()
                 focus = enabled
+                text = ""
             }
         }
     }
