@@ -42,6 +42,22 @@ Rectangle {
         }
     }
 
+    MouseArea {     //swipe area
+        anchors.fill: parent
+        onPressed: panel.swipeXStart = mouse.x
+        onMouseXChanged: {
+            var result = Gestures.checkSwipe(panel.swipeXStart, mouse.x, RL.calcSize("width", 250))
+            if(result)
+                panel.swipeXStart = mouse.x
+
+            if(result == "swipeRight")
+                CL.setPreviousRoom()
+
+            else if(result == "swipeLeft")
+                CL.setNextRoom()
+        }
+    }
+
     Image {
         id: leftArrow
 
@@ -75,22 +91,6 @@ Rectangle {
             anchors.fill: parent
 
             onClicked: CL.setNextRoom()
-        }
-    }
-
-    MouseArea {     //swipe area
-        anchors.fill: parent
-        onPressed: panel.swipeXStart = mouse.x
-        onMouseXChanged: {
-            var result = Gestures.checkSwipe(panel.swipeXStart, mouse.x, RL.calcSize("width", 250))
-            if(result)
-                panel.swipeXStart = mouse.x
-
-            if(result == "swipeRight")
-                CL.setPreviousRoom()
-
-            else if(result == "swipeLeft")
-                CL.setNextRoom()
         }
     }
 }
