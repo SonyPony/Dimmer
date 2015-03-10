@@ -14,17 +14,15 @@ Canvas {
     property real maximum
     property real minimum
     property int radius: height / 2 - toggleSize
-    property int counter
+    property bool lock
 
-    onValueChanged: sendValue()
-   // onActiveColorChanged: canvas.requestPaint()
     onValueChanged: Socket.sendDim(value, tempData.actualChannel)
     onWidthChanged: canvas.requestPaint()
     onHeightChanged: canvas.requestPaint()
     onLockChanged:  Socket.sendLock(tempData.actualChannel, lock)
 
     Behavior on value {
-        NumberAnimation { duration: 1000 }
+        NumberAnimation { duration: 1000; onRunningChanged: lock = running}
     }
 
     onPaint: {      //draw groove//
@@ -37,7 +35,6 @@ Canvas {
         ctx.lineWidth = lineWidth
         ctx.strokeStyle = color
         ctx.beginPath();
-        //ctx.moveTo(centerX, centerY)
         ctx.arc(centerX, centerY, radius, Math.PI / 2.0, Math.PI * 1.5, false)
         ctx.stroke()
         ctx.closePath();
@@ -45,7 +42,6 @@ Canvas {
         ctx.lineWidth = lineWidth
         ctx.strokeStyle = activeColor;
         ctx.beginPath();
-        //ctx.moveTo(centerX, centerY)
         ctx.arc(centerX, centerY, radius, Math.PI / 2.0, Math.PI*((toggleArea.rotation + 180) /180.0) , false)
         ctx.stroke()
         ctx.closePath();
@@ -108,9 +104,8 @@ Canvas {
 
     MouseArea {
         anchors.fill: parent
-
-        onMouseXChanged: parent.calcValue(mouse.x, mouse.y)
-        onMouseYChanged: parent.calcValue(mouse.x, mouse.y)
+        onMouseXChanged: if(!lock) parent.calcValue(mouse.x, mouse.y)
+        onMouseYChanged: if(!lock) parent.calcValue(mouse.x, mouse.y)
     }
 }
 

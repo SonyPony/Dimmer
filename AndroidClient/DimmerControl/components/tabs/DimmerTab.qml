@@ -3,6 +3,7 @@ import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
 
 import "../controls" as Controls
+import "../screens" as Screens
 import "../../responsivity/responsivityLogic.js" as RL
 
 Rectangle {
@@ -55,5 +56,9 @@ Rectangle {
 
         onActiveChanged: if(!active)
                               slider.setValue(0)
+    }
+
+    Screens.LockScreen {
+        opacity: slider.lock
     }
 }

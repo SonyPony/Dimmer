@@ -43,5 +43,6 @@
         <file>logic/channelLogic.js</file>
         <file>logic/messageController.js</file>
         <file>logic/gestures.js</file>
+        <file>components/screens/LockScreen.qml</file>
     </qresource>
 </RCC>
