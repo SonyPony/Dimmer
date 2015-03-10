@@ -1,5 +1,7 @@
 import QtQuick 2.3
 
+import "../../logic/messageController.js" as Socket
+
 Canvas {
     id: canvas
 
@@ -16,8 +18,10 @@ Canvas {
 
     onValueChanged: sendValue()
    // onActiveColorChanged: canvas.requestPaint()
+    onValueChanged: Socket.sendDim(value, tempData.actualChannel)
     onWidthChanged: canvas.requestPaint()
     onHeightChanged: canvas.requestPaint()
+    onLockChanged:  Socket.sendLock(tempData.actualChannel, lock)
 
     Behavior on value {
         NumberAnimation { duration: 1000 }
@@ -100,21 +104,6 @@ Canvas {
         value = arg;
         valueText.text = arg.toFixed(0);
         toggleArea.rotation = ((arg - minimum) / (maximum - minimum) - 0.5) * 180.0
-    }
-
-    function sendValue() {
-        if(67 >= 4) {
-            counter = 0;
-            var data = {}
-            data.action = "dim"
-            data.pin = tempData.actualChannel
-            data.dim = canvas.value
-
-            root.socket.sendTextMessage(JSON.stringify(data))
-        }
-
-        else
-            counter++
     }
 
     MouseArea {
