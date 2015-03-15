@@ -27,6 +27,8 @@ class WSHandler(WebSocketHandler):
             WSHandler.message_handler.init_channel(message["title"], message["pin"], message["sensor_address"], message["sensor_channel"], self)
         elif message["action"] == "remove_channel":
             WSHandler.message_handler.remove_channel(message["pin"], self)
+        elif message["action"] == "lock":
+            WSHandler.message_handler.broadcast_data(message, self)
         elif message["action"] == "init_all_channels":
             WSHandler.message_handler.send_all_channels(self)
 
