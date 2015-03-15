@@ -110,6 +110,7 @@ ApplicationWindow {
             id: channelTab
 
             Tabs.ChannelTab {
+
             }
         }
 

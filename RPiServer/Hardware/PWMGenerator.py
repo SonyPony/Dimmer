@@ -10,7 +10,7 @@ class PWMGenerator(object):
         :param pin: int
         :param width: int
         """
-        
+
         self.__pin = pin
         self.__width = width
         self.__generator = PWM.Servo(0, 10000, 1)

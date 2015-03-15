@@ -154,7 +154,6 @@ Canvas {
         internal.points[hour * 100 + minute] = object;
         canvas.requestPaint();
         deleteDialog.hide()
-        console.log(internal.points)
     }
 
     function pop(list, index) {
