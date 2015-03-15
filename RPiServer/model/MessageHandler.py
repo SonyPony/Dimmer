@@ -36,19 +36,22 @@ class MessageHandler():
         :param dim: int
         """
         self.__PWMOutputs[pin].width = dim
-        self.__DB.data["dim"][pin] = dim
+        temp = self.__DB.data
+        temp[str(pin)]["dim"] = dim
+        self.__DB.data = temp
 
-        self.__broadcast_data({
-            "action": "dim",
-            "dim": dim
-        })
+    def get_dim(self, pin, requester):
+        """
+        :param pin: int
+        """
+        data = {
+            "action": "set_dim",
+            "pin": pin,
+            "dim": self.__DB.data[str(pin)]["dim"]
 
-    def get_dim(self, pin):
-        """
-        :param room_label: string
-        :return: int
-        """
-        return self.__DB.data["dim"][pin]
+        }
+        self.send_data_to(data, requester)
+
 
     def init_channel(self, room_label, pin, address, channel):
         """

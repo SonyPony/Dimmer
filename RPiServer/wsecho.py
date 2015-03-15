@@ -21,7 +21,8 @@ class WSHandler(WebSocketHandler):
 
         if message["action"] == "dim":
             WSHandler.message_handler.set_dim(message["pin"], message["dim"])
-
+        elif message["action"] == "get_dim":
+            WSHandler.message_handler.get_dim(message["pin"], self)
 
 
 WSHandler.clients = []
