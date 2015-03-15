@@ -52,6 +52,17 @@ class MessageHandler():
         }
         self.send_data_to(data, requester)
 
+    def send_all_channels(self, requester):
+        data = {
+            "action": "init_channel"
+        }
+        
+        for k, v in self.__DB.data.items():
+            data["sensor_address"] = v["sensor_address"]
+            data["sensor_channel"] = v["sensor_channel"]
+            data["pin"] = v["pin"]
+            data["title"] = v["title"]
+            self.send_data_to(data, requester)
 
     def init_channel(self, room_label, pin, address, channel, sender):
         """
