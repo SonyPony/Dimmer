@@ -53,7 +53,7 @@ class MessageHandler():
         self.send_data_to(data, requester)
 
 
-    def init_channel(self, room_label, pin, address, channel):
+    def init_channel(self, room_label, pin, address, channel, sender):
         """
         :param room_label: string
         :param pin: int
@@ -61,16 +61,23 @@ class MessageHandler():
         :param channel: int
         """
         data = {
-            "address": address,
-            "channel": channel,
+            "action": "init_channel",
+            "sensor_address": address,
+            "sensor_channel": channel,
             "pin": pin,
-            "room_label": room_label
+            "title": room_label
         }
 
-        self.__DB.data["channels"][pin] = data
-        data["action"] = "init"
-        data["target"] = "channel"
-        self.__broadcast_data(data)
+        temp = {pin: {
+            "dim": 0,
+            "sensor_address": address,
+            "sensor_channel": channel,
+            "pin": pin,
+            "title": room_label,
+            "schedule": {}
+        }}
+        self.__DB.update(temp)
+        self.broadcast_data(data, sender)
 
     def remove_channel(self, pin):
         """

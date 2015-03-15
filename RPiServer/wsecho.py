@@ -23,6 +23,8 @@ class WSHandler(WebSocketHandler):
             WSHandler.message_handler.set_dim(message["pin"], message["dim"])
         elif message["action"] == "get_dim":
             WSHandler.message_handler.get_dim(message["pin"], self)
+        elif message["action"] == "init_channel":
+            WSHandler.message_handler.init_channel(message["title"], message["pin"], message["sensor_address"], message["sensor_channel"], self)
 
 
 WSHandler.clients = []
