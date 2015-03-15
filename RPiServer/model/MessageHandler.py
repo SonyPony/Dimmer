@@ -12,13 +12,15 @@ class MessageHandler():
         self.__PWMOutputs = {pin: PWMGenerator(pin, 0) for pin in Settings.PWM_PINS}
         self.__reader = AnalogReader()
 
-    def __broadcast_data(self, message):
+    def broadcast_data(self, message, sender=None):
         """
         :param message: string
         """
 
         for client in self.__clients:
-            client.write_message(dumps(message))
+            if client != sender:
+                client.write_message(dumps(message))
+
 
     def set_dim(self, pin, dim):
         """
