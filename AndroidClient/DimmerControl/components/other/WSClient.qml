@@ -53,7 +53,9 @@ WebSocket {
         var data = JSON.parse(message)
 
         if(data["action"] == "luminosity_read") {
-            root.luminosity = 255 - data["readings"][tempData.actualSensorAddress][tempData.actualSensorChannel]
+            if(tempData.actualChannel != -1)
+                root.luminosity = 255 - data["readings"][tempData.actualSensorAddress][tempData.actualSensorChannel]
+        }
 
         else if(data["action"] == "init_channel")
             CL.addRoom(data["title"], data["pin"], (data["sensor_address"] + " - " + data["sensor_channel"]), false)
