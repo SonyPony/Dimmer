@@ -53,8 +53,8 @@ class Database():
         """
         try:
             DB = open(self.__path, "r")
-            result = DB.read()
+            result = loads(DB.read())
             DB.close()
         except FileNotFoundError:
             return loads("{}")
-        return loads(result)
+        return result

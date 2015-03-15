@@ -79,7 +79,7 @@ class MessageHandler():
             "title": room_label
         }
 
-        temp = {pin: {
+        temp = {str(pin): {
             "dim": 0,
             "sensor_address": address,
             "sensor_channel": channel,
