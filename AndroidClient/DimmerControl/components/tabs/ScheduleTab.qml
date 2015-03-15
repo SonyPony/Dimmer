@@ -2,6 +2,7 @@ import QtQuick 2.0
 import "../controls" as Controls
 import "../dialogs" as Dialogs
 import "../../responsivity/responsivityLogic.js" as RL
+import "../screens" as Screens
 
 Rectangle {
     Controls.Graph {
@@ -30,5 +31,9 @@ Rectangle {
         buttonHeight: RL.calcSize("height", 60)
 
         anchors.bottom: parent.bottom
+    }
+
+    Screens.LockScreen {
+        opacity: (tempData.actualChannel == -1)
     }
 }

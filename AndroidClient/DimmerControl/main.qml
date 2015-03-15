@@ -120,13 +120,15 @@ ApplicationWindow {
         Tab {   //tab width graph
             id: scheduleTab
             title: "Schedule"
+            active: true
 
             Tabs.ScheduleTab {}
         }
 
         Tab {   //channel
-            title: "Channel"
             id: channelTab
+            title: "Channel"
+            active: true
 
             Tabs.ChannelTab {
 

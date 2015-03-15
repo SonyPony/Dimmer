@@ -17,7 +17,7 @@ Item {
     }
 
     Text {
-        text: "Someone else is dimming your current room."
+        text: (tempData.actualChannel == -1) ?"You haven't chosen desired room." :"Someone else is dimming your current room."
         color: "white"
 
         font.family: "Trebuchet MS"
