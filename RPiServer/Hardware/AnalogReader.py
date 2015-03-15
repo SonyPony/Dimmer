@@ -3,8 +3,6 @@ __author__ = 'Sony'
 from settings import Settings
 from smbus import SMBus
 import time
-from tornado.ioloop import IOLoop
-import logging
 
 class AnalogReader():
     def __init__(self):

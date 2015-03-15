@@ -1,6 +1,5 @@
 from json import loads
 from model.MessageHandler import MessageHandler
-import logging
 import tornado.ioloop
 import tornado.web
 from tornado.websocket import WebSocketHandler
@@ -25,15 +24,12 @@ class WSHandler(WebSocketHandler):
 
 
 WSHandler.clients = []
-#WSHandler.message_handler = MessageHandler(WSHandler.clients)
 
 application = tornado.web.Application([
     (r"/", WSHandler),    
 ])
 
 if __name__ == "__main__":
-    a = []
-    #handler = MessageHandler(a)
     application.listen(8888)
     WSHandler.message_handler = MessageHandler(WSHandler.clients)
     serverloop = tornado.ioloop.IOLoop.instance()

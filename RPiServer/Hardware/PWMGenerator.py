@@ -10,9 +10,7 @@ class PWMGenerator(object):
         :param pin: int
         :param width: int
         """
-
-        #PWM.set_loglevel(PWM.LOG_LEVEL_ERRORS)
-
+        
         self.__pin = pin
         self.__width = width
         self.__generator = PWM.Servo(0, 10000, 1)

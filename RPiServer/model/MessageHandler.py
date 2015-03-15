@@ -1,5 +1,5 @@
 __author__ = 'Sony'
-from json import dumps, loads
+from json import dumps
 from model.Database import Database
 from hardware.PWMGenerator import PWMGenerator
 from hardware.AnalogReader import AnalogReader
