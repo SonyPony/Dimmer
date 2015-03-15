@@ -103,13 +103,6 @@ class MessageHandler():
         self.__DB.data = temp
         self.broadcast_data(data, sender)
 
-    def get_channels(self):
-        """
-        :return: dict
-        """
-
-        return self.__DB.data["channels"]
-
     def send_luminosity(self):
         while True:
             self.__reader.read_all()
