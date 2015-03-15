@@ -9,6 +9,7 @@ Rectangle {
 
     property string label: ""
     property int swipeXStart
+    property bool swipeDone
 
     onLabelChanged: roomLabel.changeText()
 
@@ -44,17 +45,22 @@ Rectangle {
 
     MouseArea {     //swipe area
         anchors.fill: parent
-        onPressed: panel.swipeXStart = mouse.x
+        onPressed: {
+            panel.swipeDone = false
+            panel.swipeXStart = mouse.x
+        }
         onMouseXChanged: {
             var result = Gestures.checkSwipe(panel.swipeXStart, mouse.x, RL.calcSize("width", 250))
-            if(result)
-                panel.swipeXStart = mouse.x
 
-            if(result == "swipeRight")
+            if(result == "swipeRight" && (!swipeDone)) {
                 CL.setPreviousRoom()
+                swipeDone = true
+            }
 
-            else if(result == "swipeLeft")
+            else if(result == "swipeLeft" && (!swipeDone)) {
                 CL.setNextRoom()
+                swipeDone = true
+            }
         }
     }
 
