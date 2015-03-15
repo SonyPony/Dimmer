@@ -100,5 +100,11 @@ class MessageHandler():
         return self.__DB.data["channels"]
 
     def send_luminosity(self):
-        readings = self.__reader.read_all()
-        self.__broadcast_data(readings)
+        while True:
+            self.__reader.read_all()
+            print(self.__reader.readings)
+            data = {
+                "action": "luminosity_read",
+                "readings": self.__reader.readings
+            }
+            self.broadcast_data(data)
