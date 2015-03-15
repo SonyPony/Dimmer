@@ -28,7 +28,15 @@ ApplicationWindow {
     property var tabIcons: ["resources/images/dim.png", "resources/images/program.png", "resources/images/channel.png", "resources/images/settings.png", "resources/images/help.png"]
     property var tabLabels: ["Dim", "Schedule", "Channel", "Settings", "Help"]
     property var socket
+    property var slider
+    property bool lock: false
     property string language: Qt.locale().name.substring(0,2)
+
+    onLockChanged: {
+        if(!lock)
+            Socket.requestDim()
+    }
+
 
     QtObject {
         id: tempData
@@ -38,6 +46,7 @@ ApplicationWindow {
 
         property int actualChannel  //store pin
         property var channels: new Array
+        onActualChannelChanged: Socket.requestDim()
     }
 
     visible: true

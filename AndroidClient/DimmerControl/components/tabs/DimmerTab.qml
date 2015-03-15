@@ -60,5 +60,6 @@ Rectangle {
 
     Screens.LockScreen {
         opacity: slider.lock
+        opacity: root.lock || (tempData.actualChannel == -1)
     }
 }

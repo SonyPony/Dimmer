@@ -45,6 +45,15 @@ WebSocket {
 
         if(data["action"] == "luminosity_read") {
             root.luminosity = 255 - data["readings"][tempData.actualSensorAddress][tempData.actualSensorChannel]
+
+        else if(data["action"] == "lock") {
+            if(data["pin"] == tempData.actualChannel)
+                root.lock = data["lock"]
+        }
+
+        else if(data["action"] == "set_dim") {
+            if(tempData.actualChannel == data["pin"])
+                root.slider.setValue(data["dim"], true)
         }
     }
     Component.onCompleted: {

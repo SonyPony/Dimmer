@@ -14,15 +14,18 @@ Canvas {
     property real maximum
     property real minimum
     property int radius: height / 2 - toggleSize
-    property bool lock
 
-    onValueChanged: Socket.sendDim(value, tempData.actualChannel)
+    Component.onCompleted: root.slider = canvas
+
+    onValueChanged: if(tempData.actualChannel != -1 && (!root.lock))
+                        Socket.sendDim(value, tempData.actualChannel)
     onWidthChanged: canvas.requestPaint()
     onHeightChanged: canvas.requestPaint()
-    onLockChanged:  Socket.sendLock(tempData.actualChannel, lock)
 
     Behavior on value {
-        NumberAnimation { duration: 1000; onRunningChanged: lock = running}
+        id: linearChange
+        enabled: !root.lock
+        NumberAnimation { duration: 1000; onRunningChanged: Socket.sendLock(tempData.actualChannel, running)}
     }
 
     onPaint: {      //draw groove//
@@ -90,16 +93,20 @@ Canvas {
         onTextChanged: canvas.requestPaint()
     }
 
+    function doNothing() {}
+
     function calcValue(x, y) {
         toggleArea.rotation = Math.atan(( canvas.height / 2.0 - y) / (canvas.width - x)) / Math.PI * 180
-        value = (toggleArea.rotation / 180.0 + 0.5) * (maximum - minimum) + minimum;
+        value = Math.round((toggleArea.rotation / 180.0 + 0.5) * (maximum - minimum) + minimum);
         valueText.text = ((toggleArea.rotation / 180.0 + 0.5) * (maximum - minimum) + minimum).toFixed(0);
     }
 
-    function setValue(arg) {
+    function setValue(arg, requested) {
+        linearChange.enabled = !requested
         value = arg;
         valueText.text = arg.toFixed(0);
         toggleArea.rotation = ((arg - minimum) / (maximum - minimum) - 0.5) * 180.0
+        linearChange.enabled = true
     }
 
     MouseArea {
