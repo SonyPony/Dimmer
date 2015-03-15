@@ -21,6 +21,14 @@ class MessageHandler():
             if client != sender:
                 client.write_message(dumps(message))
 
+    def send_data_to(self, message, receiver):
+        """
+        :param message: string
+        """
+
+        for client in self.__clients:
+            if client == receiver:
+                client.write_message(dumps(message))
 
     def set_dim(self, pin, dim):
         """
