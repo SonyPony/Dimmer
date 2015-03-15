@@ -55,11 +55,10 @@ Rectangle {
         anchors.leftMargin: RL.calcSize("width", 40)
 
         onActiveChanged: if(!active)
-                              slider.setValue(0)
+                              slider.setValue(0, false)
     }
 
     Screens.LockScreen {
-        opacity: slider.lock
         opacity: root.lock || (tempData.actualChannel == -1)
     }
 }
