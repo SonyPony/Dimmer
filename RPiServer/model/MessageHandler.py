@@ -79,15 +79,18 @@ class MessageHandler():
         self.__DB.update(temp)
         self.broadcast_data(data, sender)
 
-    def remove_channel(self, pin):
+    def remove_channel(self, pin, sender):
         """
         :param pin: int
         """
-        data = self.__DB.data["channels"][pin]
-        self.__DB.data["channels"].pop(pin)
-        data["action"] = "remove"
-        data["action"] = "channel"
-        self.__broadcast_data(data)
+        data = {}
+        data["action"] = "remove_channel"
+        data["pin"] = pin
+
+        temp = self.__DB.data
+        temp.pop(str(pin))
+        self.__DB.data = temp
+        self.broadcast_data(data, sender)
 
     def get_channels(self):
         """
