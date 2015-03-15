@@ -140,7 +140,7 @@ Rectangle {
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: CL.popRoom(element.pin)
+                onClicked: CL.popRoom(element.pin, true)
             }
         }
 
@@ -197,12 +197,12 @@ Rectangle {
             script: {
                 var key = CL.getRoomIndexFromPin(element.pin)
 
-                roomDialog.pinList.push(channelListView.channels[key][1])
-                roomDialog.pinList.sort(function(a,b) { return a - b; })
-                roomDialog.pinListChanged()
+                tempData.pinList.push(tempData.channels[key][1])
+                tempData.pinList.sort(function(a,b) { return a - b; })
+                tempData.pinListChanged()
 
-                channelListView.channels.splice(key, 1)
-                channelListView.channelsChanged()
+                tempData.channels.splice(key, 1)
+                tempData.channelsChanged()
             }
         }
     }

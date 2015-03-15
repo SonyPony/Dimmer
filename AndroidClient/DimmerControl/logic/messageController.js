@@ -1,3 +1,5 @@
+//.import "channelLogic.js" as CM
+
 function setLuminosity(readings) {
     return 255 - data["readings"][tempData.actualSensorAddress][tempData.actualSensorChannel]
 }
@@ -25,11 +27,24 @@ function sendDim(dim, pin) {
     if(!root.lock)
         root.socket.sendTextMessage(JSON.stringify(data))
 }
+
+function removeChannel(pin) {
+    var data = {}
+    data.action = "remove_channel"
+    data.pin = pin
+
     root.socket.sendTextMessage(JSON.stringify(data))
 }
 
-function initChannel(roomLabel, pin, sensorAddress, sensorChannel) {
+function sendChannel(roomLabel, pin, sensorAddress, sensorChannel) {
+    var data = {}
+    data.action = "init_channel"
+    data.title = roomLabel
+    data.pin = pin
+    data.sensor_address = sensorAddress
+    data.sensor_channel = sensorChannel
 
+    root.socket.sendTextMessage(JSON.stringify(data))
 }
 
 function requestDim() {
@@ -41,3 +56,9 @@ function requestDim() {
    root.socket.sendTextMessage(JSON.stringify(data))
 }
 
+function requestAllChannels() {
+    var data = {}
+    data.action = "init_all_channels"
+
+    root.socket.sendTextMessage(JSON.stringify(data))
+}

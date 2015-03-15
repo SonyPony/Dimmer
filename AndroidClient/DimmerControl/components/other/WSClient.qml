@@ -1,8 +1,13 @@
 import QtQuick 2.0
 import Qt.WebSockets 1.0
 
+import "../../logic/channelLogic.js" as CL
+import "../../logic/messageController.js" as Socket
+
 WebSocket {
     id: socket
+
+    property bool requested: false
 
     active: false
     //url: "ws://169.254.29.212:8888"
@@ -17,6 +22,10 @@ WebSocket {
 
             case WebSocket.Open:
                 connectionStatus.color = root.primaryColor
+                if(!requested) {
+                    requested = true
+                    Socket.requestAllChannels()
+                }
                 console.log("Open");
                 break;
 
@@ -45,6 +54,12 @@ WebSocket {
 
         if(data["action"] == "luminosity_read") {
             root.luminosity = 255 - data["readings"][tempData.actualSensorAddress][tempData.actualSensorChannel]
+
+        else if(data["action"] == "init_channel")
+            CL.addRoom(data["title"], data["pin"], (data["sensor_address"] + " - " + data["sensor_channel"]), false)
+
+        else if(data["action"] == "remove_channel")
+            CL.popRoom(data["pin"], false)
 
         else if(data["action"] == "lock") {
             if(data["pin"] == tempData.actualChannel)

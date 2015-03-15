@@ -1,3 +1,12 @@
+.import "messageController.js" as Socket
+
+function parseSensorAddress(pin) {
+    return {
+        "address": parseInt(pin[0] + pin[1]),
+        "channel": parseInt(pin[pin.length -1])
+    }
+}
+
 function setChannel(pin, room_label, address, channel) {
     tempData.actualChannel = pin
     infoPanel.label = room_label
@@ -12,12 +21,15 @@ function getRoomIndexFromPin(pin) {
         }
 }
 
-function setRoom(newIndex) {
+function setRoom(newIndex) {  
     newIndex = parseInt(newIndex)
     infoPanel.label = tempData.channels[newIndex][0]
     tempData.actualChannel = tempData.channels[newIndex][1]
-    tempData.actualSensorAddress = tempData.channels[newIndex][2][0] + tempData.channels[newIndex][2][1]
-    tempData.actualSensorChannel = tempData.channels[newIndex][2][tempData.channels[newIndex][2].length - 1]
+
+    var sensor = parseSensorAddress(tempData.channels[newIndex][2])
+
+    tempData.actualSensorAddress = sensor.address
+    tempData.actualSensorChannel = sensor.channel
 }
 
 function setPreviousRoom() {
@@ -45,12 +57,15 @@ function setNextRoom() {
     setRoom(newIndex)
 }
 
-function popRoom(pin) {
+function popRoom(pin, broadcast) {
     var removingItemKey = -1
     var element
 
-    for(var i = 0; i < repeater.count; i++) {
-        element = repeater.itemAt(i).singleElement
+    if(broadcast)
+        Socket.removeChannel(pin)
+
+    for(var i = 0; i < root.channelList.count; i++) {
+        element = root.channelList.itemAt(i).singleElement
 
         if(element.pin == pin) {
             element.remove()
@@ -61,9 +76,24 @@ function popRoom(pin) {
     }
 }
 
-function addRoom(title, pin, sensorPin) {
-    repeater.newItemIndex = pin
-    channels.push([title, pin, sensorPin])
-    channelsChanged()
-    repeater.newItemIndex = -1
+function removeUsedPin(pin) {
+    for(var key in tempData.pinList)
+        if(pin == tempData.pinList[key])
+            tempData.pinList.splice(key, 1)
+    tempData.pinListChanged()
+}
+
+
+function addRoom(title, pin, sensorPin, broadcast) {
+    var sensor = parseSensorAddress(sensorPin)
+
+    removeUsedPin(pin)
+
+    root.channelList.newItemIndex = pin
+    tempData.channels.push([title, pin, sensorPin])
+    tempData.channelsChanged()
+    root.channelList.newItemIndex = -1
+
+    if(broadcast)
+        Socket.sendChannel(title, pin, sensor.address, sensor.channel)
 }

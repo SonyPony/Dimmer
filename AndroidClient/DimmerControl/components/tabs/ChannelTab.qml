@@ -8,8 +8,8 @@ import "../dialogs" as Dialogs
 Item {
     id: channelListView
 
-    property var channels: []
-    onChannelsChanged: tempData.channels = channels
+    //property var channels: []
+    //onChannelsChanged: tempData.channels = channels
 
     Flickable {
         id: flick
@@ -21,7 +21,7 @@ Item {
         height: parent.height - roomDialog.buttonHeight
 
         contentWidth: width
-        contentHeight: parent.channels.length * RL.calcSize("height", 80)
+        contentHeight: tempData.channels.length * RL.calcSize("height", 80)
 
         Column {
             Repeater {
@@ -30,7 +30,9 @@ Item {
                 property int newItemIndex: -1
                 property var lines: new Array
 
-                model: channels
+                Component.onCompleted: root.channelList = repeater
+
+                model: tempData.channels
                 delegate: Item {
                     property alias singleElement: singleElement
 
