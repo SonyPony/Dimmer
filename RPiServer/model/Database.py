@@ -15,10 +15,6 @@ class Database():
 
         except:
             self.__data = {}
-            self.__data["dim"] = {}    #dim in each room - index by pin
-            self.__data["schedule"] = {}   #save each point - index by time
-            self.__data["channels"] = {}   #save channels - index by pin
-            self.__data["sensors_address"] = []    #save sensor address
             self.__write_DB(self.__data)
 
     @property
