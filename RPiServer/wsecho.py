@@ -3,6 +3,7 @@ from model.MessageHandler import MessageHandler
 import tornado.ioloop
 import tornado.web
 from tornado.websocket import WebSocketHandler
+import threading
 
 class WSHandler(WebSocketHandler):
     def __init__(self, application, request, **kwargs):
@@ -33,8 +34,7 @@ if __name__ == "__main__":
     application.listen(8888)
     WSHandler.message_handler = MessageHandler(WSHandler.clients)
     serverloop = tornado.ioloop.IOLoop.instance()
-  
-    luminosity_reader = tornado.ioloop.PeriodicCallback(WSHandler.message_handler.send_luminosity, 300)
-    luminosity_reader.start()
+
+    threading.Thread(target=WSHandler.message_handler.send_luminosity).start()
     serverloop.start()
 
