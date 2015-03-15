@@ -32,6 +32,13 @@ class Database():
         self.__data = value
         self.__write_DB(self.__data)
 
+    def update(self, updatedPart):
+        """
+        :param updatedPart: dict
+        """
+        updatedPart.update(self.data)
+        self.data = updatedPart
+
     def __write_DB(self, content):
         """
         :param content: dict
