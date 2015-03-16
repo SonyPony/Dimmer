@@ -189,15 +189,15 @@ Rectangle {
     }
     //-------------------------------------------------
 
-    onMove: NumberAnimation { target: element; property: "y"; to: y - height; duration: 700; easing.type: Easing.InOutQuad }
+    onMove: NumberAnimation { target: element; property: "y"; to: y - height; duration: 400; easing.type: Easing.InOutQuad }
     onRemove: SequentialAnimation {
         ScriptAction { script: {element.move()} }
-        NumberAnimation { duration: 750 }  //delay
+        NumberAnimation { duration: 400 }  //delay
         ScriptAction {
             script: {
                 var key = CL.getRoomIndexFromPin(element.pin)
 
-                tempData.pinList.push(tempData.channels[key][1])
+                tempData.pinList.push(tempData.channels[key]["pin"])
                 tempData.pinList.sort(function(a,b) { return a - b; })
                 tempData.pinListChanged()
 
