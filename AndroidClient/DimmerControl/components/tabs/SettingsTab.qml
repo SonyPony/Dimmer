@@ -22,6 +22,7 @@ Rectangle {
     Controls.TextInput {     //IP input
         id: portInput
 
+        text: "8888"
         validator: RegExpValidator { regExp: /\d\d\d\d/ }
         placeholderText: "Port"
 

@@ -31,6 +31,7 @@ ApplicationWindow {
     property var socket
     property var slider
     property bool lock: false
+    property bool connected: false
     property var channelList
     property string language: Qt.locale().name.substring(0,2)
 
@@ -38,7 +39,6 @@ ApplicationWindow {
         if(!lock)
             Socket.requestDim()
     }
-
 
     QtObject {
         id: tempData
@@ -219,7 +219,7 @@ ApplicationWindow {
         height: RL.calcSize("height", 6)
         radius: height
 
-        color: root.cancelColor
+        color: (root.connected) ?root.primaryColor :root.cancelColor
 
         Behavior on color {
             ColorAnimation { duration: 1000 }
@@ -253,9 +253,8 @@ ApplicationWindow {
 
     Screens.LoadingScreen {
         id: loadingScreen
+    }
 
-        width: root.width
-        height: root.height
     Timer {
         id: channelDeleteManager
 
