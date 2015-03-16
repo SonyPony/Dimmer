@@ -45,11 +45,11 @@ Item {
                     ChannelListElement {
                         id: singleElement
 
-                        property int index: CL.getRoomIndexFromPin(modelData[1])
+                        property int index: CL.getRoomIndexFromPin(modelData["pin"])
 
-                        pin: modelData[1]
-                        sensorAddres: modelData[2]
-                        title: modelData[0]
+                        pin: modelData["pin"]
+                        sensorAddres: modelData["sensorPin"]
+                        title: modelData["title"]
                         addAnimation: (repeater.newItemIndex == pin) ?true :false
                         menuWasVisible: repeater.haveShownMenu[pin]
 
