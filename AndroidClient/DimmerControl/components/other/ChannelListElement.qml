@@ -9,6 +9,7 @@ Rectangle {
     property string title: "Default"
     property int pin: 0
     property var sensorAddres: 0
+    property bool active: !root.channelList.lock
     property bool addAnimation: false
     property var menuWasVisible
     signal showMenu()
@@ -93,8 +94,6 @@ Rectangle {
                 duration: 700
                 easing.type: Easing.InOutQuad
             }
-
-            ScriptAction { script: element.hideMenu() }
         }
 
         onShowMenu: ParallelAnimation {
@@ -106,13 +105,12 @@ Rectangle {
                 duration: 700
                 easing.type: Easing.InOutQuad
             }
-
-            ScriptAction { script: element.showMenu() }
         }
 
         MouseArea {
             id: elementMouseArea
             anchors.fill: parent
+            enabled: element.active
             onClicked: (infoPart.x) ?infoPart.hideMenu() :infoPart.showMenu()
         }
     }
@@ -145,8 +143,12 @@ Rectangle {
             }
 
             MouseArea {
+                enabled: element.active
                 anchors.fill: parent
-                onClicked: CL.popRoom(element.pin, true)
+                onClicked: {
+                    root.channelList.lock = true
+                    CL.popRoom(element.pin, true)
+                }
             }
         }
 
@@ -185,6 +187,7 @@ Rectangle {
 
             MouseArea {
                 anchors.fill: parent
+                enabled: element.active
                 onClicked: {
                     CL.setChannel(element.pin, element.title, sensorAddres[0] + sensorAddres[1], sensorAddres[sensorAddres.length - 1])
                     frame.currentIndex = 0;
@@ -203,6 +206,7 @@ Rectangle {
             script: {
                 var key = CL.getRoomIndexFromPin(element.pin)
 
+                root.channelList.lock = false
                 root.channelList.haveShownMenu[element.pin] = false
 
                 tempData.pinList.push(tempData.channels[key]["pin"])

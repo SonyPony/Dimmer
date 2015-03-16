@@ -29,6 +29,7 @@ Item {
 
                 property int newItemIndex: -1
                 property var lines: new Array
+                property bool lock: false
                 property var haveShownMenu: new Array
 
                 Component.onCompleted: root.channelList = repeater
