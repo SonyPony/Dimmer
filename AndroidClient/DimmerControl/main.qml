@@ -57,6 +57,10 @@ ApplicationWindow {
         ]
 
         onActualChannelChanged: Socket.requestDim()
+        onChannelsChanged: {
+            if(!channels.length)
+                CL.setNoneRoom()
+        }
     }
 
     visible: true
@@ -252,6 +256,44 @@ ApplicationWindow {
 
         width: root.width
         height: root.height
+    Timer {
+        id: channelDeleteManager
+
+        signal done()
+        property int counter: 0
+        property var listOfDeleting: new Array
+        property var synchronizationScreen
+
+        repeat: true
+        interval: 450
+        triggeredOnStart: true
+        running: false
+
+        onRunningChanged: {
+            if(!running) {
+                listOfDeleting = new Array
+                done()
+            }
+            else {
+                counter = 0
+                synchronizationScreen.active = true
+            }
+        }
+        onTriggered: {
+            if(counter >= listOfDeleting.length)
+                channelDeleteManager.running = false
+            else
+                CL.popRoom(listOfDeleting[counter], false)
+            counter++
+
+        }
+
+        onDone: {
+            if(root.socket.status == WebSocket.Open) {
+                Socket.requestAllChannels()
+                synchronizationScreen.active = false
+            }
+        }
     }
 }
 

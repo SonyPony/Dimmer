@@ -7,6 +7,14 @@ function parseSensorAddress(pin) {
     }
 }
 
+function deleteAllChannels() {
+    for(var key in tempData.channels) {
+        channelDeleteManager.listOfDeleting.push(tempData.channels[key]["pin"])
+
+    }
+    channelDeleteManager.running = true
+}
+
 function setChannel(pin, room_label, address, channel) {
     tempData.actualChannel = pin
     infoPanel.label = room_label
@@ -16,17 +24,24 @@ function setChannel(pin, room_label, address, channel) {
 
 function getRoomIndexFromPin(pin) {
     for(var key in tempData.channels)
-        if(tempData.channels[key][1] == pin) {
+        if(tempData.channels[key]["pin"] == pin) {
             return key
         }
 }
 
+function setNoneRoom() {
+    infoPanel.label = ""
+    tempData.actualChannel = -1
+    tempData.actualSensorAddress = 0
+    tempData.actualSensorChannel = 0
+}
+
 function setRoom(newIndex) {  
     newIndex = parseInt(newIndex)
-    infoPanel.label = tempData.channels[newIndex][0]
-    tempData.actualChannel = tempData.channels[newIndex][1]
+    infoPanel.label = tempData.channels[newIndex]["title"]
+    tempData.actualChannel = tempData.channels[newIndex]["pin"]
 
-    var sensor = parseSensorAddress(tempData.channels[newIndex][2])
+    var sensor = parseSensorAddress(tempData.channels[newIndex]["sensorPin"])
 
     tempData.actualSensorAddress = sensor.address
     tempData.actualSensorChannel = sensor.channel
@@ -64,6 +79,9 @@ function popRoom(pin, broadcast) {
     if(broadcast)
         Socket.removeChannel(pin)
 
+    if(tempData.actualChannel == pin)
+        setNoneRoom()
+
     for(var i = 0; i < root.channelList.count; i++) {
         element = root.channelList.itemAt(i).singleElement
 
@@ -90,7 +108,7 @@ function addRoom(title, pin, sensorPin, broadcast) {
     removeUsedPin(pin)
 
     root.channelList.newItemIndex = pin
-    tempData.channels.push([title, pin, sensorPin])
+    tempData.channels.push({"title": title, "pin": pin, "sensorPin": sensorPin})
     tempData.channelsChanged()
     root.channelList.newItemIndex = -1
 
