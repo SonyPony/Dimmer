@@ -48,12 +48,13 @@ function sendChannel(roomLabel, pin, sensorAddress, sensorChannel) {
 }
 
 function requestDim() {
-   var data = {
-       "action": "get_dim",
-       "pin": tempData.actualChannel
-   }
+    var data = {
+        "action": "get_dim",
+        "pin": tempData.actualChannel
+    }
 
-   root.socket.sendTextMessage(JSON.stringify(data))
+    if(tempData.actualChannel != -1)
+        root.socket.sendTextMessage(JSON.stringify(data))
 }
 
 function requestAllChannels() {
