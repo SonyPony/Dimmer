@@ -44,5 +44,8 @@
         <file>logic/messageController.js</file>
         <file>logic/gestures.js</file>
         <file>components/screens/LockScreen.qml</file>
+        <file>components/screens/SynchronizationScreen.qml</file>
+        <file>components/other/LoadingAnimation.qml</file>
+        <file>components/screens/PopUpScreen.qml</file>
     </qresource>
 </RCC>
