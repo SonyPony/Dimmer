@@ -7,8 +7,6 @@ import "../screens" as Screens
 import "../../responsivity/responsivityLogic.js" as RL
 
 Rectangle {
-    property alias value: slider.value
-
     Controls.Slider {
         id: slider
 

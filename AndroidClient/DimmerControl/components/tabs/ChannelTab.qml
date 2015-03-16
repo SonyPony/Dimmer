@@ -10,9 +10,6 @@ import "../screens" as Screens
 Item {
     id: channelListView
 
-    //property var channels: []
-    //onChannelsChanged: tempData.channels = channels
-
     Flickable {
         id: flick
 
