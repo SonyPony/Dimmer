@@ -59,6 +59,12 @@ Rectangle {
     }
 
     Screens.LockScreen {
-        opacity: root.lock || (tempData.actualChannel == -1)
+        active: root.lock
+        text: "Someone else is dimming your current room."
+    }
+
+    Screens.LockScreen {
+        active: tempData.actualChannel == -1
+        text: "You haven't chosen desired room."
     }
 }

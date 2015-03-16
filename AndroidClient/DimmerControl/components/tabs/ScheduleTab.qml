@@ -34,6 +34,7 @@ Rectangle {
     }
 
     Screens.LockScreen {
-        opacity: (tempData.actualChannel == -1)
+        active: (tempData.actualChannel == -1)
+        text: "You haven't chosen desired room."
     }
 }
