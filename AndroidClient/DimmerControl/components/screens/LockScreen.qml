@@ -2,26 +2,20 @@ import QtQuick 2.0
 
 import "../../responsivity/responsivityLogic.js" as RL
 
-Item {
-    anchors.fill: parent
-
-    Behavior on opacity {
-        NumberAnimation { duration: 200 }
-    }
-
-    Rectangle {
-        opacity: 0.8
-        color: root.secondaryColor
-
-        anchors.fill: parent
-    }
+PopUpScreen {
+    property alias text: info.text
 
     Text {
-        text: (tempData.actualChannel == -1) ?"You haven't chosen desired room." :"Someone else is dimming your current room."
+        id: info
+
         color: "white"
+        wrapMode: TextEdit.WordWrap
+
+        width: parent.width * 3/5
+        horizontalAlignment: Text.AlignHCenter
 
         font.family: "Trebuchet MS"
-        font.pixelSize: RL.calcSize("height", 20)
+        font.pixelSize: RL.calcSize("height", 30)
 
         anchors.centerIn: parent
     }
