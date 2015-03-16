@@ -1,9 +1,11 @@
 import QtQuick 2.0
+import QtGraphicalEffects 1.0
 
 import "../other"
 import "../../responsivity/responsivityLogic.js" as RL
 import "../../logic/channelLogic.js" as CL
 import "../dialogs" as Dialogs
+import "../screens" as Screens
 
 Item {
     id: channelListView
@@ -14,6 +16,7 @@ Item {
     Flickable {
         id: flick
 
+        visible: !syncScreen.active
         clip: true
         boundsBehavior: Flickable.StopAtBounds
 
@@ -99,8 +102,37 @@ Item {
 
         width: parent.width
         height: RL.calcSize("height", 210)
+        visible: !syncScreen.active
+
         buttonHeight: RL.calcSize("height", 60)
 
         anchors.bottom: parent.bottom
     }
+
+    FastBlur {
+        anchors.fill: roomDialog
+        source: roomDialog
+        radius: 32
+        visible: syncScreen.active
+    }
+
+    FastBlur {
+        anchors.fill: flick
+        source: flick
+        radius: 32
+        visible: syncScreen.active
+    }
+
+
+    Screens.LockScreen {
+        text: "You are not connected to Dim-Box"
+        active: !root.connected
+    }
+
+    Screens.SynchronizationScreen {
+        id: syncScreen
+        active: false
+        Component.onCompleted: channelDeleteManager.synchronizationScreen = syncScreen
+    }
+
 }
