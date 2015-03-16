@@ -29,6 +29,7 @@ Item {
 
                 property int newItemIndex: -1
                 property var lines: new Array
+                property var haveShownMenu: new Array
 
                 Component.onCompleted: root.channelList = repeater
 
@@ -49,6 +50,7 @@ Item {
                         sensorAddres: modelData[2]
                         title: modelData[0]
                         addAnimation: (repeater.newItemIndex == pin) ?true :false
+                        menuWasVisible: repeater.haveShownMenu[pin]
 
                         width: channelListView.width
                         height: RL.calcSize("height", 78)

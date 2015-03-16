@@ -10,6 +10,7 @@ Rectangle {
     property int pin: 0
     property var sensorAddres: 0
     property bool addAnimation: false
+    property var menuWasVisible
     signal showMenu()
     signal hideMenu()
 
@@ -17,7 +18,10 @@ Rectangle {
     signal move()
 
     x: -width
-    Component.onCompleted: NumberAnimation { target: element; property: "x"; to: 0; duration: addAnimation ?700 :0; easing.type: Easing.InOutQuad }
+    Component.onCompleted: SequentialAnimation {
+        ScriptAction { script: { if(menuWasVisible) { infoPart.x = infoPart.width - identifierBox.width } }}
+        NumberAnimation { target: element; property: "x"; to: 0; duration: addAnimation ?700 :0; easing.type: Easing.InOutQuad; }
+    }
     //--------------------INFO PART--------------------
     Item {
         id: infoPart
@@ -81,6 +85,7 @@ Rectangle {
         //-------------------------------------------------
 
         onHideMenu: ParallelAnimation {
+            ScriptAction { script: root.channelList.haveShownMenu[element.pin] = false }
             NumberAnimation {
                 target: infoPart
                 property: "x"
@@ -93,6 +98,7 @@ Rectangle {
         }
 
         onShowMenu: ParallelAnimation {
+            ScriptAction { script: root.channelList.haveShownMenu[element.pin] = true }
             NumberAnimation {
                 target: infoPart
                 property: "x"
@@ -196,6 +202,8 @@ Rectangle {
         ScriptAction {
             script: {
                 var key = CL.getRoomIndexFromPin(element.pin)
+
+                root.channelList.haveShownMenu[element.pin] = false
 
                 tempData.pinList.push(tempData.channels[key]["pin"])
                 tempData.pinList.sort(function(a,b) { return a - b; })
