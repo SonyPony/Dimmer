@@ -34,7 +34,7 @@ Rectangle {
     //------------------------------------------------------
 
     //-------------------------HIDE-------------------------
-    onHide: NumberAnimation { target: screen; property: "y"; to: screen.height; duration: 700; easing.type: Easing.InOutQuad }
+    onHide: NumberAnimation { target: screen; property: "y"; to: screen.height; duration: 700; easing.type: Easing.InOutQuad; onRunningChanged: if(!running) screen.visible = false }
     //------------------------------------------------------
 }
 
