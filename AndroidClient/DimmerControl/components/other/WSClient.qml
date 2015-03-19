@@ -7,8 +7,11 @@ import "../../logic/messageController.js" as Socket
 WebSocket {
     id: socket
 
+    signal reconnect()
+
     active: false
     //url: "ws://169.254.29.212:8888"
+    onActiveChanged: console.log()
 
     onStatusChanged: {
         var actualStatus = socket.status
@@ -30,11 +33,8 @@ WebSocket {
 
             case WebSocket.Closed:
                 root.connected = false
-                //reconnecting
-                socket.active = false
-                socket.active = true
-
                 console.log("Closed");
+                socket.reconnect()
                 break;
 
             case WebSocket.Error:
@@ -43,6 +43,12 @@ WebSocket {
                 break;
         }
     }
+
+    onReconnect: SequentialAnimation {
+        NumberAnimation { duration: 200 }
+        ScriptAction { script: { socket.active = false; socket.active = true } }
+    }
+
 
     onTextMessageReceived: {
         var data = JSON.parse(message)
