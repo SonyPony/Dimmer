@@ -13,7 +13,7 @@ class PWMGenerator(object):
 
         self.__pin = pin
         self.__width = width
-        self.__generator = PWM.Servo(0, 10000, 1)
+        self.__generator = PWM.Servo(0, 3000, 1)
 
     @property
     def width(self):
@@ -27,6 +27,6 @@ class PWMGenerator(object):
 
         self.__width = value
         try:
-            self.__generator.set_servo(self.__pin, pulse_width_us = value * 100)
+            self.__generator.set_servo(self.__pin, pulse_width_us = value * 30)
         except RuntimeError:
-            self.__generator.set_servo(self.__pin, 9990)
+            self.__generator.set_servo(self.__pin, 2990)
