@@ -118,14 +118,13 @@ Canvas {
 
                 var relativeWidth = internal.points[key].x - previous.x - previous.width / 4;   //width between 2 points
                 var relativeHeight = previous.y - internal.points[key].y;   //height between 2 points
-                relativeHeight = relativeHeight - ((relativeHeight > 0) - (relativeHeight < 0)) * (previous.width / 2)
 
                 //calc num of particles according to distance between 2 points
                 var numberOfParticles = Math.floor(Math.sqrt(Math.pow(relativeWidth, 2) + Math.pow(relativeHeight, 2)) / margins);
 
                 for(var i = 1; i <= numberOfParticles; i++) {
                     var fraction = i / numberOfParticles;
-                    ctx.roundedRect(relativeWidth * fraction + pointCenterX - size / 2, pointCenterY - (relativeHeight * fraction) - size / 2, size, size, size, size);
+                    ctx.roundedRect(relativeWidth * fraction + pointCenterX - size / 2, pointCenterY - (relativeHeight * fraction), size, size, size, size);
                 }
             }
             ctx.fill();

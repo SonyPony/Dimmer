@@ -39,7 +39,7 @@ Item {
     }
 
     Rectangle {     //edge because of white point would not be seen
-        width: parent.width + 2 * RL.calcSize("height", 2) + ((Math.round(parent.width) % 2) ?1 : 0)
+        width: parent.width + 2 * RL.calcSize("height", 2) + ((Math.round(parent.width) % 2) ?0 : 1)
         height: width
 
         radius: width
