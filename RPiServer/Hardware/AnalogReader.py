@@ -28,7 +28,7 @@ class AnalogReader():
         for address in Settings.ADDRESS:
             self.__readings[address] = list()
             for channel in range(Settings.NUMBER_OF_CHANNELS):
-                time.sleep(0.2)
+                time.sleep(0.25)
                 self.__bus.write_byte(address, channel)
                 time.sleep(0.3)
                 self.__readings[address].append(self.__bus.read_byte(address))
