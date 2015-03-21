@@ -288,10 +288,9 @@ ApplicationWindow {
         }
 
         onDone: {
-            if(root.socket.status == WebSocket.Open) {
+            if(root.socket.status == WebSocket.Open)
                 Socket.requestAllChannels()
-                synchronizationScreen.active = false
-            }
+            synchronizationScreen.active = false
         }
     }
 }
