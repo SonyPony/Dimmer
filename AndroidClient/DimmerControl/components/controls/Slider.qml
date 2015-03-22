@@ -1,6 +1,7 @@
 import QtQuick 2.3
 
 import "../../logic/messageController.js" as Socket
+import "../../responsivity/responsivityLogic.js" as RL
 
 Canvas {
     id: canvas
@@ -84,7 +85,7 @@ Canvas {
         color: root.secondaryColor
 
         font.family: "Trebuchet MS"
-        font.pixelSize: 80
+        font.pixelSize: RL.calcSize("height", 85)
 
         anchors.right: parent.right
         anchors.rightMargin: parent.lineWidth
