@@ -48,7 +48,7 @@ Item {
                         property int index: CL.getRoomIndexFromPin(modelData["pin"])
 
                         pin: modelData["pin"]
-                        sensorAddres: modelData["sensorPin"]
+                        sensorAddress: modelData["sensorPin"]
                         title: modelData["title"]
                         addAnimation: (repeater.newItemIndex == pin) ?true :false
                         menuWasVisible: repeater.haveShownMenu[pin]

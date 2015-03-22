@@ -55,11 +55,11 @@ WebSocket {
 
         if(data["action"] == "luminosity_read") {
             if(tempData.actualChannel != -1)
-                root.luminosity = 255 - data["readings"][tempData.actualSensorAddress][tempData.actualSensorChannel]
+                root.luminosity = (1024 - data["readings"][tempData.actualSensorChannel.toString()]) / 102.4
         }
 
         else if(data["action"] == "init_channel") {
-            CL.addRoom(data["title"], data["pin"], (data["sensor_address"] + " - " + data["sensor_channel"]), false)
+            CL.addRoom(data["title"], data["pin"], data["sensor_channel"], false)
         }
 
         else if(data["action"] == "remove_channel")

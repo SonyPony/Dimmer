@@ -58,13 +58,12 @@ class MessageHandler():
         }
         
         for k, v in self.__DB.data.items():
-            data["sensor_address"] = v["sensor_address"]
             data["sensor_channel"] = v["sensor_channel"]
             data["pin"] = v["pin"]
             data["title"] = v["title"]
             self.send_data_to(data, requester)
 
-    def init_channel(self, room_label, pin, address, channel, sender):
+    def init_channel(self, room_label, pin, channel, sender):
         """
         :param room_label: string
         :param pin: int
@@ -73,7 +72,6 @@ class MessageHandler():
         """
         data = {
             "action": "init_channel",
-            "sensor_address": address,
             "sensor_channel": channel,
             "pin": pin,
             "title": room_label
@@ -81,7 +79,6 @@ class MessageHandler():
 
         temp = {str(pin): {
             "dim": 0,
-            "sensor_address": address,
             "sensor_channel": channel,
             "pin": pin,
             "title": room_label,
@@ -106,7 +103,7 @@ class MessageHandler():
     def send_luminosity(self):
         while True:
             self.__reader.read_all()
-            print(self.__reader.readings)
+
             data = {
                 "action": "luminosity_read",
                 "readings": self.__reader.readings

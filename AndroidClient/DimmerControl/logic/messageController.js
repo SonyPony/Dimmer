@@ -1,7 +1,5 @@
-//.import "channelLogic.js" as CM
-
 function setLuminosity(readings) {
-    return 255 - data["readings"][tempData.actualSensorAddress][tempData.actualSensorChannel]
+   // return 255 - data["readings"][tempData.actualSensorAddress][tempData.actualSensorChannel]
 }
 
 function sendLock(pin, lock) {
@@ -36,12 +34,11 @@ function removeChannel(pin) {
     root.socket.sendTextMessage(JSON.stringify(data))
 }
 
-function sendChannel(roomLabel, pin, sensorAddress, sensorChannel) {
+function sendChannel(roomLabel, pin, sensorChannel) {
     var data = {}
     data.action = "init_channel"
     data.title = roomLabel
     data.pin = pin
-    data.sensor_address = sensorAddress
     data.sensor_channel = sensorChannel
 
     root.socket.sendTextMessage(JSON.stringify(data))

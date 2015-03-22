@@ -29,7 +29,7 @@ Rectangle {
 
         maximum: 10.0
         minimum: 0
-        value: 10.0 - root.luminosity / 25.5
+        value: root.luminosity
         lineWidth: RL.calcSize("height", 20)
         activeColor: root.primaryColor
         textColor: root.secondaryColor

@@ -42,7 +42,7 @@ AddDialog {
 
         Controls.TouchSpinBox {     //sensor
             id: sensorSpinbox
-            title: qsTr("Sensor adress")
+            title: qsTr("Sensor channel")
 
             width: pinSpinbox.width
             height: pinSpinbox.height

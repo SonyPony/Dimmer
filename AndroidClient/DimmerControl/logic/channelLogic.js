@@ -1,12 +1,5 @@
 .import "messageController.js" as Socket
 
-function parseSensorAddress(pin) {
-    return {
-        "address": parseInt(pin[0] + pin[1]),
-        "channel": parseInt(pin[pin.length -1])
-    }
-}
-
 function deleteAllChannels() {
     for(var key in tempData.channels) {
         channelDeleteManager.listOfDeleting.push(tempData.channels[key]["pin"])
@@ -15,10 +8,9 @@ function deleteAllChannels() {
     channelDeleteManager.running = true
 }
 
-function setChannel(pin, room_label, address, channel) {
+function setChannel(pin, room_label, channel) {
     tempData.actualChannel = pin
     infoPanel.label = room_label
-    tempData.actualSensorAddress = address
     tempData.actualSensorChannel = channel
 }
 
@@ -32,19 +24,15 @@ function getRoomIndexFromPin(pin) {
 function setNoneRoom() {
     infoPanel.label = ""
     tempData.actualChannel = -1
-    tempData.actualSensorAddress = 0
-    tempData.actualSensorChannel = 0
+    tempData.actualSensorChannel = -1
 }
 
 function setRoom(newIndex) {  
     newIndex = parseInt(newIndex)
+    console.log(tempData.channels[newIndex])
     infoPanel.label = tempData.channels[newIndex]["title"]
     tempData.actualChannel = tempData.channels[newIndex]["pin"]
-
-    var sensor = parseSensorAddress(tempData.channels[newIndex]["sensorPin"])
-
-    tempData.actualSensorAddress = sensor.address
-    tempData.actualSensorChannel = sensor.channel
+    tempData.actualSensorChannel = tempData.channels[newIndex]["sensorPin"]
 }
 
 function setPreviousRoom() {
@@ -103,8 +91,6 @@ function removeUsedPin(pin) {
 
 
 function addRoom(title, pin, sensorPin, broadcast) {
-    var sensor = parseSensorAddress(sensorPin)
-
     removeUsedPin(pin)
 
     root.channelList.newItemIndex = pin
@@ -113,5 +99,5 @@ function addRoom(title, pin, sensorPin, broadcast) {
     root.channelList.newItemIndex = -1
 
     if(broadcast)
-        Socket.sendChannel(title, pin, sensor.address, sensor.channel)
+        Socket.sendChannel(title, pin, sensorPin)
 }

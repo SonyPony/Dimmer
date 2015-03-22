@@ -8,7 +8,7 @@ Rectangle {
 
     property string title: qsTr("Default")
     property int pin: 0
-    property var sensorAddres: 0
+    property var sensorAddress: 0
     property bool active: !root.channelList.lock
     property bool addAnimation: false
     property var menuWasVisible
@@ -75,7 +75,7 @@ Rectangle {
             Text {
                 id: titleChannel
 
-                text: qsTr("Pin") + " - " + pin + "   |   " + qsTr("Address") + " - " + sensorAddres[0] + sensorAddres[1] + "   |   " + qsTr("Channel") + " - " + sensorAddres[sensorAddres.length - 1]
+                text: qsTr("Pin") + " - " + pin + "   |   " + qsTr("Channel") + " - " + sensorAddress
                 color: root.lineColor
 
                 font.pixelSize: RL.calcSize("height", 18)
@@ -189,7 +189,7 @@ Rectangle {
                 anchors.fill: parent
                 enabled: element.active
                 onClicked: {
-                    CL.setChannel(element.pin, element.title, sensorAddres[0] + sensorAddres[1], sensorAddres[sensorAddres.length - 1])
+                    CL.setChannel(element.pin, element.title, sensorAddress)
                     frame.currentIndex = 0;
                     infoPart.hideMenu()
                 }

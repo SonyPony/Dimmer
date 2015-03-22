@@ -43,18 +43,13 @@ ApplicationWindow {
     QtObject {
         id: tempData
 
-        property int actualSensorAddress: 0
         property int actualSensorChannel: 0
 
         property int actualChannel: -1  //store pin
         property var channels: []
 
         property var pinList: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
-        property var adressList: ["72 - 0", "72 - 1", "72 - 2", "72 - 3", "73 - 0", "73 - 1", "73 - 2", "73 - 3",
-                                  "74 - 0", "74 - 1", "74 - 2", "74 - 3", "75 - 0", "75 - 1", "75 - 2", "75 - 3",
-                                  "76 - 0", "76 - 1", "76 - 2", "76 - 3", "77 - 0", "77 - 1", "77 - 2", "77 - 3",
-                                  "78 - 0", "78 - 1", "78 - 2", "78 - 3", "79 - 0", "79 - 1", "79 - 2", "79 - 3"
-        ]
+        property var adressList: [0, 1, 2, 3, 4, 5, 6, 7]
 
         onActualChannelChanged: Socket.requestDim()
         onChannelsChanged: {

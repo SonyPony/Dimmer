@@ -1,12 +1,13 @@
 __author__ = 'Sony'
 
 from settings import Settings
-from smbus import SMBus
+import spidev
 import time
 
 class AnalogReader():
     def __init__(self):
-        self.__bus = SMBus(1)
+        self.__spi = spidev.SpiDev()
+        self.__spi.open(0, 0)
         self.__readings = dict()
 
     @property
@@ -17,6 +18,10 @@ class AnalogReader():
     def readings(self, value):
         self.__readings = value
 
+    def read_channel(self, channel):
+        adc = self.__spi.xfer2([1, (8 + channel) << 4, 0])
+        return ((adc[1] & 3) << 8) + adc[2]
+
     def read_all(self):
         """
         :param address: int
@@ -25,11 +30,6 @@ class AnalogReader():
 
         self.__readings = dict()
 
-        for address in Settings.ADDRESS:
-            self.__readings[address] = list()
-            for channel in range(Settings.NUMBER_OF_CHANNELS):
-                time.sleep(0.25)
-                self.__bus.write_byte(address, channel)
-                time.sleep(0.3)
-                self.__readings[address].append(self.__bus.read_byte(address))
-
+        for channel in range(Settings.NUMBER_OF_CHANNELS):
+            self.__readings[channel] = self.read_channel(channel)
+            time.sleep(0.1)
