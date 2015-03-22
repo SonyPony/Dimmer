@@ -1,15 +1,11 @@
-function sendLock(pin, lock) {
+function sendLock(pin, target, lock) {
     var data = {}
     data.action = "lock"
+    data.target = target
     data.lock = lock
     data.pin = pin
 
     root.socket.sendTextMessage(JSON.stringify(data))
-}
-
-function setLock(pin, lock, component) {
-    if(pin == tempData.actualChannel)
-        component.lock = lock
 }
 
 function sendDim(dim, pin) {
@@ -18,7 +14,7 @@ function sendDim(dim, pin) {
     data.pin = pin
     data.dim = dim
 
-    if(!root.lock)
+    if(!tempData.lockDim)
         root.socket.sendTextMessage(JSON.stringify(data))
 }
 
