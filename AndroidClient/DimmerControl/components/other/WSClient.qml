@@ -53,26 +53,31 @@ WebSocket {
     onTextMessageReceived: {
         var data = JSON.parse(message)
 
-        if(data["action"] == "luminosity_read") {
+        if(data.action == "luminosity_read") {
             if(tempData.actualChannel != -1)
-                root.luminosity = (1024 - data["readings"][tempData.actualSensorChannel.toString()]) / 102.4
+                root.luminosity = (1024 - data.readings[tempData.actualSensorChannel.toString()]) / 102.4
         }
 
-        else if(data["action"] == "init_channel") {
-            CL.addRoom(data["title"], data["pin"], data["sensor_channel"], false)
+        else if(data.action == "init_channel") {
+            if(!CL.roomExists(data.pin))
+            CL.addRoom(data.title, data.pin, data.sensor_channel, false)
         }
 
-        else if(data["action"] == "remove_channel")
-            CL.popRoom(data["pin"], false)
+        else if(data.action == "remove_channel")
+            CL.popRoom(data.pin, false)
 
-        else if(data["action"] == "lock") {
-            if(data["pin"] == tempData.actualChannel)
-                root.lock = data["lock"]
+        else if(data.action == "lock") {
+            if(data.pin == tempData.actualChannel) {
+                if(data.target == "dim")
+                    tempData.lockDim = data.lock
+                else if(data.target == "schedule")
+                    tempData.lockSchedule = data.lock
+            }
         }
 
-        else if(data["action"] == "set_dim") {
-            if(tempData.actualChannel == data["pin"])
-                root.slider.setValue(data["dim"], true)
+        else if(data.action == "set_dim") {
+            if(tempData.actualChannel == data.pin)
+                root.slider.setValue(data.dim, true)
         }
     }
     Component.onCompleted: {
