@@ -22,6 +22,7 @@ class Database():
         """
         :return: dict
         """
+
         return self.__data
 
     @data.setter
@@ -29,20 +30,17 @@ class Database():
         """
         :param value: dict
         """
-        self.__data = value
-        self.__write_DB(self.__data)
 
-    def update(self, updatedPart):
-        """
-        :param updatedPart: dict
-        """
-        updatedPart.update(self.data)
-        self.data = updatedPart
+        self.__data = value
+
+    def save(self):
+        self.__write_DB(self.__data)
 
     def __write_DB(self, content):
         """
         :param content: dict
         """
+
         DB = open(self.__path, "w")
         DB.write(dumps(content))
         DB.close()
@@ -51,6 +49,7 @@ class Database():
         """
         :return: dict
         """
+
         try:
             DB = open(self.__path, "r")
             result = loads(DB.read())

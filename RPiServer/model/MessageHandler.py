@@ -35,20 +35,20 @@ class MessageHandler():
         :param room_label: string
         :param dim: int
         """
+
         self.__PWMOutputs[pin].width = dim
-        temp = self.__DB.data
-        temp[str(pin)]["dim"] = dim
-        self.__DB.data = temp
+        self.__DB.data[str(pin)]["dim"] = dim
+        self.__DB.save()
 
     def get_dim(self, pin, requester):
         """
         :param pin: int
         """
+
         data = {
             "action": "set_dim",
             "pin": pin,
             "dim": self.__DB.data[str(pin)]["dim"]
-
         }
         self.send_data_to(data, requester)
 
@@ -70,35 +70,37 @@ class MessageHandler():
         :param address: int
         :param channel: int
         """
-        data = {
-            "action": "init_channel",
-            "sensor_channel": channel,
-            "pin": pin,
-            "title": room_label
-        }
 
-        temp = {str(pin): {
+        self.__DB.data[str(pin)] = {
             "dim": 0,
             "sensor_channel": channel,
             "pin": pin,
             "title": room_label,
             "schedule": {}
-        }}
-        self.__DB.update(temp)
-        self.broadcast_data(data, sender)
+        }
+        self.__DB.save()
 
     def remove_channel(self, pin, sender):
         """
         :param pin: int
         """
+
+        self.__DB.data.pop(str(pin))
+        self.__DB.save()
+
+    def init_schedule_point(self, pin, hours, minutes, power, sender):
         data = {}
-        data["action"] = "remove_channel"
+        data["action"] = "init_schedule_point"
         data["pin"] = pin
+        data["hours"] = hours
+        data["minutes"] = minutes
+        data["power"] = power
 
         temp = self.__DB.data
-        temp.pop(str(pin))
-        self.__DB.data = temp
-        self.broadcast_data(data, sender)
+        #temp[pin]
+
+    def remove_schedule_point(self, pin, hours, minutes, sender):
+        pass
 
     def send_luminosity(self):
         while True:
