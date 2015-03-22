@@ -8,6 +8,14 @@ function deleteAllChannels() {
     channelDeleteManager.running = true
 }
 
+function roomExists(pin) {
+    for(var key in tempData.channels)
+        if(tempData.channels[key]["pin"] == pin) {
+            return true
+        }
+    return false
+}
+
 function setChannel(pin, room_label, channel) {
     tempData.actualChannel = pin
     infoPanel.label = room_label
