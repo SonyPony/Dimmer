@@ -1,7 +1,3 @@
-function setLuminosity(readings) {
-   // return 255 - data["readings"][tempData.actualSensorAddress][tempData.actualSensorChannel]
-}
-
 function sendLock(pin, lock) {
     var data = {}
     data.action = "lock"
