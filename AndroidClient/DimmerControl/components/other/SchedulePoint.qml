@@ -1,6 +1,7 @@
 import QtQuick 2.0
 
 import "../../responsivity/responsivityLogic.js" as RL
+import "../../logic/messageController.js" as Socket
 
 Item {
     id: pointPositioner
@@ -65,7 +66,6 @@ Item {
     MouseArea {
         id: mouseArea
 
-        parent: pointPositioner.parent
         anchors.fill: pointPositioner
 
         drag.axis: Drag.YAxis
@@ -73,9 +73,12 @@ Item {
         drag.minimumY: internal.yAxisY[internal.yAxisY.length - 1] - pointPositioner.height / 2
         drag.maximumY: internal.yAxisY[0] - pointPositioner.height / 2
 
-        //because of MouseArea overlooping
-        onPressed: mouseArea.anchors.fill = parent
-        onReleased: mouseArea.anchors.fill = pointPositioner
+        drag.onActiveChanged: {
+            if(drag.active)
+                Socket.sendLock(tempData.actualChannel, "schedule", true)
+            else
+                Socket.sendLock(tempData.actualChannel, "schedule", false)
+        }
 
         onClicked: deleteDialog.show(pointPositioner.x, pointPositioner.y, pointPositioner.hour * 100 + pointPositioner.minute)
     }

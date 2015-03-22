@@ -38,6 +38,7 @@ ApplicationWindow {
     QtObject {
         id: tempData
 
+        property bool lockSchedule: false
         property bool lockDim: false
         property int actualSensorChannel: 0
 

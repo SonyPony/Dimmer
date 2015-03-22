@@ -37,4 +37,9 @@ Rectangle {
         active: (tempData.actualChannel == -1)
         text: qsTr("You haven't chosen desired room.")
     }
+
+    Screens.LockScreen {
+        active: tempData.lockSchedule
+        text: qsTr("Someone else is currently editing schedule.")
+    }
 }
