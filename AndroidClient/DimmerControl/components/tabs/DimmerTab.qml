@@ -57,7 +57,7 @@ Rectangle {
     }
 
     Screens.LockScreen {
-        active: root.lock
+        active: tempData.lockDim
         text: qsTr("Someone else is dimming your current room.")
     }
 

@@ -18,15 +18,15 @@ Canvas {
 
     Component.onCompleted: root.slider = canvas
 
-    onValueChanged: if(tempData.actualChannel != -1 && (!root.lock))
+    onValueChanged: if(tempData.actualChannel != -1 && (!tempData.lockDim))
                         Socket.sendDim(value, tempData.actualChannel)
     onWidthChanged: canvas.requestPaint()
     onHeightChanged: canvas.requestPaint()
 
     Behavior on value {
         id: linearChange
-        enabled: !root.lock
-        NumberAnimation { duration: 1000; onRunningChanged: Socket.sendLock(tempData.actualChannel, running)}
+        enabled: !tempData.lockDim
+        NumberAnimation { duration: 1000; onRunningChanged: Socket.sendLock(tempData.actualChannel, "dim", running)}
     }
 
     onPaint: {      //draw groove//

@@ -35,14 +35,10 @@ ApplicationWindow {
     property var channelList
     property string language: Qt.locale().name.substring(0,2)
 
-    onLockChanged: {
-        if(!lock)
-            Socket.requestDim()
-    }
-
     QtObject {
         id: tempData
 
+        property bool lockDim: false
         property int actualSensorChannel: 0
 
         property int actualChannel: -1  //store pin
@@ -55,6 +51,11 @@ ApplicationWindow {
         onChannelsChanged: {
             if(!channels.length)
                 CL.setNoneRoom()
+        }
+
+        onLockDimChanged: {
+            if(!lockDim)
+                Socket.requestDim()
         }
     }
 
