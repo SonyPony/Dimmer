@@ -27,7 +27,7 @@ ApplicationWindow {
     property real luminosity: 0
     property real tabCount: 5.0
     property var tabIcons: ["resources/images/dim.png", "resources/images/program.png", "resources/images/channel.png", "resources/images/settings.png", "resources/images/help.png"]
-    property var tabLabels: ["Dim", "Schedule", "Channel", "Settings", "Help"]
+    property var tabLabels: [qsTr("Dim"), qsTr("Schedule"), qsTr("Channel"), qsTr("Settings"), qsTr("Help")]
     property var socket
     property var slider
     property bool lock: false
@@ -66,7 +66,7 @@ ApplicationWindow {
     visible: true
     width: 480
     height: 782
-    title: qsTr("Ultra Dimmer")
+    title: qsTr("Dim-Box")
 
     Item {
         id: positioner
@@ -83,7 +83,7 @@ ApplicationWindow {
     MessageDialog {
         id: errorDialog
 
-        title: "Error"
+        title: qsTr("Error")
 
         function error(message) {
             errorDialog.text = message
@@ -115,15 +115,12 @@ ApplicationWindow {
         Tab {   //tab with slider
             id: dimmerTab
 
-            title: "Dim"
-
             Tabs.DimmerTab {
             }
         }
 
         Tab {   //tab width graph
             id: scheduleTab
-            title: "Schedule"
             active: true
 
             Tabs.ScheduleTab {}
@@ -131,7 +128,6 @@ ApplicationWindow {
 
         Tab {   //channel
             id: channelTab
-            title: "Channel"
             active: true
 
             Tabs.ChannelTab {
@@ -140,7 +136,6 @@ ApplicationWindow {
         }
 
         Tab {   //settings
-            title: "Settings"
 
             Tabs.SettingsTab {
 

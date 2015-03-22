@@ -58,11 +58,11 @@ Rectangle {
 
     Screens.LockScreen {
         active: root.lock
-        text: "Someone else is dimming your current room."
+        text: qsTr("Someone else is dimming your current room.")
     }
 
     Screens.LockScreen {
         active: tempData.actualChannel == -1
-        text: "You haven't chosen desired room."
+        text: qsTr("You haven't chosen desired room.")
     }
 }

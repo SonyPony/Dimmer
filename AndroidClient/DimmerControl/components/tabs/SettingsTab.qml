@@ -8,7 +8,7 @@ Rectangle {
         id: ipInput
 
         validator: RegExpValidator { regExp: /\d\d?\d?\.\d\d?\d?\.\d\d?\d?\.\d\d?\d?/ }
-        placeholderText: "IP address"
+        placeholderText: qsTr("IP address")
 
         width: RL.calcSize("width", 300)
         height: RL.calcSize("height", 60)
@@ -24,7 +24,7 @@ Rectangle {
 
         text: "8888"
         validator: RegExpValidator { regExp: /\d\d\d\d/ }
-        placeholderText: "Port"
+        placeholderText: qsTr("Port")
 
         width: RL.calcSize("width", 120)
         height: RL.calcSize("height", 60)
@@ -51,7 +51,7 @@ Rectangle {
     Controls.Button {
         width: parent.width
         height: RL.calcSize("height", 60)
-        title: "Apply"
+        title: qsTr("Apply")
 
         anchors.bottom: parent.bottom
 

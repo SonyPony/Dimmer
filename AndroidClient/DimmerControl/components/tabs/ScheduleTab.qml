@@ -35,6 +35,6 @@ Rectangle {
 
     Screens.LockScreen {
         active: (tempData.actualChannel == -1)
-        text: "You haven't chosen desired room."
+        text: qsTr("You haven't chosen desired room.")
     }
 }

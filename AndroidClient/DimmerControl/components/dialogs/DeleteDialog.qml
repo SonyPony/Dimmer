@@ -18,7 +18,7 @@ Rectangle {
     }
 
     Text {
-        text: "Delete"
+        text: qsTr("Delete")
         color: "white"
 
         font.family: "Trebuchet MS"

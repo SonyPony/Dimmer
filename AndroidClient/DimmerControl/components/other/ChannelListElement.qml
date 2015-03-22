@@ -6,7 +6,7 @@ import "../../logic/channelLogic.js" as CL
 Rectangle {
     id: element
 
-    property string title: "Default"
+    property string title: qsTr("Default")
     property int pin: 0
     property var sensorAddres: 0
     property bool active: !root.channelList.lock
@@ -75,7 +75,7 @@ Rectangle {
             Text {
                 id: titleChannel
 
-                text: "Pin - " + pin + "   |   Address - " + sensorAddres[0] + sensorAddres[1] + "   |   Channel - " + sensorAddres[sensorAddres.length - 1]
+                text: qsTr("Pin") + " - " + pin + "   |   " + qsTr("Address") + " - " + sensorAddres[0] + sensorAddres[1] + "   |   " + qsTr("Channel") + " - " + sensorAddres[sensorAddres.length - 1]
                 color: root.lineColor
 
                 font.pixelSize: RL.calcSize("height", 18)
@@ -160,7 +160,7 @@ Rectangle {
             anchors.left: deleteButton.right
 
             Text {
-                text: "Select room"
+                text: qsTr("Select room")
                 color: "white"
 
                 font.family: "Trebuchet MS"

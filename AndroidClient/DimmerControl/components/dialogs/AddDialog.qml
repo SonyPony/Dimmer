@@ -46,7 +46,7 @@ Item {
 
         width: parent.width
         height: parent.buttonHeight
-        title: "Add"
+        title: qsTr("Add")
 
         anchors.bottom: parent.bottom
 

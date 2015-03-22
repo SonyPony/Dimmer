@@ -48,5 +48,6 @@
         <file>components/other/LoadingAnimation.qml</file>
         <file>components/screens/PopUpScreen.qml</file>
         <file>resources/images/logo.png</file>
+        <file>translations/cs.qm</file>
     </qresource>
 </RCC>

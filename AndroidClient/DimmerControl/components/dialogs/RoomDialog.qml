@@ -14,7 +14,7 @@ AddDialog {
             CL.addRoom(titleInput.text, pinSpinbox.value, sensorSpinbox.value, true)
 
         else
-            errorDialog.error("Enter room label.")
+            errorDialog.error(qsTr("Enter room label."))
     })
 
     Item {
@@ -23,7 +23,7 @@ AddDialog {
 
         Controls.TouchSpinBox {     //pin
             id: pinSpinbox
-            title: "Dimmer pin"
+            title: qsTr("Dimmer pin")
 
             width: RL.calcSize("width", 100)
             height: RL.calcSize("height", 100)
@@ -42,7 +42,7 @@ AddDialog {
 
         Controls.TouchSpinBox {     //sensor
             id: sensorSpinbox
-            title: "Sensor adress"
+            title: qsTr("Sensor adress")
 
             width: pinSpinbox.width
             height: pinSpinbox.height
@@ -66,7 +66,7 @@ AddDialog {
 
             width: RL.calcSize("width", 170)
             height: RL.calcSize("height", 60)
-            title: "Room label"
+            title: qsTr("Room label")
 
             anchors.verticalCenter: sensorSpinbox.verticalCenter
             anchors.left: sensorSpinbox.right

@@ -122,7 +122,7 @@ Item {
 
 
     Screens.LockScreen {
-        text: "You are not connected to Dim-Box"
+        text: qsTr("You are not connected to Dim-Box")
         active: !root.connected
     }
 

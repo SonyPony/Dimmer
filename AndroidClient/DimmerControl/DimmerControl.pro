@@ -9,6 +9,15 @@ SOURCES += main.cpp \
 
 RESOURCES += qml.qrc
 
+TRANSLATIONS = translations/cs.ts
+
+lupdate_only{
+SOURCES = *.qml \
+          components/dialogs/*.qml \
+          components/other/*.qml \
+          components/tabs/*.qml \
+}
+
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
 

@@ -25,7 +25,7 @@ AddDialog {
         anchors.fill: parent
         Controls.TouchSpinBox {     //hours
             id: hourSpinbox
-            title: "Hours"
+            title: qsTr("Hours")
 
             width: RL.calcSize("width", 100)
             height: RL.calcSize("height", 100)
@@ -45,7 +45,7 @@ AddDialog {
 
         Controls.TouchSpinBox {     //minutes
             id: minuteSpinbox
-            title: "Minutes"
+            title: qsTr("Minutes")
 
             width: hourSpinbox.width
             height: hourSpinbox.height
@@ -71,7 +71,7 @@ AddDialog {
             width: RL.calcSize("width", 120)
             height: RL.calcSize("height", 60)
             validator: RegExpValidator { regExp: /[1]?\d\d/ }
-            title: "Power"
+            title: qsTr("Power")
 
             anchors.verticalCenter: minuteSpinbox.verticalCenter
             anchors.left: minuteSpinbox.right
