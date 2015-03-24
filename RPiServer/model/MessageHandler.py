@@ -88,19 +88,39 @@ class MessageHandler():
         self.__DB.data.pop(str(pin))
         self.__DB.save()
 
-    def init_schedule_point(self, pin, hours, minutes, power, sender):
-        data = {}
-        data["action"] = "init_schedule_point"
-        data["pin"] = pin
-        data["hours"] = hours
-        data["minutes"] = minutes
-        data["power"] = power
+    def send_all_schedule_points(self, pin, requester):
+        data = {
+            "action": "init_schedule_point"
+        }
 
-        temp = self.__DB.data
-        #temp[pin]
+        for k, v in self.__DB.data[str(pin)]["schedule"].items():
+            data["pin"] = pin
+            data["power"] = v
+            data["hour"] = int(int(k) / 100)
+            data["minute"] = int(k) % 100
+            print(dumps(data))
+            self.send_data_to(data, requester)
 
-    def remove_schedule_point(self, pin, hours, minutes, sender):
-        pass
+    def init_schedule_point(self, pin, hour, minute, power):
+        """
+        :param pin: int
+        :param hours: int
+        :param minutes: int
+        :param power: int
+        """
+
+        self.__DB.data[str(pin)]["schedule"][hour * 100 + minute] = int(power)
+        self.__DB.save()
+
+    def remove_schedule_point(self, pin, hour, minute):
+        """
+        :param pin: int
+        :param hours: int
+        :param minutes: int
+        """
+
+        self.__DB.data[str(pin)]["schedule"].pop(str(hour * 100 + minute))
+        self.__DB.save()
 
     def send_luminosity(self):
         while True:
