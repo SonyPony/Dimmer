@@ -37,7 +37,6 @@ function setNoneRoom() {
 
 function setRoom(newIndex) {  
     newIndex = parseInt(newIndex)
-    console.log(tempData.channels[newIndex])
     infoPanel.label = tempData.channels[newIndex]["title"]
     tempData.actualChannel = tempData.channels[newIndex]["pin"]
     tempData.actualSensorChannel = tempData.channels[newIndex]["sensorPin"]
