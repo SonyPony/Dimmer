@@ -22,9 +22,8 @@
         <translation>Pin</translation>
     </message>
     <message>
-        <location filename="../components/other/ChannelListElement.qml" line="78"/>
         <source>Address</source>
-        <translation>Adresa</translation>
+        <translation type="vanished">Adresa</translation>
     </message>
     <message>
         <location filename="../components/other/ChannelListElement.qml" line="78"/>
@@ -63,7 +62,7 @@
     <message>
         <location filename="../components/tabs/DimmerTab.qml" line="66"/>
         <source>You haven&apos;t chosen desired room.</source>
-        <translation>Nevybrali jste si váš požadovaný pokoj.</translation>
+        <translation>Nevybrali jste požadovaný pokoj.</translation>
     </message>
 </context>
 <context>
@@ -321,8 +320,12 @@
     </message>
     <message>
         <location filename="../components/dialogs/RoomDialog.qml" line="45"/>
+        <source>Sensor channel</source>
+        <translation>Kanál senzoru</translation>
+    </message>
+    <message>
         <source>Sensor adress</source>
-        <translation>Adresa senzoru</translation>
+        <translation type="vanished">Adresa senzoru</translation>
     </message>
     <message>
         <location filename="../components/dialogs/RoomDialog.qml" line="69"/>
@@ -336,6 +339,11 @@
         <location filename="../components/tabs/ScheduleTab.qml" line="38"/>
         <source>You haven&apos;t chosen desired room.</source>
         <translation>Nevybrali jste požadovaný pokoj.</translation>
+    </message>
+    <message>
+        <location filename="../components/tabs/ScheduleTab.qml" line="43"/>
+        <source>Someone else is currently editing schedule.</source>
+        <translation>Někdo jiný upravuje právě upravuje rozvrh.</translation>
     </message>
 </context>
 <context>
@@ -384,12 +392,12 @@
         <translation>Nápověda</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="69"/>
+        <location filename="../main.qml" line="73"/>
         <source>Dim-Box</source>
         <translation>Dim-Box</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="86"/>
+        <location filename="../main.qml" line="90"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
