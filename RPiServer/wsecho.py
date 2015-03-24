@@ -17,6 +17,7 @@ class WSHandler(WebSocketHandler):
             WSHandler.clients.remove(self)
             
     def on_message(self, message):
+        print(message)
         message = loads(message)
 
         if message["action"] in ["init_channel", "remove_channel", "lock", "remove_schedule_point", "init_schedule_point"]:
@@ -26,6 +27,8 @@ class WSHandler(WebSocketHandler):
             WSHandler.message_handler.set_dim(message["pin"], message["dim"])
         elif message["action"] == "get_dim":
             WSHandler.message_handler.get_dim(message["pin"], self)
+        elif message["action"] == "init_all_pins":
+            WSHandler.message_handler.send_all_pins(self)
         elif message["action"] == "init_channel":
             WSHandler.message_handler.init_channel(message["title"], message["pin"], message["sensor_channel"])
         elif message["action"] == "remove_channel":

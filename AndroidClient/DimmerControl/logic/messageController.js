@@ -78,6 +78,13 @@ function requestAllSchedulePoints(pin) {
     root.socket.sendTextMessage(JSON.stringify(data))
 }
 
+function requestAllPins() {
+    var data = {}
+    data.action = "init_all_pins"
+
+    root.socket.sendTextMessage(JSON.stringify(data))
+}
+
 function requestAllChannels() {
     var data = {}
     data.action = "init_all_channels"

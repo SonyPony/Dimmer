@@ -58,6 +58,8 @@ WebSocket {
                 root.luminosity = (1024 - data.readings[tempData.actualSensorChannel.toString()]) / 102.4
         }
 
+        else if(data.action == "init_all_pins")
+            tempData.pinList = data.pins
 
         else if(data.action == "init_schedule_point") {
             if(tempData.actualChannel == data.pin) {
@@ -73,7 +75,7 @@ WebSocket {
 
         else if(data.action == "init_channel") {
             if(!CL.roomExists(data.pin))
-            CL.addRoom(data.title, data.pin, data.sensor_channel, false)
+                CL.addRoom(data.title, data.pin, data.sensor_channel, false)
         }
 
         else if(data.action == "remove_channel")

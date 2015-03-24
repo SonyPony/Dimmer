@@ -109,7 +109,7 @@ class MessageHandler():
         :param power: int
         """
 
-        self.__DB.data[str(pin)]["schedule"][hour * 100 + minute] = int(power)
+        self.__DB.data[str(pin)]["schedule"][str(hour * 100) + str(minute)] = int(power)
         self.__DB.save()
 
     def remove_schedule_point(self, pin, hour, minute):
@@ -119,8 +119,16 @@ class MessageHandler():
         :param minutes: int
         """
 
-        self.__DB.data[str(pin)]["schedule"].pop(str(hour * 100 + minute))
+        self.__DB.data[str(pin)]["schedule"].pop(str(hour * 100) + str(minute))
         self.__DB.save()
+
+    def send_all_pins(self, requester):
+        data = {
+            "action": "init_all_pins",
+            "pins": Settings.PWM_PINS
+        }
+
+        self.send_data_to(data, requester)
 
     def send_luminosity(self):
         while True:

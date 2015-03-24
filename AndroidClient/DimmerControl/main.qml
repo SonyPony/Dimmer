@@ -44,16 +44,18 @@ ApplicationWindow {
 
         property int actualChannel: -1  //store pin
         property var channels: []
+        property var graph
 
-        property var pinList: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
+        property var pinList: []//: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
         property var adressList: [0, 1, 2, 3, 4, 5, 6, 7]
 
-        onActualChannelChanged: Socket.requestDim()
         onActualChannelChanged: {
             for(var key in graph.internal.points)
                 graph.removePoint(Math.floor(key / 100), key % 100)
             console.log("change", actualChannel)
             Socket.requestAllSchedulePoints(actualChannel)
+            Socket.requestDim()
+        }
         onChannelsChanged: {
             if(!channels.length)
                 CL.setNoneRoom()
@@ -271,6 +273,7 @@ ApplicationWindow {
                 done()
             }
             else {
+                Socket.requestAllPins()
                 counter = 0
                 synchronizationScreen.active = true
             }
