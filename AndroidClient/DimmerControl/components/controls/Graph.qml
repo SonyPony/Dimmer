@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import "../dialogs" as Dialogs
 import "../../responsivity/responsivityLogic.js" as RL
+import "../../logic/messageController.js" as Socket
 
 Canvas {
     id: canvas
@@ -13,6 +14,7 @@ Canvas {
     property real stepY
     property color textColor
     property color lineColor
+    property alias internal: internal
 
     //private
     QtObject {
@@ -23,6 +25,8 @@ Canvas {
 
         Component.onCompleted: points = {}
     }
+
+    Component.onCompleted: tempData.graph = canvas
 
     Dialogs.DeleteDialog {
         id: deleteDialog
@@ -133,7 +137,7 @@ Canvas {
         ctx.closePath()
     }
 
-    function addPoint(hour, minute, DCL) {
+    function addPoint(hour, minute, DCL, broadcast) {
         var component = Qt.createComponent("../other/SchedulePoint.qml");
         var object = component.createObject(canvas);
 
@@ -153,6 +157,9 @@ Canvas {
         internal.points[hour * 100 + minute] = object;
         canvas.requestPaint();
         deleteDialog.hide()
+
+        if(broadcast)
+            Socket.sendSchedulePoint(tempData.actualChannel, hour, minute, DCL)
     }
 
     function pop(list, index) {
@@ -165,9 +172,12 @@ Canvas {
         return newList
     }
 
-    function removePoint(hour, minute) {
+    function removePoint(hour, minute, broadcast) {
         internal.points[hour * 100 + minute].destroy()
         internal.points = pop(internal.points, hour * 100 + minute)
         canvas.requestPaint();
+
+        if(broadcast && tempData.actualChannel != -1)
+            Socket.removeSchedulePoint(tempData.actualChannel, hour, minute)
     }
 }

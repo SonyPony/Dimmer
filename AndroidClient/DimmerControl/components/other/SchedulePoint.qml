@@ -76,8 +76,10 @@ Item {
         drag.onActiveChanged: {
             if(drag.active)
                 Socket.sendLock(tempData.actualChannel, "schedule", true)
-            else
+            else {
                 Socket.sendLock(tempData.actualChannel, "schedule", false)
+                Socket.sendSchedulePoint(tempData.actualChannel, pointPositioner.hour, pointPositioner.minute, pointPositioner.dutyCycle)
+            }
         }
 
         onClicked: deleteDialog.show(pointPositioner.x, pointPositioner.y, pointPositioner.hour * 100 + pointPositioner.minute)

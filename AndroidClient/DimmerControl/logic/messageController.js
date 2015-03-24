@@ -18,6 +18,27 @@ function sendDim(dim, pin) {
         root.socket.sendTextMessage(JSON.stringify(data))
 }
 
+function sendSchedulePoint(pin, hour, minute, power) {
+    var data = {}
+    data.action = "init_schedule_point"
+    data.pin = pin
+    data.hour = hour
+    data.minute = minute
+    data.power = power
+
+    root.socket.sendTextMessage(JSON.stringify(data))
+}
+
+function removeSchedulePoint(pin, hour, minute) {
+    var data = {}
+    data.action = "remove_schedule_point"
+    data.pin = pin
+    data.hour = hour
+    data.minute = minute
+
+    root.socket.sendTextMessage(JSON.stringify(data))
+}
+
 function removeChannel(pin) {
     var data = {}
     data.action = "remove_channel"
@@ -44,6 +65,17 @@ function requestDim() {
 
     if(tempData.actualChannel != -1)
         root.socket.sendTextMessage(JSON.stringify(data))
+}
+
+function requestAllSchedulePoints(pin) {
+    if(tempData.actualChannel == -1)
+        return
+
+    var data = {}
+    data.action = "init_all_schedule_points"
+    data.pin = pin
+
+    root.socket.sendTextMessage(JSON.stringify(data))
 }
 
 function requestAllChannels() {

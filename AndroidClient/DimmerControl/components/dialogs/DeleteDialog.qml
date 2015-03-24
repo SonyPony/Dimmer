@@ -37,7 +37,7 @@ Rectangle {
 
     function clicked(x, y) {
         if(x >= dialog.x && x <= dialog.x + dialog.width && y >= dialog.y && y <= dialog.y + dialog.height)
-            canvas.removePoint(Math.floor(currentPointIndex / 100), currentPointIndex % 100)
+            tempData.graph.removePoint(Math.floor(currentPointIndex / 100), currentPointIndex % 100, true)
         dialog.hide()
     }
 
@@ -57,8 +57,8 @@ Rectangle {
         graphMouseArea.z = 1
 
         //fix x coord
-        if(x + width + rightMargin > canvas.width) {
-            dialog.x = canvas.width - width - rightMargin
+        if(x + width + rightMargin > tempData.graph.width) {
+            dialog.x = tempData.graph.width - width - rightMargin
             pointingTriangle.x = dialog.width - RL.calcSize("width", 10) - pointingTriangle.width
         }
         else if(x < RL.calcSize("width", 25) + rightMargin) {
