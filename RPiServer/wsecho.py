@@ -19,7 +19,7 @@ class WSHandler(WebSocketHandler):
     def on_message(self, message):
         message = loads(message)
 
-        if message["action"] in ["init_channel", "remove_channel", "lock"]:
+        if message["action"] in ["init_channel", "remove_channel", "lock", "remove_schedule_point", "init_schedule_point"]:
             WSHandler.message_handler.broadcast_data(message, self)
 
         if message["action"] == "dim":
@@ -27,9 +27,9 @@ class WSHandler(WebSocketHandler):
         elif message["action"] == "get_dim":
             WSHandler.message_handler.get_dim(message["pin"], self)
         elif message["action"] == "init_channel":
-            WSHandler.message_handler.init_channel(message["title"], message["pin"], message["sensor_channel"], self)
+            WSHandler.message_handler.init_channel(message["title"], message["pin"], message["sensor_channel"])
         elif message["action"] == "remove_channel":
-            WSHandler.message_handler.remove_channel(message["pin"], self)
+            WSHandler.message_handler.remove_channel(message["pin"])
         elif message["action"] == "init_all_channels":
             WSHandler.message_handler.send_all_channels(self)
         elif message["action"] == "init_schedule_point":

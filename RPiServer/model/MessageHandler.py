@@ -63,7 +63,7 @@ class MessageHandler():
             data["title"] = v["title"]
             self.send_data_to(data, requester)
 
-    def init_channel(self, room_label, pin, channel, sender):
+    def init_channel(self, room_label, pin, channel):
         """
         :param room_label: string
         :param pin: int
@@ -80,7 +80,7 @@ class MessageHandler():
         }
         self.__DB.save()
 
-    def remove_channel(self, pin, sender):
+    def remove_channel(self, pin):
         """
         :param pin: int
         """
