@@ -11,7 +11,6 @@ WebSocket {
 
     active: false
     //url: "ws://169.254.29.212:8888"
-    onActiveChanged: console.log()
 
     onStatusChanged: {
         var actualStatus = socket.status
@@ -93,6 +92,11 @@ WebSocket {
         else if(data.action == "set_dim") {
             if(tempData.actualChannel == data.pin)
                 root.slider.setValue(data.dim, true)
+        }
+
+        else if(data.action == "channel_synchronization_done") {
+            console.log("sync_done")
+            CL.autoSelectChannel(last_channel)
         }
     }
     Component.onCompleted: {

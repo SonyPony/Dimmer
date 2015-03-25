@@ -74,6 +74,12 @@ class MessageHandler():
             data["title"] = v["title"]
             self.send_data_to(data, requester)
 
+        data = {
+            "action": "channel_synchronization_done"
+        }
+
+        self.send_data_to(data, requester)
+
     def init_channel(self, room_label, pin, channel):
         """
         :param room_label: string

@@ -83,6 +83,12 @@ ApplicationWindow {
         source: "config.txt"
     }
 
+    FileStream {
+        id: last_channel
+
+        source: "temp.txt"
+    }
+
     //-------------ERROR DIALOG--------------
     MessageDialog {
         id: errorDialog

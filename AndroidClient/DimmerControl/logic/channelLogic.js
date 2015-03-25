@@ -1,5 +1,16 @@
 .import "messageController.js" as Socket
 
+function autoSelectChannel(configFile) {
+    var last_pin = parseInt(configFile.read())
+
+    for(var key in tempData.channels) {
+        if((tempData.channels[key]["pin"] == last_pin && last_pin != "") || tempData.channels.length == 1) {
+            setRoom(key)
+            break;
+        }
+    }
+}
+
 function deleteAllChannels() {
     for(var key in tempData.channels) {
         channelDeleteManager.listOfDeleting.push(tempData.channels[key]["pin"])
