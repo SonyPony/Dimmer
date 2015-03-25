@@ -52,9 +52,12 @@ ApplicationWindow {
         onActualChannelChanged: {
             for(var key in graph.internal.points)
                 graph.removePoint(Math.floor(key / 100), key % 100)
-            console.log("change", actualChannel)
-            Socket.requestAllSchedulePoints(actualChannel)
-            Socket.requestDim()
+
+            if(actualChannel != -1) {
+                Socket.requestAllSchedulePoints(actualChannel)
+                Socket.requestDim()
+                last_channel.write(actualChannel)
+            }
         }
         onChannelsChanged: {
             if(!channels.length)

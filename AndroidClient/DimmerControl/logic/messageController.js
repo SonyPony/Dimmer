@@ -63,14 +63,10 @@ function requestDim() {
         "pin": tempData.actualChannel
     }
 
-    if(tempData.actualChannel != -1)
-        root.socket.sendTextMessage(JSON.stringify(data))
+    root.socket.sendTextMessage(JSON.stringify(data))
 }
 
 function requestAllSchedulePoints(pin) {
-    if(tempData.actualChannel == -1)
-        return
-
     var data = {}
     data.action = "init_all_schedule_points"
     data.pin = pin
