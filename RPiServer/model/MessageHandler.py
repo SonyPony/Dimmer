@@ -6,11 +6,18 @@ from hardware.AnalogReader import AnalogReader
 from settings import Settings
 
 class MessageHandler():
-    def __init__(self, clients):
+    def __init__(self, PWMOutputs, clients):
         self.__DB = Database("db")
         self.__clients = clients
-        self.__PWMOutputs = {pin: PWMGenerator(pin, 0) for pin in Settings.PWM_PINS}
+        self.__PWMOutputs = PWMOutputs
         self.__reader = AnalogReader()
+
+        #set light on according to DB
+        for pin in self.__DB.data:
+            self.__PWMOutputs[int(pin)].width = self.__DB.data[pin]["dim"]
+
+    def data(self):
+        return self.__DB.data
 
     def broadcast_data(self, message, sender=None):
         """
@@ -40,7 +47,7 @@ class MessageHandler():
         self.__DB.data[str(pin)]["dim"] = dim
         self.__DB.save()
 
-    def get_dim(self, pin, requester):
+    def send_dim(self, pin, requester=None):
         """
         :param pin: int
         """
@@ -50,7 +57,11 @@ class MessageHandler():
             "pin": pin,
             "dim": self.__DB.data[str(pin)]["dim"]
         }
-        self.send_data_to(data, requester)
+
+        if requester:
+            self.send_data_to(data, requester)
+        else:
+            self.broadcast_data(data)
 
     def send_all_channels(self, requester):
         data = {
@@ -109,7 +120,7 @@ class MessageHandler():
         :param power: int
         """
 
-        self.__DB.data[str(pin)]["schedule"][str(hour * 100) + str(minute)] = int(power)
+        self.__DB.data[str(pin)]["schedule"][str(int(hour) * 100 + int(minute))] = int(power)
         self.__DB.save()
 
     def remove_schedule_point(self, pin, hour, minute):
@@ -119,7 +130,7 @@ class MessageHandler():
         :param minutes: int
         """
 
-        self.__DB.data[str(pin)]["schedule"].pop(str(hour * 100) + str(minute))
+        self.__DB.data[str(pin)]["schedule"].pop(str(int(hour) * 100 + int(minute)))
         self.__DB.save()
 
     def send_all_pins(self, requester):
