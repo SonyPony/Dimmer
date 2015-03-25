@@ -1,5 +1,7 @@
 from json import loads
 from model.MessageHandler import MessageHandler
+from containers.HardwareContainer import HardwareContainer
+from managers.Scheduler import Scheduler
 import tornado.ioloop
 import tornado.web
 from tornado.websocket import WebSocketHandler
@@ -26,7 +28,7 @@ class WSHandler(WebSocketHandler):
         if message["action"] == "dim":
             WSHandler.message_handler.set_dim(message["pin"], message["dim"])
         elif message["action"] == "get_dim":
-            WSHandler.message_handler.get_dim(message["pin"], self)
+            WSHandler.message_handler.send_dim(message["pin"], self)
         elif message["action"] == "init_all_pins":
             WSHandler.message_handler.send_all_pins(self)
         elif message["action"] == "init_channel":
@@ -51,9 +53,14 @@ application = tornado.web.Application([
 
 if __name__ == "__main__":
     application.listen(8888)
-    WSHandler.message_handler = MessageHandler(WSHandler.clients)
+    hardware_container = HardwareContainer()
+    WSHandler.message_handler = MessageHandler(hardware_container.PWMOutputs, WSHandler.clients)
+    scheduler = Scheduler(WSHandler.message_handler.data(), WSHandler.message_handler.set_dim, WSHandler.message_handler.send_dim)
+
     serverloop = tornado.ioloop.IOLoop.instance()
+    scheduleloop = tornado.ioloop.PeriodicCallback(scheduler.check, 30000)
 
     threading.Thread(target=WSHandler.message_handler.send_luminosity).start()
+    scheduleloop.start()
     serverloop.start()
 
