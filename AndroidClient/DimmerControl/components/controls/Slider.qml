@@ -15,11 +15,15 @@ Canvas {
     property real maximum
     property real minimum
     property int radius: height / 2 - toggleSize
+    property bool request: false
 
     Component.onCompleted: root.slider = canvas
 
-    onValueChanged: if(tempData.actualChannel != -1 && (!tempData.lockDim))
-                        Socket.sendDim(value, tempData.actualChannel)
+    onValueChanged: {
+        if(tempData.actualChannel != -1 && (!tempData.lockDim) && (!request))
+            Socket.sendDim(value, tempData.actualChannel)
+        request = false
+    }
     onWidthChanged: canvas.requestPaint()
     onHeightChanged: canvas.requestPaint()
 
@@ -103,6 +107,7 @@ Canvas {
     }
 
     function setValue(arg, requested) {
+        request = requested
         linearChange.enabled = !requested
         value = arg;
         valueText.text = arg.toFixed(0);
