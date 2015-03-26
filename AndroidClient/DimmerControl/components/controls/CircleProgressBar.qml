@@ -10,6 +10,7 @@ Canvas {
     property real value
     property real maximum
     property real minimum
+    property int precission
 
     onWidthChanged: requestPaint()
     onHeightChanged: requestPaint()
@@ -22,7 +23,7 @@ Canvas {
     Text {
         id: valueText
 
-        text: parent.value.toFixed(1)
+        text: parent.value.toFixed(precission)
 
         color: textColor
 
