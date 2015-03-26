@@ -52,51 +52,52 @@ WebSocket {
     onTextMessageReceived: {
         var data = JSON.parse(message)
 
-        if(data.action == "luminosity_read") {
-            if(tempData.actualChannel != -1)
-                root.luminosity = (1024 - data.readings[tempData.actualSensorChannel.toString()]) / 102.4
-        }
+        switch(data["action"]) {
+            case "luminosity_read":
+                if(tempData.actualChannel != -1)
+                    root.luminosity = data.readings[tempData.actualSensorChannel.toString()]
+                break;
 
-        else if(data.action == "init_all_pins")
-            tempData.pinList = data.pins
+            case "init_all_pins":
+                tempData.pinList = data.pins
+                break;
 
-        else if(data.action == "init_schedule_point") {
-            if(tempData.actualChannel == data.pin) {
-                tempData.graph.addPoint(data.hour, data.minute, data.power)
-            }
-        }
+            case "init_schedule_point":
+                if(tempData.actualChannel == data.pin)
+                    tempData.graph.addPoint(data.hour, data.minute, data.power)
+                break;
 
-        else if(data.action == "remove_schedule_point") {
-            if(tempData.actualChannel == data.pin) {
-                tempData.graph.removePoint(data.hour, data.minute)
-            }
-        }
+            case "remove_schedule_point":
+                if(tempData.actualChannel == data.pin)
+                    tempData.graph.removePoint(data.hour, data.minute)
+                break;
 
-        else if(data.action == "init_channel") {
-            if(!CL.roomExists(data.pin))
-                CL.addRoom(data.title, data.pin, data.sensor_channel, false)
-        }
+            case "init_channel":
+                if(!CL.roomExists(data.pin))
+                    CL.addRoom(data.title, data.pin, data.sensor_channel, false)
+                break;
 
-        else if(data.action == "remove_channel")
-            CL.popRoom(data.pin, false)
+            case "remove_channel":
+                CL.popRoom(data.pin, false)
+                break;
 
-        else if(data.action == "lock") {
-            if(data.pin == tempData.actualChannel) {
-                if(data.target == "dim")
-                    tempData.lockDim = data.lock
-                else if(data.target == "schedule")
-                    tempData.lockSchedule = data.lock
-            }
-        }
+            case "lock":
+                if(data.pin == tempData.actualChannel) {
+                    if(data.target == "dim")
+                        tempData.lockDim = data.lock
+                    else if(data.target == "schedule")
+                        tempData.lockSchedule = data.lock
+                }
+                break;
 
-        else if(data.action == "set_dim") {
-            if(tempData.actualChannel == data.pin)
-                root.slider.setValue(data.dim, true)
-        }
+            case "set_dim":
+                if(tempData.actualChannel == data.pin)
+                    root.slider.setValue(data.dim, true)
+                break;
 
-        else if(data.action == "channel_synchronization_done") {
-            console.log("sync_done")
-            CL.autoSelectChannel(last_channel)
+            case "channel_synchronization_done":
+                CL.autoSelectChannel(last_channel)
+                break;
         }
     }
     Component.onCompleted: {
