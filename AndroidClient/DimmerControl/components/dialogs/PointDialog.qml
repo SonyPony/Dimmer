@@ -17,7 +17,7 @@ AddDialog {
         if(parseInt(dutyCycle) >= 0 && parseInt(dutyCycle) <= 100)
             graph.addPoint(hours, minutes, dutyCycle, true)
         else
-            errorDialog.error("Enter number in range from 0 to 100")
+            errorDialog.error("Enter number in range from 0 to 100.")
     })
 
     Item {
