@@ -49,5 +49,6 @@
         <file>components/screens/PopUpScreen.qml</file>
         <file>resources/images/logo.png</file>
         <file>translations/cs.qm</file>
+        <file>components/dialogs/MoveablePointDialog.qml</file>
     </qresource>
 </RCC>

@@ -15,11 +15,17 @@ Item {
     property int newMinute
     property bool inited: false
     property bool done: false
+    property bool dragging: false
 
     width: RL.calcSize("height", 23)
     height: width
 
     onYChanged: {
+        if(dragging) {
+            dclInfo.show(pointPositioner.x, pointPositioner.y, pointPositioner.hour * 100 + pointPositioner.minute)
+            dclInfo.text = dutyCycle + "%"
+        }
+
         var closestLine = -1
         var restOfDCL
         var piece = internal.yAxisY[0] - internal.yAxisY[1]
@@ -74,9 +80,14 @@ Item {
         drag.maximumY: internal.yAxisY[0] - pointPositioner.height / 2
 
         drag.onActiveChanged: {
-            if(drag.active)
+            if(drag.active) {
                 Socket.sendLock(tempData.actualChannel, "schedule", true)
+                dragging = true
+                dclInfo.show(pointPositioner.x, pointPositioner.y, pointPositioner.hour * 100 + pointPositioner.minute)
+            }
             else {
+                dragging = false
+                dclInfo.hide()
                 Socket.sendLock(tempData.actualChannel, "schedule", false)
                 Socket.sendSchedulePoint(tempData.actualChannel, pointPositioner.hour, pointPositioner.minute, pointPositioner.dutyCycle)
             }

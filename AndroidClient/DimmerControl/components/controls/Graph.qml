@@ -33,6 +33,11 @@ Canvas {
         z: 1
     }
 
+    Dialogs.MoveablePointDialog {
+        id: dclInfo
+        z: 1
+    }
+
     Repeater {      //Y axis
         model: valuesCountY
         delegate: Rectangle {
