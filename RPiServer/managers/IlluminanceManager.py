@@ -3,7 +3,7 @@ __author__ = 'Sony'
 from hardware.AnalogReader import AnalogReader
 from settings import Settings
 
-class LuminosityManager():
+class IlluminanceManager():
     def __init__(self):
         self.__reader = AnalogReader()
 
@@ -20,7 +20,7 @@ class LuminosityManager():
         for key, single_reading in readings.items():
             voltage = self.__raw2voltage(single_reading)
             resistance = self.__voltage2resistance(voltage)
-            luminosity[key] = self.__resistance2luminosity(resistance)
+            luminosity[key] = self.__resistance2illuminance(resistance)
 
         return luminosity
 
@@ -40,7 +40,7 @@ class LuminosityManager():
 
         return (voltage * Settings.RB1) / (Settings.REFERENCE_VOLTAGE - voltage)
 
-    def __resistance2luminosity(self, resistance):
+    def __resistance2illuminance(self, resistance):
         """
         :param resistance: float
         :return: float

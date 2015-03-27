@@ -53,9 +53,9 @@ WebSocket {
         var data = JSON.parse(message)
 
         switch(data["action"]) {
-            case "luminosity_read":
+            case "illuminance_read":
                 if(tempData.actualChannel != -1)
-                    root.luminosity = data.readings[tempData.actualSensorChannel.toString()]
+                    root.illuminance = data.readings[tempData.actualSensorChannel.toString()]
                 break;
 
             case "init_all_pins":

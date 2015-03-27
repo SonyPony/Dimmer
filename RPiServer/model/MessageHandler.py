@@ -1,7 +1,7 @@
 __author__ = 'Sony'
 from json import dumps
 from model.Database import Database
-from managers.LuminosityManager import LuminosityManager
+from managers.IlluminanceManager import IlluminanceManager
 from settings import Settings
 
 class MessageHandler():
@@ -9,7 +9,7 @@ class MessageHandler():
         self.__DB = Database("db")
         self.__clients = clients
         self.__PWMOutputs = PWMOutputs
-        self.__luminosity_manager = LuminosityManager()
+        self.__luminosity_manager = IlluminanceManager()
 
         #set light on according to DB
         for pin in self.__DB.data:
@@ -162,12 +162,12 @@ class MessageHandler():
 
         self.send_data_to(data, requester)
 
-    def send_luminosity(self):
+    def send_illuminance(self):
         while True:
-            luminosity = self.__luminosity_manager.readings()
-            print(luminosity)
+            illuminance = self.__illuminance_manager.readings()
+            print(illuminance)
             data = {
-                "action": "luminosity_read",
-                "readings": luminosity
+                "action": "illuminance_read",
+                "readings": illuminance
             }
             self.broadcast_data(data)

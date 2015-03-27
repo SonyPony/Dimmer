@@ -46,7 +46,7 @@ Item {
             '
             <body>
                 <p class="title"><b>' + qsTr('Dim') + '</b></p>
-                    <p>' + qsTr('Allows you to dim light and to see luminosity in your room') + '.</p>' +
+                    <p>' + qsTr('Allows you to dim light and to see illuminance in your room') + '.</p>' +
 
                     '<p class="subtitle">' + qsTr('Enable') + '</p>
                         <p>' + qsTr('If you want to enable or disable dimming of room, tap on') + '<b> ' + qsTr('power button') + '</b>.</p>

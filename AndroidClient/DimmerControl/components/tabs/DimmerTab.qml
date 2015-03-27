@@ -28,10 +28,10 @@ Rectangle {
         height: RL.calcSize("height", 150)
         width: RL.calcSize("height", 150)
 
-        precission: (root.luminosity <= 1) ?1 :0
+        precission: (root.illuminance <= 1) ?1 :0
         maximum: 400.0
         minimum: 0
-        value: root.luminosity
+        value: root.illuminance
         lineWidth: RL.calcSize("height", 20)
 
         activeColor: root.primaryColor
