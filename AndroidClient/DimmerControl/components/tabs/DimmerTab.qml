@@ -5,6 +5,7 @@ import QtQuick.Controls.Styles 1.2
 import "../controls" as Controls
 import "../screens" as Screens
 import "../../responsivity/responsivityLogic.js" as RL
+import "../../logic/messageController.js" as Socket
 
 Rectangle {
     Controls.Slider {
@@ -54,8 +55,15 @@ Rectangle {
         anchors.bottomMargin: RL.calcSize("height", 40)
         anchors.leftMargin: RL.calcSize("width", 40)
 
-        onActiveChanged: if(!active)
-                              slider.setValue(0, false)
+        onActiveChanged: {
+            if(!active) {
+                Socket.saveLastDim()
+                slider.setValue(0, false)
+            }
+
+            else
+                Socket.setLastDim()
+        }
     }
 
     Screens.LockScreen {

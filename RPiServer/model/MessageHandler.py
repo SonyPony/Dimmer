@@ -62,6 +62,22 @@ class MessageHandler():
         else:
             self.broadcast_data(data)
 
+    def save_last_dim(self, pin):
+        """
+        :param pin: int
+        """
+
+        self.__DB.data[str(pin)]["last_dim"] = self.__DB.data[str(pin)]["dim"]
+        self.__DB.save()
+
+    def set_last_dim(self, pin):
+        """
+        :param pin: int
+        """
+
+        self.set_dim(pin, self.__DB.data[str(pin)]["last_dim"] if not self.__DB.data[str(pin)]["dim"] else self.__DB.data[str(pin)]["dim"])
+        self.send_dim(pin)
+
     def send_all_channels(self, requester):
         data = {
             "action": "init_channel"
@@ -89,6 +105,7 @@ class MessageHandler():
 
         self.__DB.data[str(pin)] = {
             "dim": 0,
+            "last_dim": 0,
             "sensor_channel": channel,
             "pin": pin,
             "title": room_label,
@@ -114,7 +131,6 @@ class MessageHandler():
             data["power"] = v
             data["hour"] = int(int(k) / 100)
             data["minute"] = int(k) % 100
-            print(dumps(data))
             self.send_data_to(data, requester)
 
     def init_schedule_point(self, pin, hour, minute, power):

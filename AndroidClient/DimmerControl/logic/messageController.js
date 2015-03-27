@@ -8,6 +8,22 @@ function sendLock(pin, target, lock) {
     root.socket.sendTextMessage(JSON.stringify(data))
 }
 
+function saveLastDim() {
+    var data = {}
+    data.action = "save_last_dim"
+    data.pin = tempData.actualChannel
+
+    root.socket.sendTextMessage(JSON.stringify(data))
+}
+
+function setLastDim() {
+    var data = {}
+    data.action = "set_last_dim"
+    data.pin = tempData.actualChannel
+
+    root.socket.sendTextMessage(JSON.stringify(data))
+}
+
 function sendDim(dim, pin) {
     var data = {}
     data.action = "dim"

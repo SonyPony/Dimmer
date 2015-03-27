@@ -29,6 +29,10 @@ class WSHandler(WebSocketHandler):
             WSHandler.message_handler.set_dim(message["pin"], message["dim"])
         elif message["action"] == "get_dim":
             WSHandler.message_handler.send_dim(message["pin"], self)
+        elif message["action"] == "save_last_dim":
+            WSHandler.message_handler.save_last_dim(message["pin"])
+        elif message["action"] == "set_last_dim":
+            WSHandler.message_handler.set_last_dim(message["pin"])
         elif message["action"] == "init_all_pins":
             WSHandler.message_handler.send_all_pins(self)
         elif message["action"] == "init_channel":
