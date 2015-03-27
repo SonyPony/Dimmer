@@ -28,7 +28,7 @@ Rectangle {
         height: RL.calcSize("height", 150)
         width: RL.calcSize("height", 150)
 
-        precission: 0
+        precission: (root.luminosity <= 1) ?1 :0
         maximum: 400.0
         minimum: 0
         value: root.luminosity
