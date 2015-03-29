@@ -9,7 +9,7 @@ class MessageHandler():
         self.__DB = Database("db")
         self.__clients = clients
         self.__PWMOutputs = PWMOutputs
-        self.__luminosity_manager = IlluminanceManager()
+        self.__illuminance_manager = IlluminanceManager()
 
         #set light on according to DB
         for pin in self.__DB.data:
