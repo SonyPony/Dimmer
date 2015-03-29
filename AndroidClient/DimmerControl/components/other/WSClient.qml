@@ -87,10 +87,8 @@ WebSocket {
                         tempData.lockDim = data.lock
                     else if(data.target == "schedule")
                         tempData.lockSchedule = data.lock
-                    else if(data.target == "graph") {
+                    else if(data.target == "graph")
                         tempData.graphEnable.active = !data.lock
-                        console.log("---", data.lock)
-                    }
                 }
                 break;
 
