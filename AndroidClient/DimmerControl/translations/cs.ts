@@ -4,7 +4,7 @@
 <context>
     <name>AddDialog</name>
     <message>
-        <location filename="../components/dialogs/AddDialog.qml" line="49"/>
+        <location filename="../components/dialogs/AddDialog.qml" line="71"/>
         <source>Add</source>
         <translation>Přidat</translation>
     </message>
@@ -47,7 +47,7 @@
 <context>
     <name>DeleteDialog</name>
     <message>
-        <location filename="../components/dialogs/DeleteDialog.qml" line="21"/>
+        <location filename="../components/dialogs/DeleteDialog.qml" line="8"/>
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
@@ -55,12 +55,12 @@
 <context>
     <name>DimmerTab</name>
     <message>
-        <location filename="../components/tabs/DimmerTab.qml" line="61"/>
+        <location filename="../components/tabs/DimmerTab.qml" line="71"/>
         <source>Someone else is dimming your current room.</source>
         <translation>Někdo jiný stmívá váš pokoj.</translation>
     </message>
     <message>
-        <location filename="../components/tabs/DimmerTab.qml" line="66"/>
+        <location filename="../components/tabs/DimmerTab.qml" line="76"/>
         <source>You haven&apos;t chosen desired room.</source>
         <translation>Nevybrali jste požadovaný pokoj.</translation>
     </message>
@@ -74,9 +74,8 @@
         <translation>Stmívání</translation>
     </message>
     <message>
-        <location filename="../components/tabs/HelpTab.qml" line="49"/>
         <source>Allows you to dim light and to see luminosity in your room</source>
-        <translation>Umožňuje vám stmívat osvětlení ve vašem pokoji</translation>
+        <translation type="vanished">Umožňuje vám stmívat osvětlení ve vašem pokoji</translation>
     </message>
     <message>
         <location filename="../components/tabs/HelpTab.qml" line="51"/>
@@ -110,6 +109,11 @@
     <message>
         <source>To dim your light you have to set your desired dim on </source>
         <translation type="vanished">Abyste stmívali ve vašem pokoji, musíte nastavit požadované stmívání na </translation>
+    </message>
+    <message>
+        <location filename="../components/tabs/HelpTab.qml" line="49"/>
+        <source>Allows you to dim light and to see illuminance in your room</source>
+        <translation>Umožňuje vám stmívat osvětlení a zjistit svítivost ve vašem pokoji</translation>
     </message>
     <message>
         <location filename="../components/tabs/HelpTab.qml" line="57"/>
@@ -291,17 +295,22 @@
 <context>
     <name>PointDialog</name>
     <message>
-        <location filename="../components/dialogs/PointDialog.qml" line="28"/>
+        <location filename="../components/dialogs/PointDialog.qml" line="21"/>
+        <source>Enter number in range from 0 to 100.</source>
+        <translation>Vložte číslo od 0 do 100.</translation>
+    </message>
+    <message>
+        <location filename="../components/dialogs/PointDialog.qml" line="33"/>
         <source>Hours</source>
         <translation>Hodiny</translation>
     </message>
     <message>
-        <location filename="../components/dialogs/PointDialog.qml" line="48"/>
+        <location filename="../components/dialogs/PointDialog.qml" line="53"/>
         <source>Minutes</source>
         <translation>Minuty</translation>
     </message>
     <message>
-        <location filename="../components/dialogs/PointDialog.qml" line="74"/>
+        <location filename="../components/dialogs/PointDialog.qml" line="79"/>
         <source>Power</source>
         <translation>Intenzita</translation>
     </message>
@@ -336,12 +345,36 @@
 <context>
     <name>ScheduleTab</name>
     <message>
-        <location filename="../components/tabs/ScheduleTab.qml" line="38"/>
+        <location filename="../components/tabs/ScheduleTab.qml" line="59"/>
+        <source>Disable</source>
+        <translation>Zakázat</translation>
+    </message>
+    <message>
+        <location filename="../components/tabs/ScheduleTab.qml" line="60"/>
+        <source>Enable</source>
+        <translation>Povolit</translation>
+    </message>
+    <message>
+        <location filename="../components/tabs/ScheduleTab.qml" line="78"/>
+        <source>Schedule is disabled.</source>
+        <translation>Rozvrh je zakázán.</translation>
+    </message>
+    <message>
+        <location filename="../components/tabs/ScheduleTab.qml" line="85"/>
         <source>You haven&apos;t chosen desired room.</source>
         <translation>Nevybrali jste požadovaný pokoj.</translation>
     </message>
     <message>
-        <location filename="../components/tabs/ScheduleTab.qml" line="43"/>
+        <location filename="../components/tabs/ScheduleTab.qml" line="92"/>
+        <source>You are not connected to Dim-Box</source>
+        <translation>Nejste připojeni k Dim-Box</translation>
+    </message>
+    <message>
+        <source>Your are not connected to Dim-Box.</source>
+        <translation type="obsolete">Nejste připojeni k Dim</translation>
+    </message>
+    <message>
+        <location filename="../components/tabs/ScheduleTab.qml" line="97"/>
         <source>Someone else is currently editing schedule.</source>
         <translation>Někdo jiný upravuje právě upravuje rozvrh.</translation>
     </message>
@@ -392,12 +425,12 @@
         <translation>Nápověda</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="73"/>
+        <location filename="../main.qml" line="78"/>
         <source>Dim-Box</source>
         <translation>Dim-Box</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="90"/>
+        <location filename="../main.qml" line="101"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>

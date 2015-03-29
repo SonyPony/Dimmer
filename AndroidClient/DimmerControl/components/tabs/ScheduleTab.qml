@@ -89,7 +89,7 @@ Rectangle {
         id: connectionLock
 
         active: !root.connected
-        text: qsTr("Your are not connected to Dim-Box.")
+        text: qsTr("You are not connected to Dim-Box")
     }
 
     Screens.LockScreen {
