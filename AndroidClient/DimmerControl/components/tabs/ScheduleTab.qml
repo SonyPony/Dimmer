@@ -36,18 +36,18 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.right: parent.right
 
-        onWidthChanged: if(width < parent.width)
+        onWidthChanged: if(width <= parent.width / 10 )
                             hideContent()
 
         onHiddenChanged: {
             if(width) {
                 if(hidden) {
                     iconVisible = true
-                    pointDialog.width = pointDialog.width / 10
+                    pointDialog.width = parent.width / 10
                 }
                 else {
                     iconVisible = false
-                    pointDialog.width = pointDialog.width * 10
+                    pointDialog.width = parent.width
                 }
             }
         }
