@@ -30,7 +30,8 @@ class Scheduler():
         schedule = dict()
 
         for k, v in self.__raw_DB.items():
-            schedule[k] = v["schedule"]
+            if(not v["lock_graph"]):
+                schedule[k] = v["schedule"]
 
         return schedule
 

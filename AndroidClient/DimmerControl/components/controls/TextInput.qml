@@ -13,9 +13,8 @@ TextField {
     style: TextFieldStyle {
         background: Rectangle {
             color: "transparent"
-            radius: RL.calcSize("height", 5)
 
-            border.width: RL.calcSize("height", 3)
+            border.width: RL.calcSize("height", 2)
             border.color: root.primaryColor
         }
 

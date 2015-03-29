@@ -11,17 +11,39 @@ Item {
     property int buttonHeight: RL.calcSize("height", 60)
     property var acceptFunction
     property alias content: content
-    property bool hidden: (content.y == addButton.y) ?true :false
+    property int delay: 0
+    property bool hidden: true
+    property alias iconVisible: addButton.iconVisible
+    property bool active: true
+
+    signal showContent()
+    signal hideContent()
+
+    onShowContent: content.show()
+    onHideContent: content.hide()
+
+    clip: true
 
     Item {  //content
         id: content
+
+        signal hide()
+        signal show()
 
         y: addButton.y
         width: parent.width
         height: parent.height - addButton.height
 
-        Behavior on y {
-            NumberAnimation { easing.type: Easing.InOutQuad; duration: 500 }
+        onShow: SequentialAnimation {
+            ScriptAction { script: {hidden = false} }
+            NumberAnimation { duration: delay }
+            NumberAnimation { target: content; property: "y"; to:addButton.y - content.height; easing.type: Easing.InOutQuad; duration: 500 }
+        }
+
+        onHide: SequentialAnimation {
+            NumberAnimation { target: content; property: "y"; to:addButton.y; easing.type: Easing.InOutQuad; duration: 500 }
+            NumberAnimation { duration: delay }
+            ScriptAction { script: hidden = true }
         }
 
         Rectangle { //background
@@ -37,7 +59,7 @@ Item {
 
             anchors.right: parent.right
 
-            onClose: parent.y = addButton.y
+            onClose: content.hide()
         }
     }
 
@@ -47,13 +69,20 @@ Item {
         width: parent.width
         height: parent.buttonHeight
         title: qsTr("Add")
+        iconSource: "resources/images/plus.png"
 
         anchors.bottom: parent.bottom
 
         onClick: function() {
-            if(content.y != addButton.y)  // not hidden
+            if(!hidden) { // not hidden
                 acceptFunction()
-            content.y = (content.y == addButton.y) ?addButton.y - content.height :addButton.y
+                content.hide()
+            }
+
+            else {
+                if(dialog.active)
+                    content.show()
+            }
         }
     }
 }

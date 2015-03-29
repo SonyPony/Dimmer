@@ -93,6 +93,8 @@ Item {
             }
         }
 
-        onClicked: deleteDialog.show(pointPositioner.x, pointPositioner.y, pointPositioner.hour * 100 + pointPositioner.minute)
+        onClicked: {
+            deleteDialog.show(pointPositioner.x, pointPositioner.y, pointPositioner.hour * 100 + pointPositioner.minute)
+        }
     }
 }

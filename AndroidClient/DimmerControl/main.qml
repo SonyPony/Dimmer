@@ -40,6 +40,8 @@ ApplicationWindow {
 
         property bool lockSchedule: false
         property bool lockDim: false
+        property bool lockGraph: false
+        property var graphEnable
         property int actualSensorChannel: 0
 
         property int actualChannel: -1  //store pin
@@ -103,7 +105,6 @@ ApplicationWindow {
             errorDialog.visible = true
         }
     }
-
     //---------------------------------------
 
     //-------------ICON & STATUS-------------

@@ -41,6 +41,8 @@ class WSHandler(WebSocketHandler):
             WSHandler.message_handler.remove_channel(message["pin"])
         elif message["action"] == "init_all_channels":
             WSHandler.message_handler.send_all_channels(self)
+        elif message["action"] == "lock" and message["target"] == "graph":
+            WSHandler.message_handler.lock_schedule(message["pin"], message["lock"])
         elif message["action"] == "init_schedule_point":
             WSHandler.message_handler.init_schedule_point(message["pin"], message["hour"], message["minute"], message["power"])
         elif message["action"] == "remove_schedule_point":

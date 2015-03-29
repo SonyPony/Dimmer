@@ -50,5 +50,7 @@
         <file>resources/images/logo.png</file>
         <file>translations/cs.qm</file>
         <file>components/dialogs/MoveablePointDialog.qml</file>
+        <file>components/controls/ToggleButton.qml</file>
+        <file>resources/images/plus.png</file>
     </qresource>
 </RCC>

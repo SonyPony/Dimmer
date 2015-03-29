@@ -109,7 +109,8 @@ class MessageHandler():
             "sensor_channel": channel,
             "pin": pin,
             "title": room_label,
-            "schedule": {}
+            "schedule": {},
+            "lock_graph": False
         }
         self.__DB.save()
 
@@ -119,6 +120,10 @@ class MessageHandler():
         """
 
         self.__DB.data.pop(str(pin))
+        self.__DB.save()
+
+    def lock_schedule(self, pin, lock):
+        self.__DB.data[str(pin)]["lock_graph"] = lock
         self.__DB.save()
 
     def send_all_schedule_points(self, pin, requester):
@@ -132,6 +137,15 @@ class MessageHandler():
             data["hour"] = int(int(k) / 100)
             data["minute"] = int(k) % 100
             self.send_data_to(data, requester)
+
+        data = {
+            "action": "lock",
+            "target": "graph",
+            "pin": pin,
+            "lock": self.__DB.data[str(pin)]["lock_graph"]
+        }
+
+        self.send_data_to(data, requester)
 
     def init_schedule_point(self, pin, hour, minute, power):
         """
