@@ -16,7 +16,7 @@ class IlluminanceManager():
 
         readings = self.__reader.readings
         luminosity = dict()
-        print("read:", readings)
+
         for key, single_reading in readings.items():
             voltage = self.__raw2voltage(single_reading)
             resistance = self.__voltage2resistance(voltage)

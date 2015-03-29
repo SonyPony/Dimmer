@@ -179,7 +179,6 @@ class MessageHandler():
     def send_illuminance(self):
         while True:
             illuminance = self.__illuminance_manager.readings()
-            print(illuminance)
             data = {
                 "action": "illuminance_read",
                 "readings": illuminance
