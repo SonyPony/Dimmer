@@ -56,8 +56,8 @@ ApplicationWindow {
                 graph.removePoint(Math.floor(key / 100), key % 100)
 
             if(actualChannel != -1) {
-                Socket.requestAllSchedulePoints(actualChannel)
                 Socket.requestDim()
+                Socket.requestAllSchedulePoints(actualChannel)
                 last_channel.write(actualChannel)
             }
         }

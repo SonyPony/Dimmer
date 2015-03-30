@@ -114,11 +114,11 @@ function removeUsedPin(pin) {
 function addRoom(title, pin, sensorPin, broadcast) {
     removeUsedPin(pin)
 
+    if(broadcast)
+        Socket.sendChannel(title, pin, sensorPin)
+
     root.channelList.newItemIndex = pin
     tempData.channels.push({"title": title, "pin": pin, "sensorPin": sensorPin})
     tempData.channelsChanged()
     root.channelList.newItemIndex = -1
-
-    if(broadcast)
-        Socket.sendChannel(title, pin, sensorPin)
 }
