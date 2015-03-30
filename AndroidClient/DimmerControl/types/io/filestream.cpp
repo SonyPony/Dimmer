@@ -41,13 +41,13 @@ QString FileStream::source() const {
 
 void FileStream::setSource(QString &value) {
     #ifdef Q_OS_IOS
-    QString path = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation).value(0);
+    QString path = QStandardPaths::standardLocations(QStandardPaths::DataLocation).value(0);
     QDir dir(path);
     if (!dir.exists())
         dir.mkpath(path);
     if (!path.isEmpty() && !path.endsWith("/"))
         path += "/";
-        value += path;
+        value = path + value;
     #endif
 
     if(p_source != value) {
