@@ -32,4 +32,4 @@ class AnalogReader():
 
         for channel in range(Settings.NUMBER_OF_CHANNELS):
             self.__readings[channel] = self.read_channel(channel)
-            time.sleep(0.2)
+            time.sleep(0.1)

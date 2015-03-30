@@ -64,7 +64,7 @@ if __name__ == "__main__":
     scheduler = Scheduler(WSHandler.message_handler.data(), WSHandler.message_handler.set_dim, WSHandler.message_handler.send_dim)
 
     serverloop = tornado.ioloop.IOLoop.instance()
-    scheduleloop = tornado.ioloop.PeriodicCallback(scheduler.check, 30000)
+    scheduleloop = tornado.ioloop.PeriodicCallback(scheduler.check, 15000)
 
     threading.Thread(target=WSHandler.message_handler.send_illuminance).start()
     scheduleloop.start()

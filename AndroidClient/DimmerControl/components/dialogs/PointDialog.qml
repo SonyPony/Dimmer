@@ -13,7 +13,7 @@ AddDialog {
     property alias dutyCycle: dclInput.text
 
     buttonHeight: RL.calcSize("height", 60)
-    delay: 350
+    delay: 200
     acceptFunction: (function() {
         if(parseInt(dutyCycle) >= 0 && parseInt(dutyCycle) <= 100)
             graph.addPoint(hours, minutes, dutyCycle, true)

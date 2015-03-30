@@ -42,7 +42,6 @@ Item {
 
         onHide: SequentialAnimation {
             NumberAnimation { target: content; property: "y"; to:addButton.y; easing.type: Easing.InOutQuad; duration: 500 }
-            NumberAnimation { duration: delay }
             ScriptAction { script: hidden = true }
         }
 
