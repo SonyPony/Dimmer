@@ -64,6 +64,8 @@ ApplicationWindow {
         onChannelsChanged: {
             if(!channels.length)
                 CL.setNoneRoom()
+            else
+                CL.autoSelectChannel(last_channel)
         }
 
         onLockDimChanged: {

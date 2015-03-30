@@ -9,6 +9,9 @@ function autoSelectChannel(configFile) {
             break;
         }
     }
+
+    if(tempData.actualChannel == -1)    //choose first room
+        setRoom(0)
 }
 
 function deleteAllChannels() {
