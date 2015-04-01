@@ -72,7 +72,13 @@ Rectangle {
     }
 
     Screens.LockScreen {
-        active: tempData.actualChannel == -1
+        active: (tempData.actualChannel == -1 && (!connectionLock.active))
         text: qsTr("You haven't chosen desired room.")
+    }
+
+    Screens.LockScreen {
+        id: connectionLock
+        active: !root.connected
+        text: qsTr("You are not connected to Dim-Box")
     }
 }
