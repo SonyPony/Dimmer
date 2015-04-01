@@ -27,6 +27,9 @@ class PWMGenerator(object):
 
         self.__width = value
         try:
-            self.__generator.set_servo(self.__pin, pulse_width_us = value * 30)
+            if value:
+                self.__generator.set_servo(self.__pin, pulse_width_us = value * 30)
+            else:
+                self.__generator.stop_servo(self.__pin)
         except RuntimeError:
             self.__generator.set_servo(self.__pin, 2990)
