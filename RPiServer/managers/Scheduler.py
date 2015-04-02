@@ -4,13 +4,14 @@ __author__ = 'Sony'
 from time import strftime
 
 class Scheduler():
-    def __init__(self, raw_DB, dim_setter, broadcast_function):
+    def __init__(self, raw_DB, dim_setter, broadcast_function, time_sender):
         """
         :param raw_DB: dict
         """
         self.__raw_DB = raw_DB
         self.__dim_setter = dim_setter
         self.__broadcast_function = broadcast_function
+        self.__time_sender = time_sender
 
     def __parse_time(self):
         """
@@ -20,6 +21,8 @@ class Scheduler():
         actual_time = strftime("%H:%M")
         hour = int(actual_time.split(":")[0])
         minute = int(actual_time.split(":")[1])
+
+        self.__time_sender(hour, minute)
 
         return str(hour * 100 + minute)
 

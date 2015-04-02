@@ -100,6 +100,10 @@ WebSocket {
             case "channel_synchronization_done":
                 CL.autoSelectChannel(last_channel)
                 break;
+
+            case "set_time":
+                Socket.setTime(data.hour, data.minute)
+                break;
         }
     }
     Component.onCompleted: {

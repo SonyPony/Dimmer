@@ -15,6 +15,11 @@ Canvas {
     property color textColor
     property color lineColor
     property alias internal: internal
+    property int timeLineHour: 2
+    property int timeLineMinute: 30
+
+    onTimeLineHourChanged: canvas.requestPaint()
+    onTimeLineMinuteChanged: canvas.requestPaint()
 
     //private
     QtObject {
@@ -77,6 +82,7 @@ Canvas {
             color: lineColor
 
             onXChanged: internal.xAxisX[modelData] = x
+            Component.onCompleted: canvas.requestPaint()
 
             Rectangle {
                 width: parent.height
@@ -101,6 +107,14 @@ Canvas {
         }
     }
 
+    Rectangle {
+        id: timeLine
+
+        color: root.primaryColor
+        width: RL.calcSize("width", 2)
+        height: canvas.y + canvas.height - RL.calcSize("height", 40)
+    }
+
     MouseArea {
         id: graphMouseArea
 
@@ -119,6 +133,8 @@ Canvas {
         ctx.clearRect(x, y, width, height)
         ctx.beginPath()
         ctx.fillStyle = root.secondaryColor
+
+        timeLine.x = Math.floor(internal.xAxisX[Math.floor(canvas.timeLineHour / 2) + 1] + ((canvas.timeLineMinute + (canvas.timeLineHour % 2) * 60) / 120) * canvas.width / (canvas.valuesCountX + 1) - timeLine.width / 2)
 
         for(var key in internal.points) {
             if(previous) {      //if it is not first point

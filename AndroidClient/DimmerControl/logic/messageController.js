@@ -1,3 +1,8 @@
+function setTime(hour, minute) {
+    tempData.graph.timeLineHour = hour
+    tempData.graph.timeLineMinute = minute
+}
+
 function sendLock(pin, target, lock) {
     var data = {}
     data.action = "lock"

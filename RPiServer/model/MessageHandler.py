@@ -36,6 +36,21 @@ class MessageHandler():
             if client == receiver:
                 client.write_message(dumps(message))
 
+    def set_time(self, hour, minute):
+        """
+        :param hour: int
+        :param minute: int
+        :param pin: int
+        """
+
+        data = {
+            "action": "set_time",
+            "hour": hour,
+            "minute": minute
+        }
+
+        self.broadcast_data(data)
+
     def set_dim(self, pin, dim):
         """
         :param room_label: string

@@ -61,7 +61,7 @@ if __name__ == "__main__":
     application.listen(8888)
     hardware_container = HardwareContainer()
     WSHandler.message_handler = MessageHandler(hardware_container.PWMOutputs, WSHandler.clients)
-    scheduler = Scheduler(WSHandler.message_handler.data(), WSHandler.message_handler.set_dim, WSHandler.message_handler.send_dim)
+    scheduler = Scheduler(WSHandler.message_handler.data(), WSHandler.message_handler.set_dim, WSHandler.message_handler.send_dim, WSHandler.message_handler.set_time)
 
     serverloop = tornado.ioloop.IOLoop.instance()
     scheduleloop = tornado.ioloop.PeriodicCallback(scheduler.check, 15000)
