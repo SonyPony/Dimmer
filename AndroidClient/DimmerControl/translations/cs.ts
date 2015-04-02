@@ -4,7 +4,7 @@
 <context>
     <name>AddDialog</name>
     <message>
-        <location filename="../components/dialogs/AddDialog.qml" line="71"/>
+        <location filename="../components/dialogs/AddDialog.qml" line="70"/>
         <source>Add</source>
         <translation>Přidat</translation>
     </message>
@@ -63,6 +63,11 @@
         <location filename="../components/tabs/DimmerTab.qml" line="76"/>
         <source>You haven&apos;t chosen desired room.</source>
         <translation>Nevybrali jste požadovaný pokoj.</translation>
+    </message>
+    <message>
+        <location filename="../components/tabs/DimmerTab.qml" line="82"/>
+        <source>You are not connected to Dim-Box</source>
+        <translation>Nejste připojeni k Dim-Box</translation>
     </message>
 </context>
 <context>
@@ -244,7 +249,7 @@
     <message>
         <location filename="../components/tabs/HelpTab.qml" line="88"/>
         <source>, which you want to delete and then tap on red cross.</source>
-        <translation>, který chcce smazat a poté klimněte na červený kříž.</translation>
+        <translation>, který chcete smazat a poté klikněte na červený kříž.</translation>
     </message>
     <message>
         <location filename="../components/tabs/HelpTab.qml" line="91"/>
@@ -254,7 +259,7 @@
     <message>
         <location filename="../components/tabs/HelpTab.qml" line="93"/>
         <source>To select channel, tap on desired channel and then tap on</source>
-        <translation>Abyvhom vybrali pokoj, klikněte na požadovaný pokoj a poté klikněte na</translation>
+        <translation>Abychom vybrali pokoj, klikněte na požadovaný pokoj a poté klikněte na</translation>
     </message>
     <message>
         <location filename="../components/tabs/HelpTab.qml" line="93"/>
@@ -425,12 +430,12 @@
         <translation>Nápověda</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="78"/>
+        <location filename="../main.qml" line="80"/>
         <source>Dim-Box</source>
         <translation>Dim-Box</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="101"/>
+        <location filename="../main.qml" line="103"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
