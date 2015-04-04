@@ -13,14 +13,28 @@ class Scheduler():
         self.__broadcast_function = broadcast_function
         self.__time_sender = time_sender
 
+    def get_time(self, send=False):
+        """
+        :send: bool
+        :return: dict
+        """
+        actual_time = strftime("%H:%M")
+        result = {
+            "hour": int(actual_time.split(":")[0]),
+            "minute": int(actual_time.split(":")[1])
+        }
+        if send:
+            self.__time_sender(result["hour"], result["minute"])
+        return result
+
     def __parse_time(self):
         """
         :return: string
         """
 
-        actual_time = strftime("%H:%M")
-        hour = int(actual_time.split(":")[0])
-        minute = int(actual_time.split(":")[1])
+        actual_time = self.get_time()
+        hour = actual_time["hour"]
+        minute = actual_time["minute"]
 
         self.__time_sender(hour, minute)
 
