@@ -11,6 +11,7 @@ import "components/tabs" as Tabs
 import "components/other"
 import "components/screens" as Screens
 import "components/panels" as Panels
+import "components/dialogs" as Dialogs
 import "responsivity/responsivityLogic.js" as RL
 import "logic/channelLogic.js" as CL
 import "logic/messageController.js" as Socket
@@ -97,14 +98,17 @@ ApplicationWindow {
     }
 
     //-------------ERROR DIALOG--------------
-    MessageDialog {
+    Dialogs.PopUpDialog {
         id: errorDialog
 
+        z: 7
         title: qsTr("Error")
+        color: "#ffbb00"
+        backgroundColor: root.secondaryColor
 
         function error(message) {
             errorDialog.text = message
-            errorDialog.visible = true
+            errorDialog.show()
         }
     }
     //---------------------------------------

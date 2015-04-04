@@ -52,5 +52,6 @@
         <file>components/dialogs/MoveablePointDialog.qml</file>
         <file>components/controls/ToggleButton.qml</file>
         <file>resources/images/plus.png</file>
+        <file>components/dialogs/PopUpDialog.qml</file>
     </qresource>
 </RCC>
