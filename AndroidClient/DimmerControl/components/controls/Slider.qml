@@ -20,18 +20,26 @@ Canvas {
     Component.onCompleted: root.slider = canvas
 
     onValueChanged: {
-        if(tempData.actualChannel != -1 && (!tempData.lockDim) && (!request))
+        if(tempData.actualChannel != -1 && (!tempData.lockDim) && (!request) && (!(value % 3)))
             Socket.sendDim(value, tempData.actualChannel)
         request = false
     }
     onWidthChanged: canvas.requestPaint()
     onHeightChanged: canvas.requestPaint()
 
+    //----------KŘIVKA STMÍVÁNÍ----------
     Behavior on value {
         id: linearChange
-        enabled: !tempData.lockDim
-        NumberAnimation { duration: 1000; onRunningChanged: Socket.sendLock(tempData.actualChannel, "dim", running)}
+        enabled: !tempData.lockDim  //ochrana proti zpětnovazební smyčce
+        NumberAnimation { duration: 1000
+            onRunningChanged: {
+                Socket.sendLock(tempData.actualChannel, "dim", running) //zámek
+                if(!running)
+                    Socket.sendDim(slider.value, tempData.actualChannel)
+            }
+        }
     }
+    //-----------------------------------
 
     onPaint: {      //draw groove//
         var ctx = canvas.getContext('2d');
