@@ -18,7 +18,7 @@ Rectangle {
 
     LoadingAnimation {
         width: height
-        height: RL.calcSize("height", 150)
+        height: RL.calcSize("height", 250)
 
         anchors.centerIn: parent
     }
