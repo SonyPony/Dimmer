@@ -381,7 +381,7 @@
     <message>
         <location filename="../components/tabs/ScheduleTab.qml" line="97"/>
         <source>Someone else is currently editing schedule.</source>
-        <translation>Někdo jiný upravuje právě upravuje rozvrh.</translation>
+        <translation>Někdo jiný právě upravuje rozvrh.</translation>
     </message>
 </context>
 <context>
@@ -405,37 +405,37 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="30"/>
+        <location filename="../main.qml" line="31"/>
         <source>Dim</source>
         <translation>Stmívání</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="30"/>
+        <location filename="../main.qml" line="31"/>
         <source>Schedule</source>
         <translation>Rozvrh</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="30"/>
+        <location filename="../main.qml" line="31"/>
         <source>Channel</source>
         <translation>Pokoje</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="30"/>
+        <location filename="../main.qml" line="31"/>
         <source>Settings</source>
         <translation>Nastavení</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="30"/>
+        <location filename="../main.qml" line="31"/>
         <source>Help</source>
         <translation>Nápověda</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="80"/>
+        <location filename="../main.qml" line="81"/>
         <source>Dim-Box</source>
         <translation>Dim-Box</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="103"/>
+        <location filename="../main.qml" line="105"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
