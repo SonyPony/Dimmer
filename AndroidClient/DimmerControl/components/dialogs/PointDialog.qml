@@ -15,7 +15,7 @@ AddDialog {
     buttonHeight: RL.calcSize("height", 60)
     delay: 200
     acceptFunction: (function() {
-        if(parseInt(dutyCycle) >= 0 && parseInt(dutyCycle) <= 100)
+        if(parseInt(dutyCycle) + Math.abs(100 - parseInt(dutyCycle)) == 100)
             graph.addPoint(hours, minutes, dutyCycle, true)
         else
             errorDialog.error(qsTr("Enter number in range from 0 to 100."))
