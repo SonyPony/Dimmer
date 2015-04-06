@@ -20,8 +20,8 @@ Canvas {
     Component.onCompleted: root.slider = canvas
 
     onValueChanged: {
-        if(tempData.actualChannel != -1 && (!tempData.lockDim) && (!request) && (!(value % 3)))
-            Socket.sendDim(value, tempData.actualChannel)
+        if(tempData.actualChannel != -1 && (!tempData.lockDim) && (!request) && (!(value % 4)))
+            Socket.sendDim(value, tempData.actualChannel, false)
         request = false
     }
     onWidthChanged: canvas.requestPaint()
@@ -35,7 +35,7 @@ Canvas {
             onRunningChanged: {
                 Socket.sendLock(tempData.actualChannel, "dim", running) //zámek
                 if(!running)
-                    Socket.sendDim(slider.value, tempData.actualChannel)
+                    Socket.sendDim(slider.value, tempData.actualChannel, true)
             }
         }
     }

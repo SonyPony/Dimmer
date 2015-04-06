@@ -27,7 +27,7 @@ class WSHandler(WebSocketHandler):
             WSHandler.message_handler.broadcast_data(message, self)
 
         if message["action"] == "dim":
-            WSHandler.message_handler.set_dim(message["pin"], message["dim"])
+            WSHandler.message_handler.set_dim(message["pin"], message["dim"], message["last"])
         elif message["action"] == "get_dim":
             WSHandler.message_handler.send_dim(message["pin"], self)
         elif message["action"] == "save_last_dim":

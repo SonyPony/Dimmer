@@ -51,15 +51,17 @@ class MessageHandler():
 
         self.broadcast_data(data)
 
-    def set_dim(self, pin, dim):
+    def set_dim(self, pin, dim, last):
         """
         :param room_label: string
         :param dim: int
+        :param last: bool
         """
 
         self.__PWMOutputs[pin].width = dim
-        self.__DB.data[str(pin)]["dim"] = dim
-        self.__DB.save()
+        if last:
+            self.__DB.data[str(pin)]["dim"] = dim
+            self.__DB.save()
 
     def send_dim(self, pin, requester=None):
         """

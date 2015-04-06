@@ -29,11 +29,12 @@ function setLastDim() {
     root.socket.sendTextMessage(JSON.stringify(data))
 }
 
-function sendDim(dim, pin) {
+function sendDim(dim, pin, last) {
     var data = {}
     data.action = "dim"
     data.pin = pin
     data.dim = dim
+    data.last = last
 
     if(!tempData.lockDim)
         root.socket.sendTextMessage(JSON.stringify(data))
