@@ -92,7 +92,7 @@ class MessageHandler():
         :param pin: int
         """
 
-        self.set_dim(pin, self.__DB.data[str(pin)]["last_dim"] if not self.__DB.data[str(pin)]["dim"] else self.__DB.data[str(pin)]["dim"])
+        self.set_dim(pin, self.__DB.data[str(pin)]["last_dim"] if not self.__DB.data[str(pin)]["dim"] else self.__DB.data[str(pin)]["dim"], True)
         self.send_dim(pin)
 
     def send_all_channels(self, requester):
