@@ -44,6 +44,7 @@ ApplicationWindow {
         property bool lockGraph: false
         property var graphEnable
         property int actualSensorChannel: 0
+        property bool syncDone: false
 
         property int actualChannel: -1  //store pin
         property var channels: []
@@ -65,7 +66,7 @@ ApplicationWindow {
         onChannelsChanged: {
             if(!channels.length)
                 CL.setNoneRoom()
-            else
+            else if(channels.length && tempData.syncDone)
                 CL.autoSelectChannel(last_channel)
         }
 
@@ -291,6 +292,7 @@ ApplicationWindow {
             else {
                 Socket.requestAllPins()
                 counter = 0
+                tempData.syncDone = true
                 synchronizationScreen.active = true
             }
         }
@@ -307,6 +309,7 @@ ApplicationWindow {
             if(root.socket.status == WebSocket.Open)
                 Socket.requestAllChannels()
             synchronizationScreen.active = false
+            tempData.syncDone = true
         }
     }
 }
