@@ -5,3 +5,10 @@ AndroidClient/build-DimmerControl-Android/
 AndroidClient/build-DimmerControl-Desktop_Qt_5_4_0_MinGW_32bit-Ladění/debug/qrc_qml.cpp
 AndroidClient/build-DimmerControl-Desktop_Qt_5_4_0_MinGW_32bit-Ladění/
 AndroidClient/DimmerControl/DimmerControl.pro.user.3.3-pre1
+RPiServer/.idea/
+*.pyc
+AndroidClient/build-DimmerControl-Desktop/
+RPiServer/testing.py
+RPiServer/db.txt
+Dim-Box/
+AndroidClient/build-DimmerControl-Android_release/
