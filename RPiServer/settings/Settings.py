@@ -5,7 +5,7 @@ AD_PRECISION = 1024
 #in kilo ohms
 RB1 = 10
 #light sensor info
-R_AT_10_LUX = 24
+R_AT_10_LUX = 24    #resistance at 10 Lux in kilo ohms
 GAMA = 0.9
 
 NUMBER_OF_CHANNELS = 8

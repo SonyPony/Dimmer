@@ -33,3 +33,6 @@ class PWMGenerator(object):
                 self.__generator.stop_servo(self.__pin)
         except RuntimeError:
             self.__generator.set_servo(self.__pin, 2990)
+
+
+
