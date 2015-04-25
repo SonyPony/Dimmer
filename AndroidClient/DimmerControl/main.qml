@@ -44,7 +44,7 @@ ApplicationWindow {
         property bool lockGraph: false
         property var graphEnable
         property int actualSensorChannel: 0
-        property bool syncDone: false
+        property bool syncDone: true
 
         property int actualChannel: -1  //store pin
         property var channels: []
@@ -67,7 +67,7 @@ ApplicationWindow {
             if(!channels.length)
                 CL.setNoneRoom()
             else if(channels.length && tempData.syncDone)
-                CL.autoSelectChannel(last_channel)
+                CL.autoSelectChannel(last_channel)             
         }
 
         onLockDimChanged: {
@@ -275,6 +275,7 @@ ApplicationWindow {
         id: channelDeleteManager
 
         signal done()
+        signal delay()
         property int counter: 0
         property var listOfDeleting: new Array
         property var synchronizationScreen
@@ -292,7 +293,7 @@ ApplicationWindow {
             else {
                 Socket.requestAllPins()
                 counter = 0
-                tempData.syncDone = true
+                tempData.syncDone = false
                 synchronizationScreen.active = true
             }
         }
@@ -309,7 +310,11 @@ ApplicationWindow {
             if(root.socket.status == WebSocket.Open)
                 Socket.requestAllChannels()
             synchronizationScreen.active = false
-            tempData.syncDone = true
+        }
+
+        onDelay: SequentialAnimation {
+            NumberAnimation { duration: 400 }
+            ScriptAction { script: {tempData.syncDone = true} }
         }
     }
 }

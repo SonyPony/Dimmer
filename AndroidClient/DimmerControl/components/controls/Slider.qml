@@ -20,7 +20,7 @@ Canvas {
     Component.onCompleted: root.slider = canvas
 
     onValueChanged: {
-        if(tempData.actualChannel != -1 && (!tempData.lockDim) && (!request) && (!(value % 5)))
+        if(tempData.actualChannel != -1 && (!tempData.lockDim) && (!request) && (!(value % 3)))
             Socket.sendDim(value, tempData.actualChannel, false)
         request = false
     }
