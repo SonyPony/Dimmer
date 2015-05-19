@@ -112,6 +112,11 @@ function removeUsedPin(pin) {
 
 
 function addRoom(title, pin, sensorPin, broadcast) {
+    if(!tempData.pinList.length) {
+        errorDialog.error(qsTr("Maximum rooms number reached."))
+        return
+    }
+
     removeUsedPin(pin)
 
     if(broadcast)
