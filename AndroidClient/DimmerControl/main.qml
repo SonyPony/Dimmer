@@ -3,7 +3,7 @@ import QtQuick.Controls 1.2
 import QtQuick.Window 2.1
 import QtQuick.Controls.Styles 1.2
 import QtQuick.Dialogs 1.2
-import Qt.WebSockets 1.0
+import WebsocketClient 1.0
 import FileStream 1.0
 
 import "components/controls" as Controls
@@ -35,6 +35,8 @@ ApplicationWindow {
     property bool connected: false
     property var channelList
     property string language: Qt.locale().name.substring(0,2)
+
+    Component.onCompleted: console.log("Done")
 
     QtObject {
         id: tempData
@@ -158,9 +160,7 @@ ApplicationWindow {
 
         Tab {   //settings
 
-            Tabs.SettingsTab {
-
-            }
+            Tabs.SettingsTab {}
         }
 
         Tab {
@@ -307,7 +307,7 @@ ApplicationWindow {
         }
 
         onDone: {
-            if(root.socket.status == WebSocket.Open)
+            if(root.socket.status == WebsocketClient.Open)
                 Socket.requestAllChannels()
             synchronizationScreen.active = false
         }

@@ -1,56 +1,46 @@
 import QtQuick 2.0
-import Qt.WebSockets 1.0
+import WebsocketClient 1.0
 
 import "../../logic/channelLogic.js" as CL
 import "../../logic/messageController.js" as Socket
 
-WebSocket {
+WebsocketClient {
     id: socket
 
-    signal reconnect()
-
-    active: false
-    //url: "ws://169.254.29.212:8888"
+    Timer {
+        id: reconnectTimer
+        interval: 500
+        running: false
+        repeat: true
+        onTriggered: socket.reconnect()
+    }
 
     onStatusChanged: {
-        var actualStatus = socket.status
+        if(status == WebsocketClient.Open) {
+            root.connected = true
+            reconnectTimer.running = false
+            CL.deleteAllChannels()
+        }
 
-        switch(actualStatus) {
-            case WebSocket.Connecting:
-                console.log("Connecting");
-                break;
-
-            case WebSocket.Open:
-                console.log("Open");
-                root.connected = true
-                CL.deleteAllChannels()
-                break;
-
-            case WebSocket.Closing:
-                console.log("Closing");
-                break;
-
-            case WebSocket.Closed:
-                root.connected = false
-                console.log("Closed");
-                socket.reconnect()
-                break;
-
-            case WebSocket.Error:
-                root.connected = false
-                console.log("Error (" + socket.errorString + ")")
-                break;
+        else if(status == WebsocketClient.Closed) {
+            root.connected = false
+            if(!reconnectTimer.running)
+                reconnectTimer.running = true
         }
     }
 
-    onReconnect: SequentialAnimation {
-        NumberAnimation { duration: 200 }
-        ScriptAction { script: { socket.active = false; socket.active = true } }
+    Component.onCompleted: {
+        var ip = fileStream.read()
+        if(ip != "") {
+            socket.url = ip
+            socket.reconnect()
+        }
+        loadingScreen.hide()
     }
-
 
     onTextMessageReceived: {
         var data = JSON.parse(message)
+        console.log(message)
 
         switch(data["action"]) {
             case "illuminance_read":
@@ -106,13 +96,4 @@ WebSocket {
                 break;
         }
     }
-    Component.onCompleted: {
-        var ip = fileStream.read()
-        if(ip != "") {
-            socket.url = ip
-            socket.active = true
-        }
-        loadingScreen.hide()
-    }
 }
-

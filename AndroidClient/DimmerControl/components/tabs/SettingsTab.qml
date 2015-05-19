@@ -58,7 +58,8 @@ Rectangle {
         onClick: function() {
             root.socket.url = 'ws://' + ipInput.text + ':' + portInput.text
             fileStream.write(root.socket.url)
-            root.socket.active = true
+            console.log(root.socket.url)
+            root.socket.reconnect()
         }
     }
 }

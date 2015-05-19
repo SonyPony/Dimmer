@@ -2,10 +2,12 @@ TEMPLATE = app
 
 QT += qml quick widgets websockets
 
-HEADERS += types/io/filestream.h
+HEADERS += types/io/filestream.h \
+    types/network/websocketclient.h
 
 SOURCES += main.cpp \
-           types/io/filestream.cpp
+           types/io/filestream.cpp \
+    types/network/websocketclient.cpp
 
 RESOURCES += qml.qrc
 
