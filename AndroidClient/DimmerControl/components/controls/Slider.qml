@@ -31,7 +31,8 @@ Canvas {
     Behavior on value {
         id: linearChange
         enabled: !tempData.lockDim  //ochrana proti zpětnovazební smyčce
-        NumberAnimation { duration: 1000
+        NumberAnimation {
+            duration: 1000
             onRunningChanged: {
                 Socket.sendLock(tempData.actualChannel, "dim", running) //zámek
                 if(!running)
@@ -105,8 +106,6 @@ Canvas {
 
         onTextChanged: canvas.requestPaint()
     }
-
-    function doNothing() {}
 
     function calcValue(x, y) {
         toggleArea.rotation = Math.atan(( canvas.height / 2.0 - y) / (canvas.width - x)) / Math.PI * 180
